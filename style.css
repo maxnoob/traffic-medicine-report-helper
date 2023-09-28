@@ -1,0 +1,112 @@
+body {
+    background: rgb(206,230,255);
+    background: linear-gradient(90deg, rgba(206,230,255,1) 51%, rgba(221,249,212,1) 100%, rgba(151,176,252,0) 100%);
+}
+input[type="text"] {
+    display:block;
+    width: 100px;
+}
+
+#birthdate {
+    width: 130px;
+}
+
+#vib_thumb_re_input{
+    width: 70px;
+}
+#vib_thumb_li_input{
+    width: 70px;
+}
+#vib_ankle_re_input{
+    width: 70px;
+}
+#vib_ankle_li_input{
+    width: 70px;
+}
+
+#vis_uncorr_re_input, #vis_uncorr_li_input, #vis_corr_re_input, #vis_corr_li_input {
+    width: 70px;
+}
+
+.btn-close {
+    width: 20px;
+}
+
+
+label {
+    white-space: nowrap;
+}
+
+#btn_download, #btn_copy {
+    display: none;
+}
+
+#bigtoe {
+    display: none;
+}
+
+#weber, #rinne {
+    display: none;
+}
+
+#vision_corrected, #vision_aid {
+    display: none;
+}
+
+[contenteditable]:hover, [contenteditable]:focus {
+background: #fafafa;
+outline: 2px solid #eee;
+}
+
+[contenteditable]{
+transition: background .3s ease-in-out;
+text-align: justify;
+text-justify: inter-word;
+}
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen -- from https://www.w3schools.com/howto/howto_js_snackbar.asp */
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 100px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 100px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 100px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 100px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 100px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
