@@ -12,7 +12,7 @@ $(document).ready(function() {
                 <label for="${gender}">${gender}</label>
         </div>`).join(' ');
 
-    
+    const tämifield = document.querySelector("#tämifield"); // maps to html object
 
     // Generate the radio buttons for general condition
     const az = document.querySelector("#az"); // maps to html object
