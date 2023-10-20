@@ -12,8 +12,13 @@ $(document).ready(function() {
                 <label for="${gender}">${gender}</label>
         </div>`).join(' ');
 
-    
+    // Generate the radio buttons for 'Sehvermögen' - Doppelbilder
+    const cb_double_vision = document.querySelector("#double_vision");
+    cb_double_vision.innerHTML = `<label>Doppelbilder:</label>
+        <input type="radio" name="double_vision" value="nein" id="double_vision_nein"> nein \u00A0\u00A0\u00A0
+        <input type="radio" name="double_vision" value="ja" id="double_vision_ja"> ja`;
 
+        
     // Generate the radio buttons for general condition
     const az = document.querySelector("#az"); // maps to html object
     az.innerHTML = `<label>Allgemeinzustand:</label> <div>
@@ -24,6 +29,16 @@ $(document).ready(function() {
             <input type="radio" name="az" value="reduziert" id="reduziert"">
             <label for="reduziert">reduziert</label>
         </div>`
+
+    // Generate the radio buttons for hearing aid
+    const h_aid = document.querySelector("#h_aid"); // maps to html object
+    h_aid.innerHTML = `<label>Hörgerät:\u00A0\u00A0</label> 
+            <input type="radio" name="h_aid" value="rechts" id="rechts" checked="true"">
+            <label for="rechts">rechts</label>
+            <input type="radio" name="h_aid" value="links" id="links"">
+            <label for="links">links</label>
+        <input type="radio" name="h_aid" value="beidseits" id="beidseits"">
+        <label for="beidseits">beidseits</label>`
         
     // Generate the radio buttons for visual field       
     const vis_field_degrees = {120: '≥ 120 Grad', 140: '≥ 140 Grad', 'nev': 'nicht erfüllt (horizontale Ausdehnung < 120 Grad)'};
@@ -89,7 +104,58 @@ $(document).ready(function() {
         <input type="radio" name="carotis" value="keine" id="carotis_keine"> keine \u00A0\u00A0\u00A0
         <input type="radio" name="carotis" value="negativ" id="carotis_vorhanden"> vorhanden`;
 
- 
+   // Radio buttons for substances
+   const foetor = document.querySelector("#foetor");
+   foetor.innerHTML = `<label>Foetor aethylicus:\u00A0\u00A0</label> 
+   <input type="radio" name="foetor" value="ja" id="foetor_ja"> ja \u00A0\u00A0\u00A0
+       <input type="radio" name="foetor" value="nein" id="foetor_nein"> nein`;
+   const face_erythem = document.querySelector("#face_erythem");
+   face_erythem.innerHTML = `<label>Gesichtserythem:\u00A0\u00A0</label> 
+   <input type="radio" name="face_erythem" value="ja" id="face_erythem_ja"> ja \u00A0\u00A0\u00A0
+       <input type="radio" name="foetor" value="nein" id="face_erythem_nein"> nein`;
+    const spider_naevi = document.querySelector("#spider_naevi");
+    spider_naevi.innerHTML = `<label>Spider naevi:\u00A0\u00A0</label> 
+    <input type="radio" name="spider_naevi" value="ja" id="spider_naevi_ja"> ja \u00A0\u00A0\u00A0
+        <input type="radio" name="spider_naevi" value="nein" id="spider_naevi_nein"> nein`;
+    const marks = document.querySelector("#marks");
+    marks.innerHTML = `<label>Einstichstelle:\u00A0\u00A0</label> 
+    <input type="radio" name="marks" value="ja" id="marks_ja"> ja \u00A0\u00A0\u00A0
+        <input type="radio" name="marks" value="nein" id="marks_nein"> nein`;
+    const ikterus = document.querySelector("#ikterus");
+    ikterus.innerHTML = `<label>Ikterus:\u00A0\u00A0</label> 
+    <input type="radio" name="ikterus" value="ja" id="ikterus_ja"> ja \u00A0\u00A0\u00A0
+        <input type="radio" name="ikterus" value="nein" id="ikterus_nein"> nein`;
+    const palmar_erythem = document.querySelector("#palmar_erythem");
+    palmar_erythem.innerHTML = `<label>Palmarerythem:\u00A0\u00A0</label> 
+    <input type="radio" name="palmar" value="ja" id="palmar_ja"> ja \u00A0\u00A0\u00A0
+        <input type="radio" name="palmar" value="nein" id="palmar_nein"> nein`;
+    const septum = document.querySelector("#septum");
+    septum.innerHTML = `<label>Nasenscheidewand:\u00A0\u00A0</label> 
+    <input type="radio" name="septum" value="ja" id="septum_ja"> ja \u00A0\u00A0\u00A0
+        <input type="radio" name="septum" value="nein" id="septum_nein"> nein`;
+    const scar_road = document.querySelector("#scar_road");
+    scar_road.innerHTML = `<label>Narbenstrasse:\u00A0\u00A0</label> 
+    <input type="radio" name="scar_road" value="ja" id="scar_road_ja"> ja \u00A0\u00A0\u00A0
+        <input type="radio" name="scar_road" value="nein" id="scar_road_nein"> nein`;
+
+    // Radio buttons for brain functionality
+    const neurocognitivity = document.querySelector("#neurocognitivity");
+    neurocognitivity.innerHTML = `<label>Neurokognitiv unauffällig:\u00A0\u00A0</label> 
+    <input type="radio" name="neurocognitivity" value="ja" id="neurocognitivity_ja"> ja \u00A0\u00A0\u00A0
+       <input type="radio" name="neurocognitivity" value="nein" id="neurocognitivity_nein"> nein (neuropsychologische Kurztests durchführen)`;
+    const mini_mental = document.querySelector("#mini_mental");
+    mini_mental.innerHTML = `<label>Mini-Mental-Test:\u00A0\u00A0</label> 
+    <input type="radio" name="mini_mental" value="nein" id="mini_mental_nein"> nein \u00A0\u00A0\u00A0
+        <input type="radio" name="mini_mental" value="ja" id="mini_mental_ja"> ja (siehe beiliegendes Formular)`;
+    const clock_test = document.querySelector("#clock_test");        
+    clock_test.innerHTML = `<label>Uhren-Test:\u00A0\u00A0</label> 
+        <input type="radio" name="clock_test" value="nein" id="clock_test_nein"> nein \u00A0\u00A0\u00A0
+        <input type="radio" name="clock_test" value="ja" id="clock_test_ja"> ja (siehe beiliegendes Formular)`;
+    const trail_test = document.querySelector("#trail_test");        
+    trail_test.innerHTML = `<label>Trail-Making-Test:\u00A0\u00A0</label> 
+    <input type="radio" name="trail_test" value="nein" id="trail_test_nein"> nein \u00A0\u00A0\u00A0
+        <input type="radio" name="trail_test" value="ja" id="trail_test_ja"> ja (siehe beiliegendes Formular)`;
+    
 
     // -------------------------- Create checkboxes -------------------------------------
     const cb_measured = document.querySelector("#measured");
@@ -102,7 +168,7 @@ $(document).ready(function() {
     cb_weber_rinne.innerHTML = '<input type="checkbox" id="cb_weber_rinne"> Weber- und Rinne-Test durchgeführt';
     const cb_vision_aid_present = document.querySelector("#vision_aid_present");
     cb_vision_aid_present.innerHTML = '<input type="checkbox" id="cb_vision_aid_present"> Sehhilfe vorhanden';
-    
+
     // Generate Weber boxes (TODO: create loop)
     const cb_weber = document.querySelector("#weber");
     cb_weber.innerHTML = '<label>Weber-Test:\u00A0\u00A0\u00A0</label><input type="checkbox" id="cb_weber_mittig"> mittig \u00A0\u00A0\u00A0<input type="checkbox" id="cb_weber_re"> rechts lateralisiert\u00A0\u00A0\u00A0 <input type="checkbox" id="cb_weber_li"> links lateralisiert';
