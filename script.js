@@ -1,6 +1,38 @@
 $(document).ready(function() {
 
 /* import $ from ‘jquery’; */
+    // -------------------------- Create sliders-------------------------------------
+
+    const psrSlider = document.getElementById('psrSlider');
+    const bsrSlider = document.getElementById('bsrSlider');
+    const asrSlider = document.getElementById('asrSlider');
+    const tsrSlider = document.getElementById('tsrSlider');
+    const psrValue = document.getElementById('psrValue');
+    const bsrValue = document.getElementById('bsrValue');
+    const asrValue = document.getElementById('asrValue');
+    const tsrValue = document.getElementById('tsrValue');
+    const psrLabels = ["-", "-/+", "+", "++", "+++"];
+    const bsrLabels = ["-", "-/+", "+", "++", "+++"];
+    const asrLabels = ["-", "-/+", "+", "++", "+++"];
+    const tsrLabels = ["-", "-/+", "+", "++", "+++"];
+    
+    // Event-Listener for changes in the slider value
+    psrSlider.addEventListener('input', function() {
+    const value = psrSlider.value;
+    psrValue.textContent = psrLabels[parseInt(value) + 3]; // Adjust index
+        });
+    bsrSlider.addEventListener('input', function() {
+    const value = bsrSlider.value;
+    bsrValue.textContent = bsrLabels[parseInt(value) + 3]; // Adjust index
+        });
+    asrSlider.addEventListener('input', function() {
+    const value = asrSlider.value;
+    asrValue.textContent = asrLabels[parseInt(value) + 3]; // Adjust index
+        });
+    tsrSlider.addEventListener('input', function() {
+    const value = tsrSlider.value;
+    tsrValue.textContent = tsrLabels[parseInt(value) + 3]; // Adjust index
+        });
 
     // -------------------------- Create radio buttons -------------------------------------
     // Generate the radio buttons for gender      
@@ -156,7 +188,6 @@ $(document).ready(function() {
     <input type="radio" name="trail_test" value="nein" id="trail_test_nein"> nein \u00A0\u00A0\u00A0
         <input type="radio" name="trail_test" value="ja" id="trail_test_ja"> ja (siehe beiliegendes Formular)`;
     
-
     // -------------------------- Create checkboxes -------------------------------------
     const cb_measured = document.querySelector("#measured");
     cb_measured.innerHTML = '<input type="checkbox" id="cb_measured"> gemessen';
@@ -168,8 +199,10 @@ $(document).ready(function() {
     cb_weber_rinne.innerHTML = '<input type="checkbox" id="cb_weber_rinne"> Weber- und Rinne-Test durchgeführt';
     const cb_vision_aid_present = document.querySelector("#vision_aid_present");
     cb_vision_aid_present.innerHTML = '<input type="checkbox" id="cb_vision_aid_present"> Sehhilfe vorhanden';
-
-    // Generate Weber boxes (TODO: create loop)
+    const cb_heart_device = document.querySelector("#cb_heart_device");
+    cb_heart_device.innerHTML = '<label>Kardiale Devices:\u00A0\u00A0</label> <input type="checkbox" id="pacemaker"> Pacemaker <input type="checkbox" id="icd"> ICD <input type="checkbox" id="crt_d"> CRT-D';
+    const cb_diabetic_device = document.querySelector("#cb_diabetic_device");
+    cb_diabetic_device.innerHTML = '<label>Diabetes-Devices:\u00A0\u00A0</label> <input type="checkbox" id="cgm"> CGM <input type="checkbox" id="fmg"> FMG <input type="checkbox" id="pump"> Pumpe'; 
     const cb_weber = document.querySelector("#weber");
     cb_weber.innerHTML = '<label>Weber-Test:\u00A0\u00A0\u00A0</label><input type="checkbox" id="cb_weber_mittig"> mittig \u00A0\u00A0\u00A0<input type="checkbox" id="cb_weber_re"> rechts lateralisiert\u00A0\u00A0\u00A0 <input type="checkbox" id="cb_weber_li"> links lateralisiert';
     

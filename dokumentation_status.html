@@ -44,7 +44,7 @@
             <div class="col">
                 <div id="bp_sys"></div>
             </div>
-            <div class="col" style="margin-left: -14px; margin-top: 30px;"">
+            <div class="col" style="margin-left: -14px; margin-top: 30px;">
                 /
             </div>
             <div class="col">
@@ -218,6 +218,35 @@
         <hr />
         <h4 class="py-2">Neurologie</h4>
         <div class="row d-inline-flex">
+        <div class="slider-container">
+        <div class="slider-pair">
+            <label for="psrSlider">PSR:</label>
+            <input type="range" id="psrSlider" min="-3" max="3" step="1">
+            <span id="psrValue">0</span>
+        </div>
+
+        <div class="slider-pair">
+            <label for="asrSlider">ASR:</label>
+            <input type="range" id="asrSlider" min="-3" max="3" step="1">
+            <span id="asrValue">0</span>
+        </div>
+        </div>
+
+        <div class="slider-container">
+        <div class="slider-pair">
+            <label for="bsrSlider">BSR:</label>
+            <input type="range" id="bsrSlider" min="-3" max="3" step="1">
+            <span id="bsrValue">0</span>
+        </div>
+
+        <div class="slider-pair">
+            <label for="tsrSlider">TSR:</label>
+            <input type="range" id="tsrSlider" min="-3" max="3" step="1">
+            <span id="tsrValue">0</span>
+        </div>
+        </div>
+
+        </div> 
             <div class="col">
                 <div id="vib_thumb_re"></div>
             </div>
@@ -236,7 +265,7 @@
                 <div id="vib_ankle_li" style="margin-left: -130px;"></div>
             </div>
             <div class="col">
-                <div id="bigtoe""></div>
+                <div id="bigtoe"></div>
             </div>
         </div>
 
@@ -250,6 +279,18 @@
 
         <div class="row py-2">
             <div id="carotis"></div>
+        </div>
+
+        <div class="row py-2">
+            <div id="cb_heart_device"></div>
+        </div>
+
+        <!----- Metabolism ----->
+        <hr />
+        <h4 class="py-2 d-inline-flex">Stoffwechselerkrankungen</h4> <button id="btn_cardio_clear" class="btn btn-sm" style="float: right; opacity: 50%;">x</button>
+
+        <div class="row py-2">
+            <div id="cb_diabetic_device"></div>
         </div>
 
         <!-- TODO -->
@@ -273,6 +314,9 @@
             <button id="btn_copy" class="btn btn-primary my-2">in Zwischenablage kopieren</button>
             <button id="btn_download" class="btn btn-success">als Datei speichern</button>
         </div>
+
+        <!DOCTYPE html>
+
 
         <!-- snackbar for showing confirmation message after copying -->
         <div id="snackbar"></div>
