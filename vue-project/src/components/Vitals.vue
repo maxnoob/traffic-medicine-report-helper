@@ -10,6 +10,29 @@
             <input type="checkbox" value="regelm" v-model="puls_reg">
             <label>regelmässig</label>
         </div>
+
+        
+        <div class="row"></div>
+        <div class="row d-inline-flex py-2">
+            <div class="col">
+                <div id="height"></div>
+            </div>
+            <div class="col">
+                <div id="weight"></div>
+            </div>
+            <div class="col">
+                <div id="measured" style="margin-top: 30px;"></div>
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="row d-inline-flex py-2">
+            <div class="col">
+                <button id="btn_bmi" class="btn btn-secondary btn-sm" style="white-space: nowrap;">BMI berechnen</button>
+            </div>
+            <div class="col">
+                <div id="bmi" style="white-space: nowrap;"></div>
+            </div>
+        </div>
     </form>
 </template>
 
