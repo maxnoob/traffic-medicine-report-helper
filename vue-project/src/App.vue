@@ -1,6 +1,7 @@
 <template>
   <!-- <Modal /> -->
 
+
   <body class="bg-body-tertiary">
     <div class="container">
         <div class="row">
@@ -10,19 +11,12 @@
 
          <!-- Basic Data / Stammdaten -->
         <h4 class="py-2">Stammdaten</h4>
-
         <BasicData />
 
 
         <!---- Vitals ---->
         <hr />
         <h4 class="py-2">Vitalparameter</h4>
-        <div class="row d-inline-flex py-2">
-            <div class="col">
-                <div id="az"></div>
-            </div>
-        </div>
-        <div class="row"></div>
         <div class="row d-inline-flex">
             <Vitals />
         </div>
@@ -160,18 +154,18 @@
         <div class="row"></div>
 
         <button id="btn_values" class="btn btn-secondary my-3">Werte ausgeben</button>
-        <button id="btn_text" class="btn btn-primary my-3">Text generieren</button>
-        <button id="btn_clear" class="btn btn-danger my-3">Werte löschen</button>
+        <button id="btn_text" class="btn btn-primary my-3" >Text generieren</button>
+        <button id="btn_clear" class="btn btn-danger my-3" @click="clear_btn_clicked()">Werte löschen</button>
 
         <div id="output" contenteditable="false"></div>
 
         <div class="row">
-            <button id="btn_copy" class="btn btn-primary my-2">in Zwischenablage kopieren</button>
+            <button id="btn_copy" class="btn btn-primary my-2" @click="showSnackbarMessage('Text kopiert! ✅')">in Zwischenablage kopieren</button>
             <button id="btn_download" class="btn btn-success">als Datei speichern</button>
         </div>
 
         <!-- snackbar for showing confirmation message after copying -->
-        <div id="snackbar"></div>
+        <Snackbar />
     </div>
     
 
@@ -182,14 +176,58 @@
 import Modal from './components/Modal.vue'
 import Vitals from './components/Vitals.vue'
 import BasicData from './components/BasicData.vue'
+import Snackbar from './components/Snackbar.vue'
+
 
 export default {
   name: 'App',
   components: {
     Modal,
     BasicData,
-    Vitals
-  }
+    Vitals,
+    Snackbar
+  },
+  methods: {
+    triggerSnackbar() {
+    console.log("snackbar button clicked")
+    this.$emit('triggerSnackbar')
+},
+    showSnackbarMessage(text) {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar");
+        x.innerText = text;
+        // Add the "show" class to DIV
+        x.className = "show";
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+      },
+          // --------------------------------- Deleting user input -------------------------------------
+              // Delete values in input fields and unchecks radio buttons
+    clearInputFields() { // TODO: does not work in Vue so far..... :()
+        var ele = document.getElementsByTagName('input');
+        var i;
+        for (i = 0; i < ele.length; i++) {
+            if (ele[i].type == "radio" || ele[i].type == "checkbox") {
+                ele[i].checked = false;
+            }
+            else {
+                document.getElementById(ele[i].id).value = "";
+            }
+        }
+        localStorage.clear() // Deletes all data local storage
+        document.querySelector('#output').innerText = ""; // Deletes generated text
+        document.querySelector('#btn_download').style.display = 'none'; // Hides download button
+        document.querySelector('#btn_copy').style.display = 'none'; // Hides copy button
+    },
+    clear_btn_clicked() {
+        if (confirm("Alle erfassten Werte sicher löschen? \nKlicke auf \"Abbrechen\" um die Werte zu behalten. \nKlicke auf \"OK\" um alle erfassten Werte zu löschen.")){
+            this.clearInputFields();
+            location.reload(); // reloads the page the get the default checked boxes
+        }
+    },
+
+
+},
 }
 </script>
 
@@ -198,7 +236,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }
@@ -206,4 +244,29 @@ body {
     background: rgb(206,230,255);
     background: linear-gradient(90deg, rgba(206,230,255,1) 51%, rgba(221,249,212,1) 100%, rgba(151,176,252,0) 100%);
 }
+label {
+    margin: 5px 0 5px;
+    letter-spacing: 1px;
+    font-size: 0.9em;
+    /*text-transform: uppercase;*/
+  }
+  input[type="date"], input[type="text"] {
+    display: block;
+    padding: 10px 6px;
+    width: 100%;
+    box-sizing: border-box; /* total width is box plus border */
+    border: none;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+  input[type="date"] {
+    width: 120px;
+  }
+  input[type="checkbox"] {
+    display: inline-block;
+    width: 16px;
+    margin: 0 10px 0 0;
+    position: relative;
+    top: 2px;
+  }
 </style>

@@ -1,13 +1,14 @@
 <template>
-    <div class="row d-inline-flex py-2">
+    <div class="row  d-inline-flex">
             <div class="col">
                 <div ref="gender">
                     <label>Geschlecht:</label>
                     <div>
+                        <div class="row "></div>
                         <input type="radio" name="gender" value="m" id="m_input">
-                        <label for="m_input">m</label>
+                        <label class="radio_label" for="m_input">m</label>
                         <input type="radio" name="gender" value="w" id="w_input">
-                        <label for="w_input">w</label>
+                        <label class="radio_label" for="w_input">w</label>
                     </div>
                 </div>
             </div>
@@ -102,3 +103,12 @@ export default {
 
 
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+
+.radio_label {
+      padding: 0px 1em 0px 4px;
+    } 
+
+</style>
