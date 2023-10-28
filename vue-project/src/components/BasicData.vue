@@ -5,10 +5,10 @@
                     <label>Geschlecht:</label>
                     <div>
                         <div class="row "></div>
-                        <input type="radio" name="gender" value="m" id="m_input">
-                        <label class="radio_label" for="m_input">m</label>
-                        <input type="radio" name="gender" value="w" id="w_input">
-                        <label class="radio_label" for="w_input">w</label>
+                        <div v-for='gender in genders'> 
+                        <input type='radio' name='gender_radio' v-bind:value='gender' v-model='genders'>
+                        <label class="radio_label" v-bind:for='gender'>{{ gender }} </label>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -19,44 +19,38 @@
                 </div>
             </div>
             <div class="col">
-                <!-- age only gets displayed, when in certain range -->
-                <div ref="age" v-if="age < 120 && age > 0" class="py-4" style="white-space: nowrap;"> {{ age }} Jahre</div>
+                <!-- age only gets displayed, when in certain range  -->
+                <div class="py-4" v-if="age < 120 && age > 0" style="white-space: nowrap;"> {{ age }} Jahre </div>
             </div>
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-          selectedDate: null,
-          age: null
-        };
-      },
-      methods: {
-        handleDateChange(event) {
-            // Access the selected date from the event object
-            const selectedDate = event.target.value;
-            // Do something with the selected date
-            console.log("Selected date:", selectedDate);
-            console.log("date changed")
-            this.age = getAge(selectedDate);
-            console.log(this.age)
-            function getAge(dateString) {
-                var today = new Date();
-                var birthDate = new Date(dateString);
-                var age = today.getFullYear() - birthDate.getFullYear();
-                var m = today.getMonth() - birthDate.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                    age--;
-                }
-                return age + "";
+<script setup>
+import { ref } from 'vue';
+    const genders = ['m', 'f'];
+    const age = ref('');
+    const handleDateChange = (event) => {
+        // Access the selected date from the event object
+        const selectedDate = event.target.value;
+        console.log("Selected date:", selectedDate);
+        age.value = getAge(selectedDate); // assign the ref's value, not the ref itself!
+        console.log(age.value)
+        function getAge(dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                calculatedAge--;
             }
-            return this.age;
+            return calculatedAge;
         }
-      }
+    }
+</script>
 
 
+
+<!--
     /*
     Didnt get version with Composition API to work -.-
     name: 'BasicData',
@@ -98,15 +92,12 @@ export default {
         
         //console.log(gender.value)
     }
-    */
+
 }
+*/-->
 
-
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
+/* add "scoped" to tyle tag to limit styling to this component */
 .radio_label {
       padding: 0px 1em 0px 4px;
     } 
