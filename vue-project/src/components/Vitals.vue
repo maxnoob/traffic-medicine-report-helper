@@ -56,6 +56,7 @@
 
 
 <script setup>
+// access specific value with "vitals.value.[specificvalue]"
 import { onMounted, ref, watch } from 'vue';
     const vitals = ref({
             bloodpressure_sys: "",
@@ -73,12 +74,11 @@ import { onMounted, ref, watch } from 'vue';
         return bmi
     }
     function bmi_clicked() {
-        console.log(vitals.height.value + " | " + vitals.weight.value)
-        console.log(typeof vitals.weight.value)
+        console.log(typeof vitals.value.weight)
         let regex = new RegExp("^[0-9]{2,3}$");
         try {
-            if (vitals.weight.value.match(regex) && vitals.height.value.match(regex)){
-                vitals.bmi.value = calcBMI(vitals.weight.value, vitals.height.value);
+            if (vitals.value.weight.match(regex) && vitals.value.height.match(regex)){
+                vitals.value.bmi = calcBMI(vitals.value.weight, vitals.value.height);
             }
             else {
                 alert("Grösse und Gewicht: Zahlen 10-999)")
