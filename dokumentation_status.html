@@ -25,7 +25,9 @@
                 <div id="birthdate"></div>
             </div>
             <div class="col">
-                <div id="age" class="py-4" style="white-space: nowrap;"></div>
+                <div id="age" class="py-4" style="white-space: nowrap;">
+                <h2>Branch Tami</h2>
+                </div>
             </div>
         </div>
 
@@ -42,7 +44,7 @@
             <div class="col">
                 <div id="bp_sys"></div>
             </div>
-            <div class="col" style="margin-left: -14px; margin-top: 30px;"">
+            <div class="col" style="margin-left: -14px; margin-top: 30px;">
                 /
             </div>
             <div class="col">
@@ -127,18 +129,29 @@
         </div>
 
         <div class="row py-2">
+            <div id="double_vision"></div>
+        </div>
+
+        <div class="row py-2">
             <div id="lang_stereo"></div>
+        </div>
+
+        <div class="row py-2">
+            <div id="sensitivity"></div>
         </div>
 
         <!----- Hearing ----->
         <hr />
         <h4 class="py-2">Hörvermögen</h4>
         <div class="row">
+            <div id="h_aid"></div>
+        </div>
+        <div class="row">
             <div id="hearing_3m"></div>
         </div>
         <div class="row d-inline-flex py-2">
             <div class="col">
-                <div id="weber_rinne""></div>
+                <div id="weber_rinne"></div>
             </div>
         </div>
         <div class="row">
@@ -151,6 +164,33 @@
                 <div id="rinne"></div>
             </div>
         </div>
+        <!----- Substance ----->
+        <hr />
+        <h4 class="py-2">Substanzen</h4>
+        <div class="row py-2">
+            <div id="foetor"></div>
+        </div>
+        <div class="row py-2">
+            <div id="face_erythem"></div>
+        </div>
+        <div class="row py-2">
+            <div id="spider_naevi"></div>
+        </div>
+        <div class="row py-2">
+            <div id="marks"></div>
+        </div>
+        <div class="row py-2">
+            <div id="ikterus"></div>
+        </div>
+        <div class="row py-2">
+            <div id="palmar_erythem"></div>
+        </div>    
+        <div class="row py-2">
+            <div id="septum"></div>
+        </div>
+        <div class="row py-2">
+            <div id="scar_road"></div>
+        </div> 
 
         <!----- Substance abuse ----->
         <hr />
@@ -158,11 +198,55 @@
         <div class="row py-2">
             <div id="liver"></div>
         </div>
+        <!----- brain functionality ----->
+        <hr />
+        <h4 class="py-2">Hirnleistungsstörungen</h4>
+        <div class="row py-2">
+            <div id="neurocognitivity"></div>
+        </div>
+        <div class="row py-2">
+            <div id="mini_mental"></div>
+        </div>
+        <div class="row py-2">
+            <div id="clock_test"></div>
+        </div>
+        <div class="row py-2">
+            <div id="trail_test"></div>
+        </div>
 
         <!----- Neurology ----->
         <hr />
         <h4 class="py-2">Neurologie</h4>
         <div class="row d-inline-flex">
+        <div class="slider-container">
+        <div class="slider-pair">
+            <label for="psrSlider">PSR:</label>
+            <input type="range" id="psrSlider" min="-3" max="3" step="1">
+            <span id="psrValue">0</span>
+        </div>
+
+        <div class="slider-pair">
+            <label for="asrSlider">ASR:</label>
+            <input type="range" id="asrSlider" min="-3" max="3" step="1">
+            <span id="asrValue">0</span>
+        </div>
+        </div>
+
+        <div class="slider-container">
+        <div class="slider-pair">
+            <label for="bsrSlider">BSR:</label>
+            <input type="range" id="bsrSlider" min="-3" max="3" step="1">
+            <span id="bsrValue">0</span>
+        </div>
+
+        <div class="slider-pair">
+            <label for="tsrSlider">TSR:</label>
+            <input type="range" id="tsrSlider" min="-3" max="3" step="1">
+            <span id="tsrValue">0</span>
+        </div>
+        </div>
+
+        </div> 
             <div class="col">
                 <div id="vib_thumb_re"></div>
             </div>
@@ -197,11 +281,17 @@
             <div id="carotis"></div>
         </div>
 
-        <div class="row py-3">
-            <div id="tämisfield">
-                <h2>Tämi Field</h2>
-                Tämis space to play
-            </div>
+
+        <div class="row py-2">
+            <div id="cb_heart_device"></div>
+        </div>
+
+        <!----- Metabolism ----->
+        <hr />
+        <h4 class="py-2 d-inline-flex">Stoffwechselerkrankungen</h4> <button id="btn_cardio_clear" class="btn btn-sm" style="float: right; opacity: 50%;">x</button>
+
+        <div class="row py-2">
+            <div id="cb_diabetic_device"></div>
         </div>
 
         <!-- TODO -->
@@ -225,6 +315,9 @@
             <button id="btn_copy" class="btn btn-primary my-2">in Zwischenablage kopieren</button>
             <button id="btn_download" class="btn btn-success">als Datei speichern</button>
         </div>
+
+        <!DOCTYPE html>
+
 
         <!-- snackbar for showing confirmation message after copying -->
         <div id="snackbar"></div>

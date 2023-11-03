@@ -64,6 +64,11 @@ text-align: justify;
 text-justify: inter-word;
 }
 
+/* Add margin-right to create spacing between radio buttons */
+.radio-container {
+    display: inline-block;
+    margin-right: 10px;
+}
 
 /* The snackbar - position it at the bottom and in the middle of the screen -- from https://www.w3schools.com/howto/howto_js_snackbar.asp */
 #snackbar {
