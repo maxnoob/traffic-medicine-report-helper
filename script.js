@@ -11,27 +11,27 @@ $(document).ready(function() {
     const bsrValue = document.getElementById('bsrValue');
     const asrValue = document.getElementById('asrValue');
     const tsrValue = document.getElementById('tsrValue');
-    const psrLabels = ["-", "-/+", "+", "++", "+++"];
-    const bsrLabels = ["-", "-/+", "+", "++", "+++"];
-    const asrLabels = ["-", "-/+", "+", "++", "+++"];
-    const tsrLabels = ["-", "-/+", "+", "++", "+++"];
+    const psrLabels = ["-", "+", "++", "+++"];
+    const bsrLabels = ["-", "+",  "++", "+++"];
+    const asrLabels = ["-", "+",  "++", "+++"];
+    const tsrLabels = ["-", "+", "++", "+++"];
     
     // Event-Listener for changes in the slider value
     psrSlider.addEventListener('input', function() {
     const value = psrSlider.value;
-    psrValue.textContent = psrLabels[parseInt(value) + 3]; // Adjust index
+    psrValue.textContent = psrLabels[parseInt(value)]; // Adjust index
         });
     bsrSlider.addEventListener('input', function() {
     const value = bsrSlider.value;
-    bsrValue.textContent = bsrLabels[parseInt(value) + 3]; // Adjust index
+    bsrValue.textContent = bsrLabels[parseInt(value)]; // Adjust index
         });
     asrSlider.addEventListener('input', function() {
     const value = asrSlider.value;
-    asrValue.textContent = asrLabels[parseInt(value) + 3]; // Adjust index
+    asrValue.textContent = asrLabels[parseInt(value) ]; // Adjust index
         });
     tsrSlider.addEventListener('input', function() {
     const value = tsrSlider.value;
-    tsrValue.textContent = tsrLabels[parseInt(value) + 3]; // Adjust index
+    tsrValue.textContent = tsrLabels[parseInt(value) ]; // Adjust index
         });
 
     // -------------------------- Create radio buttons -------------------------------------
