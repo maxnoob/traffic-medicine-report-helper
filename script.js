@@ -50,7 +50,6 @@ $(document).ready(function() {
         <input type="radio" name="double_vision" value="nein" id="double_vision_nein"> nein \u00A0\u00A0\u00A0
         <input type="radio" name="double_vision" value="ja" id="double_vision_ja"> ja`;
 
-        
     // Generate the radio buttons for general condition
     const az = document.querySelector("#az"); // maps to html object
     az.innerHTML = `<label>Allgemeinzustand:</label> <div>
