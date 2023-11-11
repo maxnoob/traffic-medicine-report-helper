@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent> <!-- without @submit.prevent the page will reload after every button clicked-->
-        <h4 class="py-2">Neuro</h4>
+        <h4 class="py-2">Neurologie</h4>
        
     </form>
 
@@ -28,7 +28,7 @@ import { onMounted, ref, watch } from 'vue';
     /* use watch to retain inputted data via localStorage */
     watch(neuro, () => {
         console.log("watcher triggered");
-        localStorage.setItem('vitals', JSON.stringify(vitals.value));
+        localStorage.setItem('neuro', JSON.stringify(neuro.value));
             }, { deep: true }, { immediate: true }
         )
 
