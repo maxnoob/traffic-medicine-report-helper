@@ -58,49 +58,16 @@
 
         <!----- Neurology ----->
         <hr />
-        <h4 class="py-2">Neurologie</h4>
-        <div class="row d-inline-flex">
-          <div class="col">
-            <div id="vib_thumb_re"></div>
-          </div>
+        <NeuroForm/>
 
-          <div class="col">
-            <div id="vib_thumb_li" style="margin-left: -120px"></div>
-          </div>
-        </div>
-        <div class="row"></div>
-
-        <div class="row d-inline-flex py-2">
-          <div class="col">
-            <div id="vib_ankle_re"></div>
-          </div>
-          <div class="col">
-            <div id="vib_ankle_li" style="margin-left: -130px"></div>
-          </div>
-          <div class="col">
-            <div id="bigtoe"></div>
-          </div>
-        </div>
 
         <!----- Cardiopulmonal ----->
         <hr />
-        <h4 class="py-2 d-inline-flex">Kardiopulmonal</h4>
-        <button
-          id="btn_cardio_clear"
-          class="btn btn-sm"
-          style="float: right; opacity: 50%"
-        >
-          x
-        </button>
-
-        <div class="row py-2">
-          <div id="heart_auscultation"></div>
-        </div>
-
-        <div class="row py-2">
-          <div id="carotis"></div>
-        </div>
-
+        <KardioForm/>
+        <MetaboForm/>
+        <AirwayIntenstineForm/>
+        <SpineMSForm/>
+        
         <!-- TODO -->
 
         <hr />
@@ -161,6 +128,11 @@ import VitalsForm from "./components/VitalsForm.vue";
 import BasicData from "./components/BasicData.vue";
 import Snackbar from "./components/Snackbar.vue";
 import VisionForm from "./components/VisionForm.vue";
+import NeuroForm from "./components/NeuroForm.vue";
+import KardioForm from "./components/KardioForm.vue";
+import MetaboForm from "./components/MetaboForm.vue";
+import AirwayIntenstineForm from "./components/AirwayIntenstineForm.vue";
+import SpineMSForm from "./components/SpineMSForm.vue";
 
 
 export default {
@@ -169,7 +141,12 @@ export default {
     BasicData,
     VitalsForm,
     VisionForm,
+    NeuroForm,
     Snackbar,
+    KardioForm,
+    MetaboForm,
+    AirwayIntenstineForm,
+    SpineMSForm
   },
   methods: {
     triggerSnackbar() {

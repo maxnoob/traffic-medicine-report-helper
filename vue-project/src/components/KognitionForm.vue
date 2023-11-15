@@ -126,7 +126,7 @@
     </div>
 
     <div class="row py-2 px-2">
-      <label>Horizontales Gesichtsfeld</label>
+      Horizontales Gesichtsfeld
       <div v-for="option in vis_field_degrees" :key="option.text">
         <input
           type="radio"
@@ -139,13 +139,11 @@
       </div>
     </div>
 
-    
-    <div class="d-flex py-2" style="background-color: aliceblue; padding-left: 6px;">
-      <label>Pupillenöffnung:</label>
+    Pupillenöffnung
+    <div class="row py-2">
       <select
         v-model="vision.pupils"
         class="form-select form-select-sm vision_input"
-        
       >
         <option value="" selected disabled>mm</option>
         <option
@@ -158,18 +156,35 @@
       </select>
     </div>
 
-
-    <div class="d-flex py-2">
+    <div class="row py-2 px-2">
+      <div class="col">
         <label>Nystagmus:</label>
-        <RadioInputGroup
-          v-model="vision.nystag"
-          name="nystag"
-          :options="nein_jaOptions"
-        />
       </div>
+      <div class="col">
+        <input
+          type="radio"
+          name="nystag"
+          value="nein"
+          id="nystag_nein"
+          v-model="vision.nystag"
+        />
+        <label for="nystag_nein">nein</label>
+      </div>
+      <div class="col">
+        <input
+          type="radio"
+          name="nystag"
+          value="ja"
+          id="nystag_ja"
+          v-model="vision.nystag"
+        /><label for="nystag_ja">ja</label>
+      </div>
+    </div>
 
+    <div class="d-flex" style="background-color: aliceblue">
+      <div class="d-inline-md-flex"></div>
 
-    <div class="d-flex py-2" style="background-color: aliceblue">
+      <div class="d-inline-md-flex">
         <label>Doppelbilder:</label>
         <RadioInputGroup
           v-model="vision.double"
@@ -177,8 +192,8 @@
           :options="nein_jaOptions"
         />
       </div>
+    </div>
 
-    <div class="d-flex py-2">
     <label>Lang-Stereo-Test:</label>
     <RadioInputGroup
       v-model="vision.stereo"
@@ -187,7 +202,6 @@
     />
     <div v-if="vision.stereo=='neg'"><input type="text" placeholder="Beschreibung des Befundes" v-model="vision.bemerkung" />
     </div>
-  </div>
 
     <div class="d-flex py-2" style="background-color: aliceblue">
       <label>Augenmotilität:</label>
@@ -198,14 +212,12 @@
       />
     </div>
 
-    <div class="d-flex py-2">
     <label>Dämmerungssehen:</label>
     <RadioInputGroup
       v-model="vision.daemmerung"
       name="daemmerung"
       :options="erhalten_gestoertOptions"
     />
-  </div>
 
     <div class="d-flex py-2" style="background-color: aliceblue">
       <label>Blendempfindlichkeit:</label>
@@ -323,7 +335,7 @@ input[type="text"] {
   text-align: center;
 }
 
-label, select {
+label {
   margin-left: 6px;
 }
 </style>

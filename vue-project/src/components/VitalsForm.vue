@@ -2,6 +2,13 @@
   <form @submit.prevent>
     <!-- without @submit.prevent the page will reload after every button clicked-->
     <h4 class="py-2">Vitalparameter</h4>
+    <label>Allgemeinzustand:</label>
+    <RadioInputGroup
+      name="az"
+      :options="azOptions"
+      v-model="vitals.az"
+      vertical
+    />
     <label>Blutdruck:</label>
     <div class="row">
       <div class="col">
@@ -27,28 +34,8 @@
       <input type="checkbox" value="regelm" v-model="vitals.puls_reg" />
       <label>regelmässig</label>
     </div>
-    <label>Allgemeinzustand:</label>
-    <div>
-      <input
-        type="radio"
-        name="az"
-        value="erhalten"
-        id="erhalten"
-        checked="true"
-        v-model="vitals.az"
-      />
-      <label class="radio_label" for="erhalten">erhalten</label>
-    </div>
-    <div>
-      <input
-        type="radio"
-        name="az"
-        value="reduziert"
-        id="reduziert"
-        v-model="vitals.az"
-      />
-      <label class="radio_label" for="reduziert">reduziert</label>
-    </div>
+
+
     <div class="row"></div>
 
     <div class="row">
@@ -86,7 +73,13 @@
 
 <script setup>
 // access specific value with "vitals.value.[specificvalue]"
-import {  onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
+import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
+
+const azOptions = [
+  { label: "erhalten", value: "erhalten" },
+  { label: "nicht erhalten", value: "nicht_erhalten" },
+];
 
 const vitals = ref({
   bloodpressure_sys: "",
@@ -95,7 +88,7 @@ const vitals = ref({
   puls_reg: false,
   height: "",
   weight: "",
-  az: true,
+  az: "erhalten",
   bmi: null,
 });
 
