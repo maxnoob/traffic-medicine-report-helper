@@ -50,6 +50,7 @@
 import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
+import persistToLocalStorage from "@/utils/persistToLocalStorage";
 
 const nichteingeschraenkt_eingeschraenktOptions = [
   { label: "nicht eingeschränkt", value: "nicht_eingeschraenkt" },
@@ -82,11 +83,8 @@ const spine_ms = ref({
 });
 /* populate fields with stored data */
 onMounted(
-  () =>
-    (spine_ms.value =
-      JSON.parse(localStorage.getItem("spine_ms")) ||
-      JSON.stringify(this.spine_ms.value))
-); // TODO: throws "Uncaught TypeError" after emptied field, but still works...
+  () => persistToLocalStorage(spine_ms,"spine_ms")
+);
 /* use watch to retain inputted data via localStorage */
 watch(
   spine_ms,

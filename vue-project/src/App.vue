@@ -1,34 +1,19 @@
 <template>
   <!-- <Modal /> -->
   <body>
-
     <div class="container" id="top_container">
       <div class="second_container">
-
         <div class="row">
           <h1 class="py-3">Status erfassen</h1>
-          
         </div>
-
         <hr />
-
         <!-- Basic Data / Stammdaten -->
-        <BasicData />
-        
+        <BasicDataForm />
         <!---- Vitals  / Vitalparameter---->
-        <hr />
-        <div class="row d-inline-flex">
-          <VitalsForm />
-        </div>
-
+        <VitalsForm />
         <!----- Vision / Sehvermögen ----->
-        <hr />
-        <div class="row d-inline-flex">
-          <VisionForm />
-        </div>
-
-        <!----- Hearing ----->
-        <hr />
+        <VisionForm />
+        <!----- Hearing / Hörvermögen ----->
         <h4 class="py-2">Hörvermögen</h4>
         <div class="row">
           <div id="hearing_3m"></div>
@@ -49,53 +34,56 @@
           </div>
         </div>
 
-        <!----- Substance abuse ----->
-        <hr />
+        <!----- Substance abuse / Substanzen ----->
         <h4 class="py-2">Stigmata</h4>
         <div class="row py-2">
           <div id="liver"></div>
         </div>
 
-        <!----- Neurology ----->
-        <hr />
-        <NeuroForm/>
+        <!-- Psychische Störungen -->
 
+        <!-- Organisch bedingte Hirnleistungsstörungen -->
+        <KognitionForm />
+        <!----- Neurology / Neurologische Erkrankungen ----->
+        <NeuroForm />
+        <!----- Cardiopulmonal / Herz-Kreislauferkrankungen ----->
+        <KardioForm />
+        <!----- Stoffwechselerkrankungen ----->
+        <MetaboForm />
+        <!----- Atem- und Bauchorganerkrankungen ----->
+        <AirwayIntenstineForm />
+        <!----- Wirbelsäule und Bewegungsapparat ----->
+        <SpineMSForm />
 
-        <!----- Cardiopulmonal ----->
-        <hr />
-        <KardioForm/>
-        <MetaboForm/>
-        <AirwayIntenstineForm/>
-        <SpineMSForm/>
-        
-        <!-- TODO -->
-
-        <hr />
-
-        <!----- Kognition ----->
-        <!-- <hr />
-            <h4 class="py-2">Kognition</h4>  -->
-        <!-- TODO -->
-
-        <div class="row"></div>
-
-        <button id="btn_values" class="btn btn-secondary my-3">
-          Werte ausgeben
-        </button>
-        <button
-          id="btn_text"
-          class="btn btn-primary my-3"
-          @click="text_btn_clicked()"
+        <!----- Buttons ----->
+        <div
+          class="d-sm-flex flex-row justify-content-evenly"
+          style="max-width: 70vw"
         >
-          Text generieren
-        </button>
-        <button
-          id="btn_clear"
-          class="btn btn-danger my-3"
-          @click="clear_btn_clicked()"
-        >
-          Werte löschen
-        </button>
+          <div>
+            <button id="btn_values" class="btn btn-secondary my-3">
+              Werte ausgeben
+            </button>
+          </div>
+          <div>
+            <button
+              id="btn_text"
+              class="btn btn-primary my-3"
+              @click="text_btn_clicked()"
+            >
+              Text generieren
+            </button>
+          </div>
+          <div>
+            <button
+              id="btn_clear"
+              class="btn btn-danger my-3"
+              @click="clear_btn_clicked()"
+            >
+              Werte löschen
+            </button>
+          </div>
+        </div>
 
         <div id="output" contenteditable="false"></div>
 
@@ -110,7 +98,7 @@
           <button id="btn_download" class="btn btn-success">
             als Datei speichern
           </button>
-          <button id="btn_download" class="btn btn-success" @click="darkmode()">
+          <button class="btn btn-success" @click="darkmode()">
             darkmode
           </button>
         </div>
@@ -119,13 +107,22 @@
         <Snackbar />
       </div>
     </div>
-    <img src="./assets/BFH_Logo_deutsch.png" alt="BFH Logo" style="max-width: 50px;  height: auto; display: -webkit-box; margin-left: auto;"/>
+    <img
+      src="./assets/BFH_Logo_deutsch.png"
+      alt="BFH Logo"
+      style="
+        max-width: 50px;
+        height: auto;
+        display: -webkit-box;
+        margin-left: auto;
+      "
+    />
   </body>
 </template>
 
 <script>
 import VitalsForm from "./components/VitalsForm.vue";
-import BasicData from "./components/BasicData.vue";
+import BasicDataForm from "./components/BasicDataForm.vue";
 import Snackbar from "./components/Snackbar.vue";
 import VisionForm from "./components/VisionForm.vue";
 import NeuroForm from "./components/NeuroForm.vue";
@@ -133,12 +130,12 @@ import KardioForm from "./components/KardioForm.vue";
 import MetaboForm from "./components/MetaboForm.vue";
 import AirwayIntenstineForm from "./components/AirwayIntenstineForm.vue";
 import SpineMSForm from "./components/SpineMSForm.vue";
-
+import KognitionForm from "./components/KognitionForm.vue";
 
 export default {
   name: "App",
   components: {
-    BasicData,
+    BasicDataForm,
     VitalsForm,
     VisionForm,
     NeuroForm,
@@ -146,7 +143,8 @@ export default {
     KardioForm,
     MetaboForm,
     AirwayIntenstineForm,
-    SpineMSForm
+    SpineMSForm,
+    KognitionForm,
   },
   methods: {
     triggerSnackbar() {

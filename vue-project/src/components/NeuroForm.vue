@@ -258,6 +258,7 @@
 import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
+import persistToLocalStorage from "@/utils/persistToLocalStorage";
 // import { formToJSON } from "axios";
 //import TextInput from "./InputComponents/TextInput.vue";
 // import SliderInput from "./InputComponents/SliderInput.vue";
@@ -303,19 +304,19 @@ const fnpOptions = [
 
 const reflOptions = ["nicht geprüft", "-", "+", "++", "+++"];
 
-const bsr_conv = ref(null);
+const bsr_conv = ref("nicht geprüft");
 function bsr_change() {
   bsr_conv.value = reflOptions[neuro.value.bsr];
 }
-const psr_conv = ref(null);
+const psr_conv = ref("nicht geprüft");
 function psr_change() {
   psr_conv.value = reflOptions[neuro.value.psr];
 }
-const tsr_conv = ref(null);
+const tsr_conv = ref("nicht geprüft");
 function tsr_change() {
   tsr_conv.value = reflOptions[neuro.value.tsr];
 }
-const asr_conv = ref(null);
+const asr_conv = ref("nicht geprüft");
 function asr_change() {
   asr_conv.value = reflOptions[neuro.value.asr];
 }
@@ -347,10 +348,10 @@ const neuro = ref({
   vibration_ankle_li: "",
   bigtoe: "",
   sensibility: "",
-  bsr: null,
-  psr: null,
-  asr: null,
-  tsr: null,
+  bsr: 0,
+  psr: 0,
+  asr: 0,
+  tsr: 0,
   reflexes_symm: true,
   strength_extremities: null,
   romberg_test: "",
@@ -366,11 +367,8 @@ const neuro = ref({
 
 /* populate fields with stored data */
 onMounted(
-  () =>
-    (neuro.value =
-      JSON.parse(localStorage.getItem("neuro")) ||
-      JSON.stringify(this.neuro.value))
-); // TODO: throws "Uncaught TypeError" after emptied field, but still works...
+  () => persistToLocalStorage(neuro,"neuro")
+);
 /* use watch to retain inputted data via localStorage */
 watch(
   neuro,

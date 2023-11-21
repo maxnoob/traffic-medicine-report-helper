@@ -1,6 +1,6 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
+  <FormCard>
+    
 
     <h4 class="py-2">Sehvermögen</h4>
 
@@ -215,12 +215,14 @@
         :options="nichterhoeht_erhoehtOptions"
       />
     </div>
-  </form>
+  </FormCard>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
+import persistToLocalStorage from "@/utils/persistToLocalStorage";
+import FormCard from "./FormCard.vue";
 
 /* provides options for the vision input fields */
 const vision_options = [
@@ -295,11 +297,8 @@ const vision = ref({
 });
 /* populate fields with stored data */
 onMounted(
-  () =>
-    (vision.value =
-      JSON.parse(localStorage.getItem("vision")) ||
-      JSON.stringify(this.vision.value))
-); // TODO: throws "Uncaught TypeError" after emptied field, but still works...
+  () => persistToLocalStorage (vision, "vision")
+);
 /* use watch to retain inputted data via localStorage */
 watch(
   vision,

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent>
+  <FormCard>
     <!-- without @submit.prevent the page will reload after every button clicked-->
     <h4 class="py-2">Vitalparameter</h4>
     <label>Allgemeinzustand:</label>
@@ -35,7 +35,6 @@
       <label>regelmässig</label>
     </div>
 
-
     <div class="row"></div>
 
     <div class="row">
@@ -68,13 +67,15 @@
         </div>
       </div>
     </div>
-  </form>
+  </FormCard>
 </template>
 
 <script setup>
 // access specific value with "vitals.value.[specificvalue]"
 import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
+import persistToLocalStorage from "@/utils/persistToLocalStorage";
+import FormCard from "./FormCard.vue";
 
 const azOptions = [
   { label: "erhalten", value: "erhalten" },
@@ -118,12 +119,8 @@ function bmi_clicked() {
   }
 }
 /* populate fields with stored data */
-onMounted(
-  () =>
-    (vitals.value =
-      JSON.parse(localStorage.getItem("vitals")) ||
-      JSON.stringify(this.vitals.value))
-); // TODO: throws "Uncaught TypeError" after emptied field, but still works...
+onMounted(() => persistToLocalStorage(vitals, "vitals"));
+
 /* use watch to retain inputted data via localStorage */
 watch(
   vitals,

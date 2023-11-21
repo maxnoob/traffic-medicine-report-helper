@@ -27,6 +27,7 @@
 import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
+import persistToLocalStorage from "@/utils/persistToLocalStorage.js";
 
 const metabo_devicesOptions = [
   { label: "nicht vorhanden", value: "nichtvorhanden" },
@@ -41,11 +42,8 @@ const metabo = ref({
 });
 /* populate fields with stored data */
 onMounted(
-  () =>
-    (metabo.value =
-      JSON.parse(localStorage.getItem("metabo")) ||
-      JSON.stringify(this.metabo.value))
-); // TODO: throws "Uncaught TypeError" after emptied field, but still works...
+  () => persistToLocalStorage(metabo,"metabo")
+);
 /* use watch to retain inputted data via localStorage */
 watch(
   metabo,

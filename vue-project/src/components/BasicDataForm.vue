@@ -1,4 +1,5 @@
 <template>
+<FormCard>
   <h4 class="py-2">Stammdaten</h4>
   <div class="row d-inline-flex">
     <div class="col">
@@ -43,10 +44,14 @@
       </div>
     </div>
   </div>
+</FormCard>
 </template>
 
 <script setup>
 import { onMounted, watch, ref } from "vue";
+import persistToLocalStorage from "@/utils/persistToLocalStorage";
+import FormCard from "./FormCard.vue";
+
 const genders = ["m", "f"];
 const basic = ref({
   gender: "",
@@ -78,11 +83,7 @@ const handleDateChange = (event) => {
 };
 /* populate fields with stored data */
 onMounted(
-  () =>
-    (basic.value =
-      JSON.parse(localStorage.getItem("basic")) ||
-      JSON.stringify(this.basic.value))
-); // TODO: throws "Uncaught TypeError" after emptied field, but still works...
+  () => persistToLocalStorage (basic, "basic"))
 /* watcher to save all inputted data to localStorage */
 watch(
   basic,
@@ -123,22 +124,7 @@ watch(
         })
          ,
     created() {
-    },
-    mounted(){
-        /*
-        The code below does not work. So radio button are hardcoded in HTML... :(
-        // Generate the radio buttons for gender
-        const gender = ref()
-        const genders = ['m', 'f'];
-        gender.value += genders.map((gender) => `<div>
-            <input type="radio" name="gender" value="${gender}" id="${gender}_input">
-                <label for="${gender}">${gender}</label>
-        </div>`).join(' ');
-        
-        //console.log(gender.value)
     }
-
-}
 */-->
 
 <style scoped>

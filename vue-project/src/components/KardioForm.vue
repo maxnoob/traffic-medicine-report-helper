@@ -49,8 +49,9 @@
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
-import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
-import CheckboxInput from "./InputComponents/CheckboxInput.vue";
+import RadioInputGroup from "@/components/InputComponents/RadioInputGroup.vue";
+import CheckboxInput from "@/components/InputComponents/CheckboxInput.vue";
+import persistToLocalStorage from "@/utils/persistToLocalStorage";
 
 const soundsOptions = [
   { label: "normal", value: "normal" },
@@ -78,11 +79,8 @@ const cardio = ref({
 });
 /* populate fields with stored data */
 onMounted(
-  () =>
-    (cardio.value =
-      JSON.parse(localStorage.getItem("cardio")) ||
-      JSON.stringify(this.cardio.value))
-); // TODO: throws "Uncaught TypeError" after emptied field, but still works...
+  () => persistToLocalStorage(cardio,"cardio")
+);
 /* use watch to retain inputted data via localStorage */
 watch(
   cardio,
