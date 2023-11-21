@@ -7,11 +7,15 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@formkit/vue": "^1.2.2",
     "core-js": "^3.8.3",
+    "node": "^21.1.0",
     "vue": "^3.2.13"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-service": "~5.0.0"
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-vue": "^9.18.1"
   }
 }
