@@ -10,7 +10,7 @@
         <!-- Basic Data / Stammdaten -->
         <BasicDataForm />
         <!---- Vitals  / Vitalparameter---->
-        <VitalsForm />
+        <VitalsForm ref="vitalsFormRef"/>
         <!----- Vision / Sehvermögen ----->
         <VisionForm />
         <!----- Hearing / Hörvermögen ----->
@@ -85,6 +85,8 @@
           </div>
         </div>
 
+        <GeneratedText v-bind:bmi="bmi" v-bind:storage="storage"/>
+
         <div id="output" contenteditable="false"></div>
 
         <div class="row">
@@ -131,6 +133,7 @@ import MetaboForm from "./components/MetaboForm.vue";
 import AirwayIntenstineForm from "./components/AirwayIntenstineForm.vue";
 import SpineMSForm from "./components/SpineMSForm.vue";
 import KognitionForm from "./components/KognitionForm.vue";
+import GeneratedText from "./components/GeneratedText.vue";
 
 export default {
   name: "App",
@@ -145,6 +148,7 @@ export default {
     AirwayIntenstineForm,
     SpineMSForm,
     KognitionForm,
+    GeneratedText
   },
   methods: {
     triggerSnackbar() {
@@ -183,31 +187,17 @@ export default {
           'Alle erfassten Werte sicher löschen? \nKlicke auf "Abbrechen" um die Werte zu behalten. \nKlicke auf "OK" um alle erfassten Werte zu löschen.'
         )
       ) {
-        //clearInputFields(); is this method really necessary??
         localStorage.clear();
         location.reload(); // reloads the page the get the default checked boxes
       }
-    },
-    // Delete values in input fields and unchecks radio buttons
-    clearInputFields() {
-      var ele = document.getElementsByTagName("input");
-      for (let i = 0; i < ele.length; i++) {
-        if (ele[i].type == "radio" || ele[i].type == "checkbox") {
-          ele[i].checked = false;
-        } else {
-          document.getElementById(ele[i].id).value = "";
-        }
-      }
-      localStorage.clear(); // Deletes all data local storage
-      document.querySelector("#output").innerText = ""; // Deletes generated text
-      document.querySelector("#btn_download").style.display = "none"; // Hides download button
-      document.querySelector("#btn_copy").style.display = "none"; // Hides copy button
     },
   },
 };
 </script>
 
 <script setup>
+import { ref } from "vue";
+const vitalsFormRef = ref(null)
 // ---------------------------------- Generate text ------------------------------------------------------
 let outputEdited = false;
 // Handles text button logic; catches if user previously did changes to generated text
@@ -227,7 +217,7 @@ function text_btn_clicked() {
   }
 }
 
-// Checks if one of the radio buttons of a group is checked
+// Checks if one of the gender radio buttons is checked
 function inputValidation() {
   let basic = JSON.parse(localStorage.getItem("basic"));
   console.log("gender " + basic.gender);
@@ -248,12 +238,6 @@ function allStorage() {
   return values;
 }
 
-// Calculate BMI
-function calcBMI(weight, height) {
-  let bmi = (weight / (height / 100) ** 2).toPrecision(3);
-  return bmi;
-}
-
 // Generates plain text with the inputted information
 function generateText() {
   outputEdited = false;
@@ -261,7 +245,7 @@ function generateText() {
 
   // Checks BMI
   let bmi_phrase = "normalem";
-  let bmi = calcBMI(storage.vitals.weight, storage.vitals.height);
+  let bmi = vitalsFormRef.value.calcBMI(storage.vitals.weight, storage.vitals.height);
   storage.vitals.bmi;
   console.log(bmi);
   if (bmi > 25) {

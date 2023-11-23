@@ -82,6 +82,11 @@ const azOptions = [
   { label: "nicht erhalten", value: "nicht_erhalten" },
 ];
 
+/* // a computed ref -> doesn't work with ref; using reactive throws error
+const bmi = computed(() => {
+  return (vitals.value.weight / (vitals.value.height / 100) ** 2).toPrecision(3);
+}); */
+
 const vitals = ref({
   bloodpressure_sys: "",
   bloodpressure_dia: "",
@@ -93,12 +98,9 @@ const vitals = ref({
   bmi: null,
 });
 
-// a computed ref
-/* const bmi = computed(() => {
-  return (vitals.value.weight / (vitals.value.height / 100) ** 2).toPrecision(
-    3
-  );
-}); */
+defineExpose({
+  calcBMI,
+})
 
 // Calculate BMI
 function calcBMI(weight, height) {
