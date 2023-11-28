@@ -13,34 +13,9 @@
         <VitalsForm ref="vitalsFormRef"/>
         <!----- Vision / Sehvermögen ----->
         <VisionForm />
-        <!----- Hearing / Hörvermögen ----->
-        <h4 class="py-2">Hörvermögen</h4>
-        <div class="row">
-          <div id="hearing_3m"></div>
-        </div>
-        <div class="row d-inline-flex py-2">
-          <div class="col">
-            <div id="weber_rinne"></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div id="weber"></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div id="rinne"></div>
-          </div>
-        </div>
-
-        <!----- Substance abuse / Substanzen ----->
-        <h4 class="py-2">Stigmata</h4>
-        <div class="row py-2">
-          <div id="liver"></div>
-        </div>
-
-        <!-- Psychische Störungen -->
+        <HearingForm />
+        <Substance />
+        <Psych />
 
         <!-- Organisch bedingte Hirnleistungsstörungen -->
         <KognitionForm />
@@ -134,6 +109,9 @@ import AirwayIntenstineForm from "./components/AirwayIntenstineForm.vue";
 import SpineMSForm from "./components/SpineMSForm.vue";
 import KognitionForm from "./components/KognitionForm.vue";
 import GeneratedText from "./components/GeneratedText.vue";
+import HearingForm from "./components/HearingForm.vue";
+import Substance from "./components/Substance.vue";
+import Psych from "./components/Psych.vue";
 
 export default {
   name: "App",
@@ -148,7 +126,10 @@ export default {
     AirwayIntenstineForm,
     SpineMSForm,
     KognitionForm,
-    GeneratedText
+    GeneratedText, 
+    Substance,
+    HearingForm,
+    Psych
   },
   methods: {
     triggerSnackbar() {
