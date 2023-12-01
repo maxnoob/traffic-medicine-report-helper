@@ -1,7 +1,5 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
-
+      <FormCard>
     <h4 class="py-2">Atem- und Bauchorganerkrankungen</h4>
 
     <RadioInputGroup
@@ -13,13 +11,15 @@
     <div v-if="airway_intestine.problem == 'vorhanden'">
       <Input type="text" v-model="airway_intestine.description" />
     </div>
-  </form>
+    
+</FormCard>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
+import FormCard from "./FormCard.vue";
 
 const nichtvorhanden_vorhandenOptions = [
   { label: "nicht vorhanden", value: "nichtvorhanden" },

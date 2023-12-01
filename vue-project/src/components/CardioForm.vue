@@ -1,6 +1,5 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
+  <FormCard>
 
     <h4 class="py-2">Herz-Kreislauferkrankungen</h4>
 
@@ -44,7 +43,7 @@
       <CheckboxInput v-model="cardio.crt_d" :value="false" label="CRT-D" />
     </div>
 
-  </form>
+</FormCard>
 </template>
 
 <script setup>
@@ -52,6 +51,7 @@ import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "@/components/InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "@/components/InputComponents/CheckboxInput.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
+import FormCard from "./FormCard.vue";
 
 const auscultationOptions = [
   { label: "normal", value: "normal" },

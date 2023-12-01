@@ -1,7 +1,5 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
-
+  <FormCard>
     <h4 class="py-2">Wirbelsäule und Bewegungsapparat</h4>
 
     <div>
@@ -43,7 +41,7 @@
       <CheckboxInput v-model="spine_ms.andere" :value="false" label="andere Orthese" />
     </div>
 
-  </form>
+</FormCard>
 </template>
 
 <script setup>
@@ -51,6 +49,7 @@ import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
+import FormCard from "./FormCard.vue";
 
 const nichteingeschraenkt_eingeschraenktOptions = [
   { label: "nicht eingeschränkt", value: "nicht_eingeschraenkt" },

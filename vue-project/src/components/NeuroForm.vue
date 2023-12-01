@@ -1,6 +1,5 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
+  <FormCard>
     <h4 class="py-2">Neurologie</h4>
     <RadioInputGroup
       v-model="neuro.speech"
@@ -250,7 +249,7 @@
         name="gang"
       />
     </div>
-  </form>
+</FormCard>
 </template>
 
 <script setup>
@@ -259,6 +258,7 @@ import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
+import FormCard from "./FormCard.vue";
 // import { formToJSON } from "axios";
 //import TextInput from "./InputComponents/TextInput.vue";
 // import SliderInput from "./InputComponents/SliderInput.vue";
