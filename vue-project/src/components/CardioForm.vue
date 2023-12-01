@@ -7,9 +7,9 @@
     <div>
       <label>Herztöne:</label>
       <RadioInputGroup
-        v-model="cardio.sounds"
-        name="sounds"
-        :options="soundsOptions"
+        v-model="cardio.auscultation"
+        name="auscultation"
+        :options="auscultationOptions"
       />
     </div>
 
@@ -53,7 +53,7 @@ import RadioInputGroup from "@/components/InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "@/components/InputComponents/CheckboxInput.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
 
-const soundsOptions = [
+const auscultationOptions = [
   { label: "normal", value: "normal" },
   {
     label: "nicht normal (Herzgeräusche, Extrasystolen etc.)",
@@ -68,7 +68,7 @@ const cardio_devicesOptions = [
 
 
 const cardio = ref({
-  sounds: "",
+  auscultation: "",
   carotids: false,
   heartinsuff_zeichen: false,
   devices: "",
