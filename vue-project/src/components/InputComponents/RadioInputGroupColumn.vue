@@ -15,7 +15,7 @@
       horizontal: !vertical,
     }"
   >
-  <RadioInputElement
+  <RadioInputElementColumn 
   :label="option.label"
   :value="option.value"
   :modelValue="modelValue"
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import RadioInputElement from "./RadioInputElement.vue";
+import RadioInputElementColumn from "./RadioInputElementColumn.vue";
 
 export default {
   props: {
@@ -52,7 +52,7 @@ export default {
       type: String,
     },
   },
-  components: { RadioInputElement },
+  components: { RadioInputElementColumn },
   methods: {
     // checks if the chosen value is the same as the current value so button can be deselected
     deselect(new_value) {
@@ -75,7 +75,10 @@ export default {
 
 .radio-group {
   display: flex;
-  gap: 15px;
+  gap: 20px;
+}
+.def-element{
+  width: 200px;
 }
 
 label {
