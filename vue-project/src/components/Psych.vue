@@ -3,30 +3,17 @@
       <h4 class="py-2">Psychische Störungen</h4>
   
       <div class="py-2">
-        <label>psychisch:</label>
-        <div>
-          <input
-            type="radio"
-            id="nicht_auffaellig"
-            value="nicht_auffaellig"
+        <label>psychisch auffällig:</label>
+          <RadioInputGroup
             v-model="psych.condition"
+            vertical
+            name="condition"
+            :options="nein_jaOptions"
           />
-          <label for="nicht_auffaellig">Nicht auffällig</label>
         </div>
-  
-        <div>
-          <input
-            type="radio"
-            id="auffaellig"
-            value="auffaellig"
-            v-model="psych.condition"
-          />
-          <label for="auffaellig">Auffällig</label>
-        </div>
-      </div>
   
       <!-- Additional text field displayed when "Auffällig" is selected -->
-      <div v-if="psych.condition === 'auffaellig'" class="py-2">
+      <div v-if="psych.condition === 'ja'" class="py-2">
         <label for="additionalInfo">weitere Angaben:</label>
         <input
           type="text"
@@ -48,6 +35,10 @@
     condition: null,
     info: '',
   });
+  const nein_jaOptions = [
+  { label: "nein", value: "nein" },
+  { label: "ja", value: "ja" },
+];
 
 onMounted(
     () => persistToLocalStorage(psych, "psych")
