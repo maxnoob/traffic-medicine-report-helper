@@ -22,7 +22,7 @@
         <!----- Neurology / Neurologische Erkrankungen ----->
         <NeuroForm />
         <!----- Cardiopulmonal / Herz-Kreislauferkrankungen ----->
-        <KardioForm />
+        <CardioForm />
         <!----- Stoffwechselerkrankungen ----->
         <MetaboForm />
         <!----- Atem- und Bauchorganerkrankungen ----->
@@ -103,7 +103,7 @@ import BasicDataForm from "./components/BasicDataForm.vue";
 import Snackbar from "./components/Snackbar.vue";
 import VisionForm from "./components/VisionForm.vue";
 import NeuroForm from "./components/NeuroForm.vue";
-import KardioForm from "./components/KardioForm.vue";
+import CardioForm from "./components/CardioForm.vue";
 import MetaboForm from "./components/MetaboForm.vue";
 import AirwayIntenstineForm from "./components/AirwayIntenstineForm.vue";
 import SpineMSForm from "./components/SpineMSForm.vue";
@@ -121,7 +121,7 @@ export default {
     VisionForm,
     NeuroForm,
     Snackbar,
-    KardioForm,
+    CardioForm,
     MetaboForm,
     AirwayIntenstineForm,
     SpineMSForm,

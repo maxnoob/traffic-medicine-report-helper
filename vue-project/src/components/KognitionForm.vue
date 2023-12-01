@@ -94,7 +94,7 @@ watch(
   kognition,
   () => {
     console.log("watcher triggered");
-    localStorage.setItem("vision", JSON.stringify(kognition.value));
+    localStorage.setItem("kognition", JSON.stringify(kognition.value));
   },
   { deep: true },
   { immediate: true }

@@ -12,6 +12,8 @@ const props = defineProps({
   storage: {}
 });
 
+const s = props.storage // save storage for better readability in the code below
+
 defineExpose({
     generateText,
 })
@@ -35,7 +37,7 @@ function generateText() {
   const f_phrases = ["eine", "alte", "Frau", "die Explorandin"];
   let phrases = "";
   // Checks value from radio button to use corresponding gendering
-  if (props.storage.basic.gender == "m") {
+  if (s.basic.gender == "m") {
     phrases = m_phrases;
     measured_phrase = "(Angaben des Exploranden)";
   } else {
@@ -44,7 +46,7 @@ function generateText() {
   }
   // Checks general condition
   let az_phrase = "gutem";
-  if (props.storage.vitals.az == "reduziert") {
+  if (s.vitals.az == "reduziert") {
     az_phrase = "reduziertem";
   }
   // Checks if weight & height were measured
@@ -55,23 +57,27 @@ function generateText() {
   // Checks bloodpressure
   let bp_phrase = "nicht erhöht";
   let bp_no_rest = "";
-  if (input_dict.bp_sys_input > 140 || input_dict.bp_dia_input > 90) {
+  let bp_sys = s.vitals.bloodpressure_sys
+  let bp_dia = s.vitals.bloodpressure_dia
+  if (bp_sys > 140 || bp_dia > 90) {
     bp_phrase = "erhöht";
     bp_no_rest = ", keine Ruheblutdruckmessung";
   }
-  if (input_dict.bp_sys_input < 100 || input_dict.bp_dia_input < 60) {
+  if (bp_sys < 100 || bp_dia < 60) {
     bp_phrase = "erniedrigt";
   }
 
   // Checks pulse
   let pulse_phrase = "";
-  if (input_dict.pulse_input > 100) {
+  let pulse = s.vitals.pulse;
+  let pulse_reg = s.pulse_reg
+  if (pulse > 100) {
     pulse_phrase = "beschleunigt und ";
   }
-  if (input_dict.pulse_input < 60) {
+  if (pulse < 60) {
     pulse_phrase = "verlangsamt und ";
   }
-  if (input_dict.cb_pulse_reg === true) {
+  if (pulse_reg === true) {
     pulse_phrase += "regelmässig";
   } else {
     pulse_phrase += "unregelmässig [Schlagmuster beschreiben]";
@@ -80,13 +86,14 @@ function generateText() {
   // Checks visual field
   let vis_field_phrase =
     " In der fingerperimetrischen Prüfung des Gesichtsfeldes fallen keine Ausfälle auf, die horizontale Ausdehnung ist ≥ ";
-  if (radio_buttons.vis_field == 120) {
+  let vis_field = s.vision.vis_field_degrees
+  if (vis_field == 120) {
     vis_field_phrase += "120°.";
   }
-  if (radio_buttons.vis_field == 140) {
+  if (vis_field == 140) {
     vis_field_phrase += "140°.";
   }
-  if (radio_buttons.vis_field == "nev") {
+  if (vis_field == "nev") {
     vis_field_phrase =
       " Das Gesichtfeld ist in der fingerperimetrischen Prüfung nicht normal, die horizontale Ausdehnung beträgt < 120°.";
   }
@@ -94,8 +101,10 @@ function generateText() {
   // Check if vision aid used
   let vision_corr_phrase = "";
   let vision_aid_type = "";
-  if (input_dict.cb_vision_aid_present === true) {
-    if (radio_buttons.vision_aid == "Brille") {
+  let vision_aid_present = s.vision.aid_present
+  let vision_aid = s.vision.aid
+  if (vision_aid_present === true) {
+    if (vision_aid == "Brille") {
       vision_aid_type = "eigener Brille";
     } else {
       vision_aid_type = "eigenen Kontaktlinsen";
@@ -105,54 +114,60 @@ function generateText() {
 
   // Nystagmus
   let nystag_phrase = "";
-  if (radio_buttons.nystag == "nein") {
+  let nystag = s.vision.nystag
+  if (nystag == "nein") {
     nystag_phrase = ", ein Augenzittern (Nystagmus) nicht festzustellen";
   }
-  if (radio_buttons.nystag == "ja") {
+  if (nystag == "ja") {
     nystag_phrase =
       ", ein Augenzittern (Nystagmus) ist feststellbar [BESCHREIBEN]";
   }
 
   // Eye motility
   let eye_motiliy_phrase = " erhalten";
-  if (radio_buttons.eye_motility == "gestört") {
+  let eye_motility = s.vision.eye_motility
+  if (eye_motility == "gestört") {
     eye_motiliy_phrase = " nicht erhalten [BESCHREIBEN]";
   }
 
   // Lang-Stereo-Test
   let lang_test_phrase = "";
-  if (radio_buttons.lang_stereo == "positiv") {
+  let stereo = s.vision.stereo
+  if (stereo == "positiv") {
     lang_test_phrase = "Der Lang-Stereotest II ist positiv.";
   }
-  if (radio_buttons.lang_stereo == "negativ") {
+  if (stereo == "negativ") {
     lang_test_phrase = "Der Lang-Stereotest II ist negativ.";
   }
 
   // Checks if Weber- & Rinne performed
   let weber_rinne_phrase = "";
-  if (input_dict.cb_weber_rinne === true) {
+ // TODO
+  if (cb_weber_rinne === true) {
     weber_rinne_phrase =
       " Der Weber-Test ist zentriert, der Rinne-Test positiv (Gehörprüfungen).";
   }
 
   // Heart auscultation
   let heart_auscultation_phrase = "";
-  if (radio_buttons.heart_auscultation == "normal") {
+  let auscultation = s.cardio.auscultation
+  if (auscultation == "normal") {
     heart_auscultation_phrase =
       "Bei der Auskultation des Herzens finden sich reine Herztöne und keine Herzgeräusche. ";
   }
-  if (radio_buttons.heart_auscultation == "auffällig") {
+  if (auscultation == "auffällig") {
     heart_auscultation_phrase =
       "Bei der Auskultation des Herzens findet sich [BESCHREIBEN] reine Herztöne und keine Herzgeräusche. ";
   }
 
   // Carotis
   let carotis_phrase = "";
-  if (radio_buttons.carotis == "keine") {
+  let carotis_sounds = s.cardio.carotids
+  if (carotis_sounds == "keine") {
     carotis_phrase =
       "Auskultatorisch werden über den Karotiden keine pathologischen Geräusche festgestellt.";
   }
-  if (radio_buttons.carotis == "vorhanden") {
+  if (carotis_sounds == "vorhanden") {
     carotis_phrase =
       "Auskultatorisch werden über den Karotiden pathologische Geräusche festgestellt [BESCHREIBEN].";
   }
