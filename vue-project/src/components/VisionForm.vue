@@ -284,6 +284,8 @@ const nichterhoeht_erhoehtOptions = [
 const vision = ref({
   uncorr_re: "",
   uncorr_li: "",
+  corr_re: "",
+  corr_li: "",
   aid_present: false,
   aid: "",
   vis_field_degrees: "",

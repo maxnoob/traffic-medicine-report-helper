@@ -8,21 +8,19 @@
 import { ref } from 'vue';
 
 const props = defineProps({
-  bmi: String,
-  storage: {}
+  bmi: String
 });
 
-const s = props.storage // save storage for better readability in the code below
+// const s = props.storage // save storage for better readability in the code below
 
-defineExpose({
-    generateText,
-})
+
 
 let outputEdited = false;
-const status_text = ref("")
+const status_text = ref("");
 
 // Generates plain text with the inputted information
-function generateText() {
+const generateText = (s) => {
+  console.log("text generation started");
   outputEdited = false;
   // Checks BMI
   let bmi_phrase = "normalem";
@@ -32,17 +30,17 @@ function generateText() {
   if (props.bmi < 18.5) {
     bmi_phrase = "untergewichtigem";
   }
-  let measured_phrase = "";
+  let measured_phrases = [];
   const m_phrases = ["ein", "alter", "Mann", "der Explorand"];
   const f_phrases = ["eine", "alte", "Frau", "die Explorandin"];
   let phrases = "";
   // Checks value from radio button to use corresponding gendering
   if (s.basic.gender == "m") {
     phrases = m_phrases;
-    measured_phrase = "(Angaben des Exploranden)";
+    measured_phrases = ["(Angabe des Exploranden)","(Angaben des Exploranden)"];
   } else {
     phrases = f_phrases;
-    measured_phrase = "(Angaben der Explorandin)";
+    measured_phrases = ["(Angabe der Explorandin)","(Angaben der Explorandin)"];
   }
   // Checks general condition
   let az_phrase = "gutem";
@@ -50,9 +48,9 @@ function generateText() {
     az_phrase = "reduziertem";
   }
   // Checks if weight & height were measured
-/*   if (input_dict.cb_measured === true) {
-    measured_phrase = "(gemessen mit Bekleidung, ohne Schuhe)";
-  } */
+  if (s.vitals.measured_weight === true && s.vitals.measured_height === true) {
+    measured_phrases[0] = "(gemessen mit Bekleidung, ohne Schuhe)";
+  }
 
   // Checks bloodpressure
   let bp_phrase = "nicht erhöht";
@@ -67,16 +65,18 @@ function generateText() {
     bp_phrase = "erniedrigt";
   }
 
-  // Checks pulse
+  //// Checks pulse
+  // Checks pulse frequency
   let pulse_phrase = "";
   let pulse = s.vitals.pulse;
-  let pulse_reg = s.pulse_reg
+  let pulse_reg = s.vitals.pulse_reg;
   if (pulse > 100) {
     pulse_phrase = "beschleunigt und ";
   }
   if (pulse < 60) {
     pulse_phrase = "verlangsamt und ";
   }
+  // Checks pulse regularity
   if (pulse_reg === true) {
     pulse_phrase += "regelmässig";
   } else {
@@ -109,7 +109,7 @@ function generateText() {
     } else {
       vision_aid_type = "eigenen Kontaktlinsen";
     }
-    vision_corr_phrase = `, korrigiert mit ${vision_aid_type} rechts ${input_dict.vis_corr_re_input} und links ${input_dict.vis_corr_li_input}`;
+    vision_corr_phrase = `, korrigiert mit ${vision_aid_type} rechts ${vis_corr_re} und links ${vis_corr_li}`;
   }
 
   // Nystagmus
@@ -139,14 +139,14 @@ function generateText() {
   if (stereo == "negativ") {
     lang_test_phrase = "Der Lang-Stereotest II ist negativ.";
   }
-
+/* 
   // Checks if Weber- & Rinne performed
   let weber_rinne_phrase = "";
  // TODO
   if (cb_weber_rinne === true) {
     weber_rinne_phrase =
       " Der Weber-Test ist zentriert, der Rinne-Test positiv (Gehörprüfungen).";
-  }
+  } */
 
   // Heart auscultation
   let heart_auscultation_phrase = "";
@@ -172,55 +172,66 @@ function generateText() {
       "Auskultatorisch werden über den Karotiden pathologische Geräusche festgestellt [BESCHREIBEN].";
   }
 
-  // const status_text_test =
-  // `Es präsentiert sich ${phrases[0]} ${input_dict.age_input} Jahre ${phrases[1]} ${phrases[2]} in ${az_phrase} Allgemein- und ${bmi_phrase} Ernährungszustand.
-  // Körpergrösse ${input_dict.height_input} cm, Gewicht ${input_dict.weight_input} kg ${measured_phrase}. Das Gesichtsfeld beträgt ≥ ${radio_buttons.vis_field}`;
+  let age = s.basic.age
+  let height = s.vitals.height
+  let weight = s.vitals.weight
+  let pupil = s.vision.pupil
+  let vis_uncorr_re = s.vision.uncorr_re
+  let vis_uncorr_li = s.vision.uncorr_li
+  let vis_corr_re = s.vision.corr_re
+  let vis_corr_li = s.vision.corr_li
 
-  const status_einleitung = `Bei der körperlichen Untersuchung zeigt sich ${phrases[0]} zum Begutachtungszeitpunkt ${calculated_age} Jahre\
-         ${phrases[1]} ${phrases[2]} in ${az_phrase} Allgemein- und ${bmi_phrase} Ernährungszustand. Körpergrösse ca. ${input_dict.height_input} cm, Körpergewicht \
-         ca. ${input_dict.weight_input} kg ${measured_phrase}. `;
+  const status_einleitung = `Bei der körperlichen Untersuchung zeigt sich ${phrases[0]} zum Begutachtungszeitpunkt ${age} Jahre\
+         ${phrases[1]} ${phrases[2]} in ${az_phrase} Allgemein- und ${bmi_phrase} Ernährungszustand. Körpergrösse ca. ${height} cm ${measured_phrases}, Körpergewicht \
+         ca. ${weight} kg ${measured_phrases}. `;
 
   const status_psychostatus = `Das Bewusstsein ist klar, die Orientierung in allen vier Qualitäten erhalten. \
         Auffassung und Konzentration erscheinen nicht vermindert. Der Gedankengang weist keine inhaltlichen und/oder formalen Störungen auf. \
         Es finden sich keine Hinweise auf ein psychotisches Erleben. Im Affekt ist ${phrases[3]} situationsadäquat und gut schwingungsfähig. \
         Antrieb und Psychomotorik sind nicht gestört.`;
 
-  const status_vitals = `\nDer Blutdruck ist ${bp_phrase} (${input_dict.bp_sys_input} / ${input_dict.bp_dia_input} mmHg, Normbereich 100–140/60–90 mmHg${bp_no_rest}), \
-        der Puls ${pulse_phrase} (Pulsfrequenz ${input_dict.pulse_input} Schläge/min, Normbereich 60–100 Schläge/min). \
+  const status_vitals = `\nDer Blutdruck ist ${bp_phrase} (${bp_sys}/${bp_dia} mmHg, Normbereich 100–140/60–90 mmHg${bp_no_rest}), \
+        der Puls ${pulse_phrase} (Pulsfrequenz ${pulse} Schläge/min, Normbereich 60–100 Schläge/min). \
         ${heart_auscultation_phrase}Zeichen einer Herzschwäche fallen nicht auf. \
         ${carotis_phrase} \
         Über allen Lungenfeldern können vesikuläre Atemgeräusche ohne Nebengeräusche auskultiert werden. Palpatorisch ist die Leber nicht vergrössert und nicht druckschmerzhaft. \
-        In der Kratzauskultation ragt die Leber in der Medioklavikularlinie bis etwa ${input_dict.liver_input} cm unter den Rippenbogen. `;
+        In der Kratzauskultation ragt die Leber in der Medioklavikularlinie bis etwa _ cm unter den Rippenbogen. `;
 
   const status_vision = `Es liegt kein Herabhängen der Augenlider vor (Ptose). \
-        Die Pupillen sind seitengleich, messen ca. ${input_dict.pupil_input} mm im Durchmesser und reagieren direkt und konsensuell prompt auf Lichtreize. \
+        Die Pupillen sind seitengleich, messen ca. ${pupil} mm im Durchmesser und reagieren direkt und konsensuell prompt auf Lichtreize. \
         Die Augenbeweglichkeit ist${eye_motiliy_phrase}${nystag_phrase}. \
-        Der Visus beträgt unkorrigiert rechts ${input_dict.vis_uncorr_re_input} und links ${input_dict.vis_uncorr_li_input}${vision_corr_phrase}. \
+        Der Visus beträgt unkorrigiert rechts ${vis_uncorr_re} und links ${vis_uncorr_li}${vision_corr_phrase}. \
         ${lang_test_phrase} ${vis_field_phrase}`;
 
-  const status_hearing = ` Eine Einschränkung des Hörvermögens fällt im Gespräch nicht auf.${weber_rinne_phrase}`;
+  const status_hearing = ` Eine Einschränkung des Hörvermögens fällt im Gespräch nicht auf.`; // TODO add weber rinne phrase
 
   // Sense of vibration
   let vibration_phrase = "";
-  let vib_thumb = "";
-  if (input_dict.vib_thumb_re_input || input_dict.vib_thumb_li_input) {
-    if (input_dict.vib_thumb_re_input == input_dict.vib_thumb_li_input) {
-      vib_thumb = `über beiden Daumengrundgelenken ${input_dict.vib_thumb_re_input}/8 und `;
+  let vib_wrist = "";
+  let vib_wrist_re = s.neuro.vibration_wrist_re;
+  let vib_wrist_li = s.neuro.vibration_wrist_li;
+  let vib_ankle_re = s.neuro.vibration_ankle_re;
+  let vib_ankle_li = s.neuro.vibration_ankle_li;
+  let bigtoe = s.neuro.bigtoe;
+
+  if (vib_wrist_re || vib_wrist_li) {
+    if (vib_wrist_re == vib_wrist_li) {
+      vib_wrist = `über beiden Daumengrundgelenken ${vib_wrist_re}/8 und `;
     } else {
-      vib_thumb = `über dem Daumengrundgelenk rechts ${input_dict.vib_thumb_re_input}/8 und links ${input_dict.vib_thumb_li_input}/8 sowie `;
+      vib_wrist = `über dem Daumengrundgelenk rechts ${vib_wrist_re}/8 und links ${vib_wrist_li}/8 sowie `;
     }
   }
-  if (input_dict.vib_ankle_re_input || input_dict.vib_ankle_li_input) {
-    if (input_dict.vib_ankle_re_input == input_dict.vib_ankle_li_input) {
-      vibration_phrase = `Der Vibrationssinn beträgt ${vib_thumb}über beiden Aussenknöcheln ${input_dict.vib_ankle_re_input}/8.`;
+  if (vib_ankle_re || vib_ankle_li) {
+    if (vib_ankle_re == vib_ankle_li) {
+      vibration_phrase = `Der Vibrationssinn beträgt ${vib_wrist}über beiden Aussenknöcheln ${vib_ankle_re}/8.`;
     } else {
-      vibration_phrase = `Der Vibrationssinn beträgt ${vib_thumb}über dem Aussenknöchel rechts ${input_dict.vib_ankle_re_input}/8 und links ${input_dict.vib_ankle_li_input}/8.`;
+      vibration_phrase = `Der Vibrationssinn beträgt ${vib_wrist}über dem Aussenknöchel rechts ${vib_ankle_re}/8 und links ${vib_ankle_li}/8.`;
     }
   }
-  if (radio_buttons.bigtoe == "erhalten") {
+  if (bigtoe == "erhalten") {
     vibration_phrase += " Der Lagesinn der Grosszehen ist beidseits erhalten.";
   }
-  if (radio_buttons.bigtoe == "nicht erhalten") {
+  if (bigtoe == "nicht erhalten") {
     vibration_phrase += " Der Lagesinn der Grosszehen ist nicht erhalten.";
   }
 
@@ -248,10 +259,11 @@ function generateText() {
   output.addEventListener("keyup", function () {
     outputEdited = true;
   });
-  const download_btn = document.querySelector("#btn_download");
-  download_btn.style.display = "block";
-  const copy_btn = document.querySelector("#btn_copy");
-  copy_btn.style.display = "block";
   output.scrollIntoView({ behavior: "smooth" });
 }
+
+defineExpose({
+    generateText,
+})
+
 </script>
