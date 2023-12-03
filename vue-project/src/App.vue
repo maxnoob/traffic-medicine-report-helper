@@ -60,9 +60,11 @@
           </div>
         </div>
 
+        <!-- If the generated text gets changed by the user, output-edited event gets emitted within GeneratedText component -->
         <GeneratedText
           v-bind:bmi="bmi"
           ref="generatedTextRef"
+          @output-edited="outputEdited=true"
         />
 
         <!-- <div id="output" contenteditable="false"></div> -->
@@ -160,10 +162,11 @@ import { ref, unref } from "vue";
 const generatedTextRef = ref(null);
 const vitalsFormRef = ref(null); // vitalsRef really necessary?
 let storage = null;
-// ---------------------------------- Generate text ------------------------------------------------------
 let outputEdited = false;
+// ---------------------------------- Generate text ------------------------------------------------------
 // Handles text button logic; catches if user previously did changes to generated text
 function text_btn_clicked() {
+  console.log("edited: " + outputEdited);
   if (inputValidation()) {
     if (outputEdited) {
       if (
@@ -173,12 +176,14 @@ function text_btn_clicked() {
       ) {
         if (unref(generatedTextRef)) {
           storage = allStorage()
+          outputEdited = false;
           generatedTextRef.value.generateText(storage);
         }
       }
     } else {
       if (unref(generatedTextRef)) {
         storage = allStorage()
+        outputEdited = false;
         generatedTextRef.value.generateText(storage);
       }
     }
