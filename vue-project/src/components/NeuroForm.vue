@@ -151,14 +151,69 @@
     />
 
     <div>
-    <label>Romberg</label>
-</div>
-<div>
-    <label>Unterberger</label>
-</div>
-<div>
-    <label>Strichgang</label>
-</div>
+      <label>Romberg</label>
+      <input
+        type="range"
+        v-model="neuro.romberg_test"
+        min="0"
+        max="4"
+        step="1"
+        @input="romberg_change()"
+      />
+      <span>{{ romberg_conv }}</span>
+    </div>
+
+    <div>
+      <label>Unterberger</label>
+      <RadioInputGroup name="unterberger" v-model="neuro.unterberger_test" />
+    </div>
+    <CheckboxInput
+      name="unterberger_abnorm"
+      v-model="neuro.unterberger_abnorm"
+      label="weitere Auffälligkeiten"
+    />
+    <div v-if="neuro.unterberger_abnorm">
+      <CheckboxInput
+        name="unterberger_arm_re"
+        v-model="neuro.unterberger_arm_re"
+        label="Absinken/Pronation rechts"
+      />
+      <CheckboxInput
+        name="unterberger_arm_li"
+        v-model="neuro.unterberger_arm_li"
+        label="Absinken/Pronation links"
+      />
+      <!-- TODO Arrange stuff not ugly! -->
+      <CheckboxInput
+        name="unterberger_rotation"
+        v-model="neuro.unterberger_rotation"
+        label="Drehung"
+      />
+      <div v-if="neuro.unterberger_rotation">
+        um
+        <input
+          type="text"
+          placeholder="°"
+          v-model="neuro.unterberger_rotation_degrees"
+        />
+        Grad nach
+        <input
+          type="text"
+          placeholder="#"
+          v-model="neuro.unterberger_rotation_steps"
+        />
+        Schritten
+      </div>
+    </div>
+
+    <div>
+      <label>Strichgang</label>
+      <RadioInputGroup
+        name="line_walk"
+        v-model="neuro.line_walk"
+        :options="sicherSchwankendOptions"
+      />
+    </div>
     <div>
       <label>Finger-Nase-Probe</label>
       <RadioInputGroup name="fnp" v-model="neuro.fnp" :options="fnpOptions" />
@@ -166,6 +221,12 @@
 
     <div>
       <label>Tremor</label>
+      <RadioInputGroup
+      name="tremor"
+        v-model="neuro.tremor"
+        :options="nichtVorhanden_vorhandenOptions"
+      />
+      <div v-if="tremor==='present'">
       <CheckboxInput
         v-model="neuro.restingtremor"
         :value="false"
@@ -188,6 +249,7 @@
         />
       </div>
     </div>
+  </div>
     <div>
       <label>Diadochokinese</label>
       <RadioInputGroup
@@ -197,54 +259,54 @@
       />
     </div>
     <div>
-      <label>Gang:</label>
+      <label>Gang</label>
       <RadioInputGroup
         name="gait"
-        v-model="neuro.gait"
+        v-model="neuro.gait.abnorm"
         :options="auffaellig_unauffaelligOptions"
       />
     </div>
-    <div v-if="neuro.gait == 'auffaellig'">
+    <div v-if="neuro.gait.abnorm == 'auffaellig'">
       <div>
         <CheckboxInput
-          v-model="neuro.schwankend"
+          v-model="neuro.gait.schwankend"
           :value="false"
           label="schwankend"
           name="gang"
         />
         <CheckboxInput
-          v-model="neuro.kleinschrittig"
+          v-model="neuro.gait.kleinschrittig"
           :value="false"
           label="kleinschrittig"
           name="gang"
         />
         <CheckboxInput
-          v-model="neuro.trendelenburg"
+          v-model="neuro.gait.trendelenburg"
           :value="false"
           label="Trendelenburg-Hinken"
           name="gang"
         />
         <CheckboxInput
-          v-model="neuro.steppergang"
+          v-model="neuro.gait.steppergang"
           :value="false"
           label="Steppergang"
           name="gang"
         />
         <CheckboxInput
-          v-model="neuro.ataktisch"
+          v-model="neuro.gait.ataktisch"
           :value="false"
           label="ataktisch"
           name="gang"
         />
       </div>
       <CheckboxInput
-        v-model="neuro.spastisch"
+        v-model="neuro.gait.spastisch"
         :value="false"
         label="spastisch"
         name="gang"
       />
       <CheckboxInput
-        v-model="neuro.wernicke_mann_gang"
+        v-model="neuro.gait.wernicke_mann"
         :value="false"
         label="Wernicke-Mann-Gang"
         name="gang"
@@ -266,6 +328,11 @@ import persistToLocalStorage from "@/utils/persistToLocalStorage";
 const auffaellig_unauffaelligOptions = [
   { label: "unauffällig", value: "unauffaellig" },
   { label: "auffällig", value: "auffaellig" },
+];
+
+const nichtVorhanden_vorhandenOptions = [
+  { label: "nicht vorhanden", value: "not" },
+  { label: "vorhanden", value: "present" },
 ];
 
 const speech_extendedOptions = [
@@ -302,6 +369,28 @@ const fnpOptions = [
   { label: "unpräzise", value: "unpraezise" },
 ];
 
+// für Gang-Sliders
+const gangOptions = [
+  "nicht geprüft",
+  "sicher",
+  "leicht schwankend",
+  "stark schwankend",
+  "unmöglich",
+];
+
+const romberg_conv = ref("nicht geprüft");
+function romberg_change() {
+  romberg_conv.value = gangOptions[neuro.value.romberg_test];
+}
+
+const sicherSchwankendOptions = [
+  { label: "sicher", value: "sicher" },
+  { label: "leicht schwankend", value: "l_schwankend" },
+  { label: "stark schwankend", value: "s_schwankend" },
+  { label: "unmöglich", value: "unmoeglich" },
+];
+
+// für Reflex-Sliders
 const reflOptions = ["nicht geprüft", "-", "+", "++", "+++"];
 
 const bsr_conv = ref("nicht geprüft");
@@ -340,6 +429,7 @@ function check_bigtoeNeeded() {
   return;
 }
 
+// TODO: daten zu unterberger verschachteln
 const neuro = ref({
   speech: "",
   vibration_wrist_re: "",
@@ -356,19 +446,30 @@ const neuro = ref({
   strength_extremities: null,
   romberg_test: "",
   unterberger_test: "",
-  unterberger_rotation: "",
-  unterberger_arms: "",
+  unterberger_abnorm: false,
+  unterberger_rotation: false,
+  unterberger_rotation_degrees: "",
+  unterberger_rotation_steps: "",
+  unterberger_arm_re: false,
+  unterberger_arm_rli: false,
   line_walk: "",
   finger_nose: "",
   tremor: "",
   diadochokinesis: "",
-  gait: "",
+  gait: {
+    abnorm: false,
+    schwankend: false,
+    kleinschrittig: false,
+    trendelenburg: false,
+    steppergang: false,
+    ataktisch: false,
+    spastisch: false,
+    wernicke_mann: false
+  },
 });
 
 /* populate fields with stored data */
-onMounted(
-  () => persistToLocalStorage(neuro,"neuro")
-);
+onMounted(() => persistToLocalStorage(neuro, "neuro"));
 /* use watch to retain inputted data via localStorage */
 watch(
   neuro,

@@ -5,6 +5,17 @@
     <h4 class="py-2">Atem- und Bauchorganerkrankungen</h4>
 
     <RadioInputGroup
+    v-model="airway_intestine.breathingsound"
+    name="breathing"
+    label="Atemgeräusche"
+    :options="breathinsoundOptions"
+    />
+
+    <div v-if="airway_intestine.breathingsound == 'auffaellig'">
+      <Input type="text" v-model="airway_intestine.sound_description" />
+    </div>
+
+    <RadioInputGroup
       v-model="airway_intestine.problem"
       name="problem"
       :options="nichtvorhanden_vorhandenOptions"
@@ -26,8 +37,15 @@ const nichtvorhanden_vorhandenOptions = [
   { label: "vorhanden", value: "vorhanden" },
 ];
 
+const breathinsoundOptions = [
+  {label:"normal über allen Lungenfeldern ohne Nebengeräusche", value:"normal"},
+  {label:"auffällig", value:"auffaellig"}
+]
+
 const airway_intestine = ref({
-  problem: "",
+  breathingsound: "",
+  sound_description: "",
+  problem: "nichtvorhanden",
   description: "",
 });
 /* populate fields with stored data */

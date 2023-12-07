@@ -31,7 +31,7 @@
     <input type="text" placeholder="Schl./min" v-model="vitals.pulse" />
 
     <div>
-      <input type="checkbox" value="regelm" v-model="vitals.puls_reg" />
+      <input type="checkbox" value="regelm" v-model="vitals.pulse_reg" />
       <label>regelmässig</label>
     </div>
 
@@ -41,12 +41,12 @@
       <div class="col">
         <label>Grösse:</label>
         <input type="text" placeholder="cm" v-model="vitals.height" />
-        <input type="checkbox" id="height_measured" />gemessen
+        <input type="checkbox" v-model="vitals.height_measured" />gemessen
       </div>
       <div class="col">
         <label>Gewicht:</label>
         <input type="text" placeholder="kg" v-model="vitals.weight" />
-        <input type="checkbox" id="weight_measured" />gemessen
+        <input type="checkbox" v-model="vitals.weight_measured" />gemessen
       </div>
     </div>
 
@@ -87,13 +87,19 @@ const bmi = computed(() => {
   return (vitals.value.weight / (vitals.value.height / 100) ** 2).toPrecision(3);
 }); */
 
+// TODO: color necessary input fields red:
+/* input[type=text] {
+  background-color: #3CBC8D; */
+
 const vitals = ref({
   bloodpressure_sys: "",
   bloodpressure_dia: "",
   pulse: "",
-  puls_reg: false,
+  pulse_reg: false,
   height: "",
+  height_measured: false,
   weight: "",
+  weight_measured: false,
   az: "erhalten",
   bmi: null,
 });

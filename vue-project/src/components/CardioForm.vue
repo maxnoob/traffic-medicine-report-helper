@@ -22,7 +22,7 @@
       />
     </div>
     <CheckboxInput
-      v-model="cardio.heartinsuff_zeichen"
+      v-model="cardio.heartinsuff_signs"
       :value="false"
       label="keine Unterschenkelödeme, kein gestauten Halsvenen"
     />
@@ -70,7 +70,7 @@ const cardio_devicesOptions = [
 const cardio = ref({
   auscultation: "",
   carotids: false,
-  heartinsuff_zeichen: false,
+  heartinsuff_signs: false,
   devices: "",
   pacemaker: false,
   icd: false,
