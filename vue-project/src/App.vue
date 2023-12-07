@@ -16,7 +16,6 @@
         <HearingForm />
         <Substance />
         <Psych />
-
         <!-- Organisch bedingte Hirnleistungsstörungen -->
         <KognitionForm />
         <!----- Neurology / Neurologische Erkrankungen ----->
@@ -28,8 +27,7 @@
         <!----- Atem- und Bauchorganerkrankungen ----->
         <AirwayIntenstineForm />
         <!----- Wirbelsäule und Bewegungsapparat ----->
-        <SpineMSForm />
-
+        <MobilityForm />
         <!----- Buttons ----->
         <div
           class="d-sm-flex flex-row justify-content-evenly"
@@ -65,12 +63,13 @@
           v-bind:bmi="bmi"
           ref="generatedTextRef"
           @output-edited="outputEdited=true"
+          @make-buttons-visible="textButtons=true"
         />
 
         <!-- <div id="output" contenteditable="false"></div> -->
 
         <div class="row">
-          <div v-if="unref(generatedTextRef)">
+          <div v-if="textButtons">
           <button
             id="btn_copy"
             class="btn btn-primary my-2"
@@ -82,7 +81,9 @@
             als Datei speichern
           </button>
         </div>
+        <div>
           <button class="btn btn-success" @click="darkmode()">darkmode</button>
+        </div>
         </div>
 
         <!-- snackbar for showing confirmation message after copying -->
@@ -111,7 +112,7 @@ import NeuroForm from "./components/NeuroForm.vue";
 import CardioForm from "./components/CardioForm.vue";
 import MetaboForm from "./components/MetaboForm.vue";
 import AirwayIntenstineForm from "./components/AirwayIntenstineForm.vue";
-import SpineMSForm from "./components/SpineMSForm.vue";
+import MobilityForm from "./components/MobilityForm.vue";
 import KognitionForm from "./components/KognitionForm.vue";
 import GeneratedText from "./components/GeneratedText.vue";
 import HearingForm from "./components/HearingForm.vue";
@@ -129,7 +130,7 @@ export default {
     CardioForm,
     MetaboForm,
     AirwayIntenstineForm,
-    SpineMSForm,
+    MobilityForm,
     KognitionForm,
     GeneratedText,
     Substance,
@@ -163,6 +164,7 @@ const generatedTextRef = ref(null);
 const vitalsFormRef = ref(null); // vitalsRef really necessary?
 let storage = null;
 let outputEdited = false;
+const textButtons = ref(false); // use ref to let the variable update, when the event is emitted from child component!
 // ---------------------------------- Generate text ------------------------------------------------------
 // Handles text button logic; catches if user previously did changes to generated text
 function text_btn_clicked() {

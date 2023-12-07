@@ -87,6 +87,10 @@ const bmi = computed(() => {
   return (vitals.value.weight / (vitals.value.height / 100) ** 2).toPrecision(3);
 }); */
 
+// TODO: color necessary input fields red:
+/* input[type=text] {
+  background-color: #3CBC8D; */
+
 const vitals = ref({
   bloodpressure_sys: "",
   bloodpressure_dia: "",
