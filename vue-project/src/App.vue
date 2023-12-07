@@ -217,7 +217,7 @@ function allStorage() {
 
 // Copy text to clipboard
 function copyText() {
-  const content = document.querySelector("#output").innerText;
+  const content = JSON.parse(localStorage.getItem("output")).status_text;
   // navigator.clipboard.writeText(content);
   try {
     navigator.clipboard.writeText(content);
