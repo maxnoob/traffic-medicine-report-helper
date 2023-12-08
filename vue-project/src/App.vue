@@ -62,28 +62,34 @@
         <GeneratedText
           v-bind:bmi="bmi"
           ref="generatedTextRef"
-          @output-edited="outputEdited=true"
-          @make-buttons-visible="textButtons=true"
+          @output-edited="outputEdited = true"
+          @make-buttons-visible="textButtons = true"
         />
 
         <!-- <div id="output" contenteditable="false"></div> -->
 
         <div class="row">
           <div v-if="textButtons">
-          <button
-            id="btn_copy"
-            class="btn btn-primary my-2"
-            @click="copyText()"
-          >
-            in Zwischenablage kopieren
-          </button>
-          <button id="btn_download" class="btn btn-success">
-            als Datei speichern
-          </button>
-        </div>
-        <div>
-          <button class="btn btn-success" @click="darkmode()">darkmode</button>
-        </div>
+            <button
+              id="btn_copy"
+              class="btn btn-primary my-2"
+              @click="copyText()"
+            >
+              in Zwischenablage kopieren
+            </button>
+            <button
+              id="btn_download"
+              class="btn btn-success"
+              @click="downloadFile()"
+            >
+              als Datei speichern
+            </button>
+          </div>
+          <div>
+            <button class="btn btn-success" @click="darkmode()">
+              darkmode
+            </button>
+          </div>
         </div>
 
         <!-- snackbar for showing confirmation message after copying -->
@@ -177,14 +183,14 @@ function text_btn_clicked() {
         )
       ) {
         if (unref(generatedTextRef)) {
-          storage = allStorage()
+          storage = allStorage();
           outputEdited = false;
           generatedTextRef.value.generateText(storage);
         }
       }
     } else {
       if (unref(generatedTextRef)) {
-        storage = allStorage()
+        storage = allStorage();
         outputEdited = false;
         generatedTextRef.value.generateText(storage);
       }
@@ -214,7 +220,6 @@ function allStorage() {
   return values;
 }
 
-
 // Copy text to clipboard
 function copyText() {
   const content = JSON.parse(localStorage.getItem("output")).status_text;
@@ -227,6 +232,18 @@ function copyText() {
     console.error("Failed to copy: ", err);
   }
 }
+
+// Allows user to download the text as txt-file
+function downloadFile() {
+  const link = document.createElement("a");
+  const content = JSON.parse(localStorage.getItem("output")).status_text;
+  const file = new Blob([content], { type: "text/plain" });
+  link.href = URL.createObjectURL(file);
+  link.download = "documentation.txt";
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
 function showSnackbarMessage(text) {
   // Get the snackbar DIV
   var x = document.getElementById("snackbar");
