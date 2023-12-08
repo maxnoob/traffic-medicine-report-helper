@@ -4,6 +4,7 @@
     <h4 class="py-2">organische bedingte Hirnleistungsstörung</h4>
 
     <div>
+      <label>Kognition:</label>
       <RadioInputGroup
         v-model="kognition.kognitiv"
         vertical
@@ -25,6 +26,7 @@
       <input
         v-if="kognition.mms.performed"
         type="text"
+        placeholder="Resultat Mini-Mental-State-Test"
         v-model="kognition.mms.score"
       />
 
@@ -37,6 +39,7 @@
       <input
         v-if="kognition.ut.performed"
         type="text"
+        placeholder="Resultat Uhrentest"
         v-model="kognition.ut.score"
       />
 
@@ -48,11 +51,13 @@
       <input
         v-if="kognition.tmt.performed"
         type="text"
+        placeholder="Resultat Trail-Making-Test Teil A"
         v-model="kognition.tmt.tmt_a_score"
       />
       <input
         v-if="kognition.tmt.performed"
         type="text"
+        placeholder="Resultat Trail-Making-Test Teil B"
         v-model="kognition.tmt.tmt_b_score"
       />
       <CheckboxInput
@@ -63,6 +68,7 @@
       <input
         v-if="kognition.neglect.performed"
         type="text"
+        placeholder="Resultat Neglect-Test"
         v-model="kognition.neglect.score"
       />
 </FormCard>

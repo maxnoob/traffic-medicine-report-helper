@@ -10,16 +10,17 @@
       vertical
     />
     <label>Blutdruck:</label>
-    <div class="row">
+    <div class="bp-row">
       <div class="col">
-        <input
+        <input class="bp-input"
           type="text"
           placeholder="sys mmHg"
           v-model="vitals.bloodpressure_sys"
         />
       </div>
+      /
       <div class="col">
-        <input
+        <input class="bp-input"
           type="text"
           placeholder="dia mmHg"
           v-model="vitals.bloodpressure_dia"
@@ -138,6 +139,20 @@ watch(
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 input[type="text"] {
-  width: 80px;
+  width: 150px;
+}
+input[type="text"].bp-input{
+  width: 100px;
+  height: 30px;
+  border-style: solid;
+  border-color: black;
+}
+.bp-row{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.bp-row .col{
+  flex-grow: 0;
 }
 </style>
