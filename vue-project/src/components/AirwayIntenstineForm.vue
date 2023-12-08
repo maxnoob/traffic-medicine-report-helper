@@ -1,52 +1,44 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
-
+  <FormCard>
     <h4 class="py-2">Atem- und Bauchorganerkrankungen</h4>
 
     <RadioInputGroup
-    v-model="airway_intestine.breathingsound"
-    name="breathing"
-    label="Atemgeräusche"
-    :options="breathinsoundOptions"
+      v-model="airway_intestine.breathingsound"
+      name="breathing"
+      label="Atemgeräusche"
+      :options="breathinsoundOptions"
     />
 
     <div v-if="airway_intestine.breathingsound == 'auffaellig'">
-      <Input type="text" v-model="airway_intestine.sound_description" />
+      <label for="additionalInfo">weitere Angaben:</label>
+      <Input
+        type="text"
+        placeholder="bekannte Diagnosen"
+        id="additionalInfo"
+        v-model="airway_intestine.sound_description"
+      />
     </div>
-
-    <RadioInputGroup
-      v-model="airway_intestine.problem"
-      name="problem"
-      :options="nichtvorhanden_vorhandenOptions"
-    />
-
-    <div v-if="airway_intestine.problem == 'vorhanden'">
-      <Input type="text" v-model="airway_intestine.description" />
-    </div>
-  </form>
+  </FormCard>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
-
-const nichtvorhanden_vorhandenOptions = [
-  { label: "nicht vorhanden", value: "nichtvorhanden" },
-  { label: "vorhanden", value: "vorhanden" },
-];
+import FormCard from "./FormCard.vue";
 
 const breathinsoundOptions = [
-  {label:"normal über allen Lungenfeldern ohne Nebengeräusche", value:"normal"},
-  {label:"auffällig", value:"auffaellig"}
-]
+  {
+    label: "normal über allen Lungenfeldern ohne Nebengeräusche",
+    value: "normal",
+  },
+  { label: "auffällig", value: "auffaellig" },
+];
 
 const airway_intestine = ref({
   breathingsound: "",
   sound_description: "",
   problem: "nichtvorhanden",
-  description: "",
 });
 /* populate fields with stored data */
 onMounted(() => persistToLocalStorage(airway_intestine, "airway_intestine"));
@@ -67,10 +59,6 @@ watch(
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="text"] {
-  width: 80px;
-}
-
 label {
   margin-left: 6px;
 }
