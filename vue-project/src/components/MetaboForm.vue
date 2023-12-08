@@ -1,7 +1,5 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
-
+  <FormCard>
     <h4 class="py-2">Stoffwechselerkrankungen</h4>
 
     <div>
@@ -20,7 +18,7 @@
         <CheckboxInput v-model="metabo.pumpe" :value="false" label="Pumpe" />
       </div>
     </div>
-  </form>
+</FormCard>
 </template>
 
 <script setup>
@@ -28,6 +26,7 @@ import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage.js";
+import FormCard from "./FormCard.vue";
 
 const metabo_devicesOptions = [
   { label: "nicht vorhanden", value: "nichtvorhanden" },

@@ -140,8 +140,10 @@
     </div>
 
     
-    <div class="d-flex py-2" style="background-color: aliceblue; padding-left: 6px;">
+    <div class="d-flex py-2 " style="background-color: aliceblue;">
+     <div class="def-label">
       <label>Pupillenöffnung:</label>
+    </div>
       <select
         v-model="vision.pupils"
         class="form-select form-select-sm vision_input"
@@ -160,8 +162,8 @@
 
 
     <div class="d-flex py-2">
-        <label>Nystagmus:</label>
-        <RadioInputGroup
+        <label class="def-label">Nystagmus:</label>
+        <RadioInputGroupColumn
           v-model="vision.nystag"
           name="nystag"
           :options="nein_jaOptions"
@@ -170,8 +172,8 @@
 
 
     <div class="d-flex py-2" style="background-color: aliceblue">
-        <label>Doppelbilder:</label>
-        <RadioInputGroup
+        <label class="def-label">Doppelbilder:</label>
+        <RadioInputGroupColumn
           v-model="vision.double"
           name="doppelbilder"
           :options="nein_jaOptions"
@@ -179,8 +181,8 @@
       </div>
 
     <div class="d-flex py-2">
-    <label>Lang-Stereo-Test:</label>
-    <RadioInputGroup
+    <label class="def-label">Lang-Stereo-Test:</label>
+    <RadioInputGroupColumn
       v-model="vision.stereo"
       name="stereo"
       :options="pos_negOptions"
@@ -190,8 +192,8 @@
   </div>
 
     <div class="d-flex py-2" style="background-color: aliceblue">
-      <label>Augenmotilität:</label>
-      <RadioInputGroup
+      <label class="def-label">Augenmotilität:</label>
+      <RadioInputGroupColumn
         v-model="vision.eye_motility"
         name="eye_motility"
         :options="erhalten_gestoertOptions"
@@ -199,8 +201,8 @@
     </div>
 
     <div class="d-flex py-2">
-    <label>Dämmerungssehen:</label>
-    <RadioInputGroup
+    <label class="def-label">Dämmerungssehen:</label>
+    <RadioInputGroupColumn
       v-model="vision.daemmerung"
       name="daemmerung"
       :options="erhalten_gestoertOptions"
@@ -208,8 +210,8 @@
   </div>
 
     <div class="d-flex py-2" style="background-color: aliceblue">
-      <label>Blendempfindlichkeit:</label>
-      <RadioInputGroup
+      <label class="def-label">Blendempfindlichkeit:</label>
+      <RadioInputGroupColumn
         v-model="vision.blend"
         name="blend"
         :options="nichterhoeht_erhoehtOptions"
@@ -220,7 +222,7 @@
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
-import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
+import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
 import FormCard from "./FormCard.vue";
 
@@ -284,8 +286,6 @@ const nichterhoeht_erhoehtOptions = [
 const vision = ref({
   uncorr_re: "",
   uncorr_li: "",
-  corr_re: "",
-  corr_li: "",
   aid_present: false,
   aid: "",
   vis_field_degrees: "",
@@ -323,7 +323,9 @@ input[type="text"] {
   width: 90px;
   text-align: center;
 }
-
+.def-label {
+  width: 200px;
+}
 label, select {
   margin-left: 6px;
 }
