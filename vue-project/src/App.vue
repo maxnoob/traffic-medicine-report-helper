@@ -10,13 +10,12 @@
         <!-- Basic Data / Stammdaten -->
         <BasicDataForm />
         <!---- Vitals  / Vitalparameter---->
-        <VitalsForm ref="vitalsFormRef"/>
+        <VitalsForm ref="vitalsFormRef" />
         <!----- Vision / Sehvermögen ----->
         <VisionForm />
         <HearingForm />
         <Substance />
         <Psych />
-
         <!-- Organisch bedingte Hirnleistungsstörungen -->
         <KognitionForm />
         <!----- Neurology / Neurologische Erkrankungen ----->
@@ -28,8 +27,7 @@
         <!----- Atem- und Bauchorganerkrankungen ----->
         <AirwayIntenstineForm />
         <!----- Wirbelsäule und Bewegungsapparat ----->
-        <SpineMSForm />
-
+        <MobilityForm />
         <!----- Buttons ----->
         <div
           class="d-sm-flex flex-row justify-content-evenly"
@@ -68,10 +66,9 @@
           @make-buttons-visible="textButtons = true"
         />
 
-        <div id="output" contenteditable="false"></div>
+        <!-- <div id="output" contenteditable="false"></div> -->
 
         <div class="row">
-
           <div v-if="textButtons">
             <button
               id="btn_copy"
@@ -93,7 +90,6 @@
               darkmode
             </button>
           </div>
-
         </div>
 
         <!-- snackbar for showing confirmation message after copying -->
@@ -122,7 +118,7 @@ import NeuroForm from "./components/NeuroForm.vue";
 import CardioForm from "./components/CardioForm.vue";
 import MetaboForm from "./components/MetaboForm.vue";
 import AirwayIntenstineForm from "./components/AirwayIntenstineForm.vue";
-import SpineMSForm from "./components/SpineMSForm.vue";
+import MobilityForm from "./components/MobilityForm.vue";
 import KognitionForm from "./components/KognitionForm.vue";
 import GeneratedText from "./components/GeneratedText.vue";
 import HearingForm from "./components/HearingForm.vue";
@@ -140,42 +136,17 @@ export default {
     CardioForm,
     MetaboForm,
     AirwayIntenstineForm,
-    SpineMSForm,
+    MobilityForm,
     KognitionForm,
-    GeneratedText, 
+    GeneratedText,
     Substance,
     HearingForm,
-    Psych
+    Psych,
   },
   methods: {
     triggerSnackbar() {
       console.log("snackbar button clicked");
       this.$emit("triggerSnackbar");
-    },
-    saveValue() {
-      console.log("change/keyup event triggered");
-      var id = this.id; // get the sender's id to save it
-      let val = "";
-      if (this.type == "radio") {
-        val = this.checked; // get status of current radio button
-        let radio_group = this.name;
-        var ele = document.getElementsByName(radio_group); // get all radio buttons from that group
-        for (let i = 0; i < ele.length; i++) {
-          if (ele[i] != this) {
-            // unchecks all other radio buttons in localStorage of same group
-            ele[i].checked = false;
-            localStorage.setItem(ele[i].id, false);
-          }
-        }
-      } else if (this.type == "checkbox") {
-        val = this.checked; // get status of current radio button
-      } else if (id == "output") {
-        val = this.innerText; // to store the generated text
-      } else {
-        val = this.value; // get the value
-      }
-      console.log(val);
-      localStorage.setItem(id, val); // Every time user writing something, the localStorage's value will override
     },
     // --------------------------------- Deleting user input -------------------------------------
     clear_btn_clicked() {
@@ -193,14 +164,19 @@ export default {
 </script>
 
 <script setup>
-import { ref } from "vue";
-const vitalsFormRef = ref(null)
-// ---------------------------------- Generate text ------------------------------------------------------
+import { ref, unref } from "vue";
+// Create a refs for the child components
+const generatedTextRef = ref(null);
+const vitalsFormRef = ref(null); // vitalsRef really necessary?
+let storage = null;
 let outputEdited = false;
+const textButtons = ref(false); // use ref to let the variable update, when the event is emitted from child component!
+// ---------------------------------- Generate text ------------------------------------------------------
 // Handles text button logic; catches if user previously did changes to generated text
 function text_btn_clicked() {
+  console.log("edited: " + outputEdited);
   if (inputValidation()) {
-    if (outputEdited == true) {
+    if (outputEdited) {
       if (
         confirm(
           'Der Text wurde bearbeitet. Wirklich neuen Text generieren?\n\nKlicke auf "OK" um den Text neu zu generieren. Änderungen gehen verloren.\nKlicke auf "Abbrechen" um den geänderten Text zu behalten.'
@@ -218,7 +194,6 @@ function text_btn_clicked() {
         outputEdited = false;
         generatedTextRef.value.generateText(storage);
       }
-
     }
   }
 }
@@ -234,6 +209,7 @@ function inputValidation() {
   return true;
 }
 
+// Retrieves all json in localStorage. can be accessed e.g. via "storage.basic.gender".
 function allStorage() {
   let values = {};
   const keys = Object.keys(localStorage);
