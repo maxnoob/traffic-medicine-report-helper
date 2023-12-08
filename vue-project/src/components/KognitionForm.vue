@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent class="shadow p-3 mb-5 bg-white rounded px-4">
-    <!-- without @submit.prevent the page will reload after every button clicked-->
+  <FormCard>
 
     <h4 class="py-2">organische bedingte Hirnleistungsstörung</h4>
 
     <div>
       <RadioInputGroup
         v-model="kognition.kognitiv"
+        vertical
         name="kognitiv"
         :options="nichtauffaellig_auffaelligOptions"
       />
@@ -65,7 +65,7 @@
         type="text"
         v-model="kognition.neglect.score"
       />
-  </form>
+</FormCard>
 </template>
 
 <script setup>
@@ -73,6 +73,7 @@ import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage.js";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
+import FormCard from "./FormCard.vue";
 
 const nichtauffaellig_auffaelligOptions = [
   { label: "nicht auffällig", value: "nicht_auffaellig" },
@@ -103,9 +104,7 @@ watch(
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="text"] {
-  width: 80px;
-}
+
 
 label {
   margin-left: 6px;
