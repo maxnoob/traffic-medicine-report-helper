@@ -2,14 +2,19 @@
       <FormCard>
     <h4 class="py-2">Atem- und Bauchorganerkrankungen</h4>
 
+    <label>Diagnosen:</label>
     <RadioInputGroup
       v-model="airway_intestine.problem"
       name="problem"
       :options="nichtvorhanden_vorhandenOptions"
     />
 
-    <div v-if="airway_intestine.problem == 'vorhanden'">
-      <Input type="text" v-model="airway_intestine.description" />
+    <div v-if="airway_intestine.problem == 'vorhanden'" class="py-2">
+        <label for="additionalInfo">weitere Angaben:</label>
+        <Input type="text" 
+          placeholder="bekannte Diagnosen"
+          id="additionalInfo"
+          v-model="airway_intestine.description" />
     </div>
     
 </FormCard>
@@ -49,9 +54,7 @@ watch(
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="text"] {
-  width: 80px;
-}
+
 
 label {
   margin-left: 6px;

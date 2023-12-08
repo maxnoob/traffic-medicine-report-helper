@@ -5,7 +5,7 @@
 
 <template>
   <div class="def-component">
-  <input 
+  <input
     type="radio"
     :checked="modelValue === value"
     :value="value"
@@ -42,6 +42,7 @@ label{
 .def-component {
   width: 120px;
 }
+
 </style>
 
 <!-- Apply this component in parent like:

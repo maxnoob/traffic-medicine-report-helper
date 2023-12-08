@@ -6,6 +6,7 @@
     <div>
       <RadioInputGroup
         v-model="kognition.kognitiv"
+        vertical
         name="kognitiv"
         :options="nichtauffaellig_auffaelligOptions"
       />
@@ -103,9 +104,7 @@ watch(
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="text"] {
-  width: 80px;
-}
+
 
 label {
   margin-left: 6px;
