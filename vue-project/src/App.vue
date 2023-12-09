@@ -3,10 +3,26 @@
   <body>
     <div class="container" id="top_container">
       <div class="second_container">
-        <div class="row">
-          <h1 class="py-3">Status erfassen</h1>
+        <div class="d-flex justify-content-between">
+          <h1>Status erfassen</h1>
+          <button class="btn btn-dark m-3" @click="darkmode()">
+            <!--Moon stars fill icon-->
+            <svg
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-moon-stars-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278"
+              />
+              <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
+              />
+            </svg>
+          </button>
         </div>
-        <hr />
         <!-- Basic Data / Stammdaten -->
         <BasicDataForm />
         <!---- Vitals  / Vitalparameter---->
@@ -29,14 +45,11 @@
         <!----- Wirbelsäule und Bewegungsapparat ----->
         <MobilityForm />
         <!----- Buttons ----->
-        <div
-          class="d-md-flex justify-content-evenly"
-          
-        >
+        <div class="d-flex justify-content-evenly">
           <div>
             <button
               id="btn_text"
-              class="btn btn-primary my-3"
+              class="btn cstm-blue my-3"
               @click="text_btn_clicked()"
             >
               Text generieren
@@ -57,7 +70,7 @@
           <div>
             <button
               id="btn_clear"
-              class="btn btn-danger my-3"
+              class="btn cstm-red my-3"
               @click="clear_btn_clicked()"
             >
               Werte löschen
@@ -86,11 +99,11 @@
 
         <!-- <div id="output" contenteditable="false"></div> -->
 
-        <div class="row">
-          <div v-if="textButtons" class="d-md-flex justify-content-evenly">
+        <div v-if="textButtons" class="d-flex">
+          <div>
             <button
               id="btn_copy"
-              class="btn btn-primary my-2"
+              class="btn cstm-green m-3"
               @click="copyText()"
             >
               in Zwischenablage kopieren
@@ -107,9 +120,11 @@
                 />
               </svg>
             </button>
+          </div>
+          <div>
             <button
               id="btn_download"
-              class="btn btn-success"
+              class="btn cstm-green m-3"
               @click="downloadFile()"
             >
               als Datei speichern
@@ -129,26 +144,8 @@
               </svg>
             </button>
           </div>
-          <div>
-            <button class="btn btn-dark" @click="darkmode()">
-              <!--Moon stars fill icon-->
-              <svg
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-moon-stars-fill"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278"
-                />
-                <path
-                  d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
+        
 
         <!-- snackbar for showing confirmation message after copying -->
         <Snackbar />
@@ -331,12 +328,7 @@ function darkmode() {
 
 html,
 body {
-  background: linear-gradient(
-    90deg,
-    rgba(206, 230, 255, 1) 51%,
-    rgba(221, 249, 212, 1) 100%,
-    rgba(151, 176, 252, 0) 100%
-  );
+  background: #f2fbff !important;
   margin: 0;
   padding: 0px;
 }
@@ -382,7 +374,40 @@ input[type="checkbox"] {
 }
 
 .second_container {
-  padding-top: 60px;
-  margin-left: 60px;
+  padding-top: 30px;
+  margin-left: 40px;
+}
+
+.cstm-blue {
+  /* !important is needed to oversteer the bootstrap styling */
+  background-color: #36749e !important;
+  color: white !important;
+  border-color: #36749e !important;
+}
+.cstm-blue:hover {
+  background-color: #2c5f81 !important;
+  border-color: #2c5f81 !important;
+}
+
+.cstm-red {
+  /* !important is needed to oversteer the bootstrap styling */
+  background-color: #c44b47 !important;
+  color: white !important;
+  border-color: #c44b47 !important;
+}
+.cstm-red:hover {
+  background-color: #a7403c !important;
+  border-color: #a7403c !important;
+}
+
+.cstm-green {
+  /* !important is needed to oversteer the bootstrap styling */
+  background-color: #278069 !important;
+  color: white !important;
+  border-color: #278069 !important;
+}
+.cstm-green:hover {
+  background-color: #1e6250 !important;
+  border-color: #1e6250 !important;
 }
 </style>
