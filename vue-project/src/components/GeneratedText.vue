@@ -21,6 +21,11 @@ const output = ref({ status_text: "" });
 /* populate fields with stored data */
 onMounted(() => {
   persistToLocalStorage(output, "output");
+  if (output.value.status_text != "") {
+    let text_output = document.querySelector("#text-output");
+    text_output.setAttribute("contenteditable", true);
+    emit("make-buttons-visible");
+  }
 });
 /* use watch to retain inputted data via localStorage */
 watch(
@@ -569,3 +574,16 @@ defineExpose({
   generateText,
 });
 </script>
+
+<style scoped>
+#text-output:hover,
+#text-output:focus {
+  background-color: white;
+}
+#text-output {
+  margin-right: 2.5rem;
+  max-width: 80rem;
+  text-align: justify;
+  transition: all 200ms ease-in-out;
+}
+</style>

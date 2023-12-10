@@ -1,5 +1,4 @@
 <template>
-  <!-- <Modal /> -->
   <body>
     <div class="container" id="top_container">
       <div class="second_container">
@@ -23,29 +22,46 @@
             </svg>
           </button>
         </div>
+
+        <NavBar />
         <!-- Basic Data / Stammdaten -->
+        <div id="basic_data" class="offset" />
         <BasicDataForm />
         <!---- Vitals  / Vitalparameter---->
+        <div id="vitals" class="offset" />
         <VitalsForm ref="vitalsFormRef" />
         <!----- Vision / Sehvermögen ----->
+        <div id="vision" class="offset" />
         <VisionForm />
+        <div id="hearing" class="offset" />
         <HearingForm />
+        <div id="substances" class="offset" />
         <Substance />
+        <div id="psych" class="offset" />
         <Psych />
         <!-- Organisch bedingte Hirnleistungsstörungen -->
+        <div id="kognition" class="offset" />
         <KognitionForm />
         <!----- Neurology / Neurologische Erkrankungen ----->
+        <div id="neurology" class="offset" />
         <NeuroForm />
         <!----- Cardiopulmonal / Herz-Kreislauferkrankungen ----->
+        <div id="cardio_pulmo" class="offset" />
         <CardioForm />
         <!----- Stoffwechselerkrankungen ----->
+        <div id="metabo" class="offset" />
         <MetaboForm />
         <!----- Atem- und Bauchorganerkrankungen ----->
+        <div id="airway_intestine" class="offset" />
         <AirwayIntenstineForm />
         <!----- Wirbelsäule und Bewegungsapparat ----->
+        <div id="mobility" class="offset" />
         <MobilityForm />
         <!----- Buttons ----->
-        <div class="d-flex justify-content-evenly">
+        <div
+          class="d-flex justify-content-evenly offset width-adj"
+          id="processing"
+        >
           <div>
             <button
               id="btn_text"
@@ -99,7 +115,7 @@
 
         <!-- <div id="output" contenteditable="false"></div> -->
 
-        <div v-if="textButtons" class="d-flex">
+        <div v-if="textButtons" class="d-flex justify-content-evenly width-adj">
           <div>
             <button
               id="btn_copy"
@@ -145,7 +161,6 @@
             </button>
           </div>
         </div>
-        
 
         <!-- snackbar for showing confirmation message after copying -->
         <Snackbar />
@@ -179,6 +194,7 @@ import GeneratedText from "./components/GeneratedText.vue";
 import HearingForm from "./components/HearingForm.vue";
 import Substance from "./components/Substance.vue";
 import Psych from "./components/Psych.vue";
+import NavBar from "./components/NavBar.vue";
 
 export default {
   name: "App",
@@ -197,6 +213,7 @@ export default {
     Substance,
     HearingForm,
     Psych,
+    NavBar,
   },
   methods: {
     triggerSnackbar() {
@@ -219,7 +236,7 @@ export default {
 </script>
 
 <script setup>
-import { ref, unref } from "vue";
+import { ref, unref} from "vue";
 // Create a refs for the child components
 const generatedTextRef = ref(null);
 const vitalsFormRef = ref(null); // vitalsRef really necessary?
@@ -314,6 +331,25 @@ function darkmode() {
   var x = document.getElementById("top_container");
   x.classList.toggle("darkmode");
 }
+
+/*
+// Navbar logic
+const navbar = ref(null);
+const sticky = ref(0);
+// Add sticky class to navbar when it's on top. Remove "sticky" when you leave the scroll position
+const navbarStick = () => {
+  if (window.scrollY >= sticky.value) {
+    navbar.value.classList.add("sticky")
+  } else if (navbar.value){
+    navbar.value.classList.remove("sticky");
+  }
+};
+onMounted( () => {
+  navbar.value = $refs.navbar; // get navbar
+  sticky.value = navbar.value.offsetTop; // get offset position of navbar
+  window.addEventListener("scroll", navbarStick)
+}
+);*/
 </script>
 
 <style>
@@ -324,6 +360,13 @@ function darkmode() {
   /*text-align: center; */
   color: #2c3e50;
   /*margin-top: 60px; */
+}
+
+/* the offset is for the on-page navigation, so the navbar doesn't hide the content*/
+.offset {
+  padding-top: 50px; /* Adjust this value to your desired offset */
+  margin-top: -50px; /* Counteract the added padding to maintain layout */
+  position: relative; /* Ensure proper positioning */
 }
 
 html,
@@ -409,5 +452,10 @@ input[type="checkbox"] {
 .cstm-green:hover {
   background-color: #1e6250 !important;
   border-color: #1e6250 !important;
+}
+
+.width-adj {
+  margin-right: 2.5rem;
+  max-width: 80rem;
 }
 </style>
