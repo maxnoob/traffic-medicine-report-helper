@@ -3,7 +3,7 @@
 
     <h4 class="py-2">organische bedingte Hirnleistungsstörung</h4>
 
-    <div>
+    <div class="py-2">
       <label>Kognition:</label>
       <RadioInputGroup
         v-model="kognition.kognitiv"
