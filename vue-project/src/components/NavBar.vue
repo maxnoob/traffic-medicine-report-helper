@@ -15,8 +15,6 @@
           <a class="nav-link" href="#processing">Datenverarbeitung</a>
         </nav>
 </template>
-<script setup>
-</script>
 
 <style scoped>
 #navbar {
@@ -24,6 +22,7 @@
   background-color: rgba(51,51,51,0.75); /* is the hexcolor #333, but rgba needed for opacity */
   transition: all 300ms ease-in-out;
   max-width: 80rem;
+  margin-right: 2.5rem;
   font-size: 0.7rem;
   margin-bottom: 10px;
 }

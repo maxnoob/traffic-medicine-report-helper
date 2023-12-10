@@ -24,145 +24,146 @@
         </div>
 
         <NavBar />
-        <div data-spy="scroll" data-target="#navbar" data-offset="0">
-          <!-- Basic Data / Stammdaten -->
-          <div id="basic_data" class="offset"/>
-          <BasicDataForm />
-          <!---- Vitals  / Vitalparameter---->
-          <div id="vitals" class="offset" />
-          <VitalsForm ref="vitalsFormRef" />
-          <!----- Vision / Sehvermögen ----->
-          <div id="vision" class="offset"/>
-          <VisionForm />
-          <div id="hearing" class="offset"/>
-          <HearingForm />
-          <div id="substances" class="offset"/>
-          <Substance />
-          <div id="psych" class="offset"/>
-          <Psych />
-          <!-- Organisch bedingte Hirnleistungsstörungen -->
-          <div id="kognition" class="offset"/>
-          <KognitionForm />
-          <!----- Neurology / Neurologische Erkrankungen ----->
-          <div id="neurology" class="offset"/>
-          <NeuroForm />
-          <!----- Cardiopulmonal / Herz-Kreislauferkrankungen ----->
-          <div id="cardio_pulmo" class="offset"/>
-          <CardioForm />
-          <!----- Stoffwechselerkrankungen ----->
-          <div id="metabo" class="offset"/>
-          <MetaboForm />
-          <!----- Atem- und Bauchorganerkrankungen ----->
-          <div id="airway_intestine" class="offset"/>
-          <AirwayIntenstineForm />
-          <!----- Wirbelsäule und Bewegungsapparat ----->
-          <div id="mobility" class="offset"/>
-          <MobilityForm />
-          <!----- Buttons ----->
-          <div class="d-flex justify-content-evenly offset" id="processing">
-            <div>
-              <button
-                id="btn_text"
-                class="btn cstm-blue my-3"
-                @click="text_btn_clicked()"
+        <!-- Basic Data / Stammdaten -->
+        <div id="basic_data" class="offset" />
+        <BasicDataForm />
+        <!---- Vitals  / Vitalparameter---->
+        <div id="vitals" class="offset" />
+        <VitalsForm ref="vitalsFormRef" />
+        <!----- Vision / Sehvermögen ----->
+        <div id="vision" class="offset" />
+        <VisionForm />
+        <div id="hearing" class="offset" />
+        <HearingForm />
+        <div id="substances" class="offset" />
+        <Substance />
+        <div id="psych" class="offset" />
+        <Psych />
+        <!-- Organisch bedingte Hirnleistungsstörungen -->
+        <div id="kognition" class="offset" />
+        <KognitionForm />
+        <!----- Neurology / Neurologische Erkrankungen ----->
+        <div id="neurology" class="offset" />
+        <NeuroForm />
+        <!----- Cardiopulmonal / Herz-Kreislauferkrankungen ----->
+        <div id="cardio_pulmo" class="offset" />
+        <CardioForm />
+        <!----- Stoffwechselerkrankungen ----->
+        <div id="metabo" class="offset" />
+        <MetaboForm />
+        <!----- Atem- und Bauchorganerkrankungen ----->
+        <div id="airway_intestine" class="offset" />
+        <AirwayIntenstineForm />
+        <!----- Wirbelsäule und Bewegungsapparat ----->
+        <div id="mobility" class="offset" />
+        <MobilityForm />
+        <!----- Buttons ----->
+        <div
+          class="d-flex justify-content-evenly offset width-adj"
+          id="processing"
+        >
+          <div>
+            <button
+              id="btn_text"
+              class="btn cstm-blue my-3"
+              @click="text_btn_clicked()"
+            >
+              Text generieren
+              <svg
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-body-text"
+                viewBox="0 0 16 16"
               >
-                Text generieren
-                <svg
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-body-text"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5m0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div>
-              <button
-                id="btn_clear"
-                class="btn cstm-red my-3"
-                @click="clear_btn_clicked()"
-              >
-                Werte löschen
-                <svg
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash3"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  fill-rule="evenodd"
+                  d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5m0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"
+                />
+              </svg>
+            </button>
           </div>
-
-          <!-- If the generated text gets changed by the user, output-edited event gets emitted within GeneratedText component -->
-          <GeneratedText
-            v-bind:bmi="bmi"
-            ref="generatedTextRef"
-            @output-edited="outputEdited = true"
-            @make-buttons-visible="textButtons = true"
-          />
-
-          <!-- <div id="output" contenteditable="false"></div> -->
-
-          <div v-if="textButtons" class="d-flex">
-            <div>
-              <button
-                id="btn_copy"
-                class="btn cstm-green m-3"
-                @click="copyText()"
+          <div>
+            <button
+              id="btn_clear"
+              class="btn cstm-red my-3"
+              @click="clear_btn_clicked()"
+            >
+              Werte löschen
+              <svg
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash3"
+                viewBox="0 0 16 16"
               >
-                in Zwischenablage kopieren
-                <svg
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-copy"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div>
-              <button
-                id="btn_download"
-                class="btn cstm-green m-3"
-                @click="downloadFile()"
-              >
-                als Datei speichern
-                <svg
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-download"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"
-                  />
-                  <path
-                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
+                />
+              </svg>
+            </button>
           </div>
-
-          <!-- snackbar for showing confirmation message after copying -->
-          <Snackbar />
         </div>
+
+        <!-- If the generated text gets changed by the user, output-edited event gets emitted within GeneratedText component -->
+        <GeneratedText
+          v-bind:bmi="bmi"
+          ref="generatedTextRef"
+          @output-edited="outputEdited = true"
+          @make-buttons-visible="textButtons = true"
+        />
+
+        <!-- <div id="output" contenteditable="false"></div> -->
+
+        <div v-if="textButtons" class="d-flex justify-content-evenly width-adj">
+          <div>
+            <button
+              id="btn_copy"
+              class="btn cstm-green m-3"
+              @click="copyText()"
+            >
+              in Zwischenablage kopieren
+              <svg
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-copy"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <button
+              id="btn_download"
+              class="btn cstm-green m-3"
+              @click="downloadFile()"
+            >
+              als Datei speichern
+              <svg
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-download"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"
+                />
+                <path
+                  d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- snackbar for showing confirmation message after copying -->
+        <Snackbar />
       </div>
     </div>
     <img
@@ -361,9 +362,10 @@ onMounted( () => {
   /*margin-top: 60px; */
 }
 
+/* the offset is for the on-page navigation, so the navbar doesn't hide the content*/
 .offset {
-  padding-top: 60px; /* Adjust this value to your desired offset */
-  margin-top: -60px; /* Counteract the added padding to maintain layout */
+  padding-top: 50px; /* Adjust this value to your desired offset */
+  margin-top: -50px; /* Counteract the added padding to maintain layout */
   position: relative; /* Ensure proper positioning */
 }
 
@@ -450,5 +452,10 @@ input[type="checkbox"] {
 .cstm-green:hover {
   background-color: #1e6250 !important;
   border-color: #1e6250 !important;
+}
+
+.width-adj {
+  margin-right: 2.5rem;
+  max-width: 80rem;
 }
 </style>
