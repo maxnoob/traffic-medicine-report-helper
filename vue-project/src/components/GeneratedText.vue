@@ -210,7 +210,7 @@ const generateText = (s) => {
 
   // Checks visual field
   let vis_field_phrase =
-    " In der fingerperimetrischen Prüfung des Gesichtsfeldes fallen keine Ausfälle auf, die horizontale Ausdehnung ist ≥ ";
+    " In der fingerperimetrischen Prüfung des Gesichtsfeldes fallen keine Ausfälle auf, die horizontale Ausdehnung ist grösser-gleich ";
   let vis_field = s.vision.vis_field_degrees;
   if (vis_field == 120) {
     vis_field_phrase += "120°.";
