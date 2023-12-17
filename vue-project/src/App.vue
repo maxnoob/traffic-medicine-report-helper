@@ -4,7 +4,7 @@
       <div class="second_container">
         <div class="d-flex justify-content-between">
           <h1>Status erfassen</h1>
-          <button class="btn btn-dark m-3" @click="darkmode()">
+          <button class="btn btn-dark m-3" style="margin-right: 2.5rem !important;" @click="darkmode()">
             <!--Moon stars fill icon-->
             <svg
               width="16"
