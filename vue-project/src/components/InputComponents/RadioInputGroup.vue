@@ -5,7 +5,7 @@
 <!-- maybe set modelValue required to false -->
 
 <template>
-  <label for="{{ name }} ">{{ label }}</label>
+  <label v-if="label" for="{{ name }} ">{{ label }}</label>
   <component
     v-for="option in options"
     :key="option.value"

@@ -1,12 +1,10 @@
 <template>
-<FormCard>
-  <h4 class="py-2">Stammdaten</h4>
-  <div class="row d-inline-flex">
-    <div class="col">
-      <div ref="gender">
-        <label>Geschlecht:</label>
-        <div>
-          <div class="row"></div>
+  <FormCard>
+    <h4 class="py-2">Stammdaten</h4>
+    <div class="row d-inline-flex">
+      <div class="col">
+        <div ref="gender">
+          <label>Geschlecht:</label>
           <!-- for-loop that creates the radio buttons; on refresh, if value of clicked button is in storage, the button gets checked -->
           <div v-for="gender in genders" v-bind:key="gender.id">
             <input
@@ -20,44 +18,62 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="field">
-        <label>Geburtsdatum:</label>
-        <input
-          type="date"
-          v-model="basic.birthDate"
-          @change="handleDateChange"
-          ref="birthdate_input"
-          name="birthdate"
+
+      <div class="col" style="padding-left: 4rem">
+        <div class="field">
+          <label>Geburtsdatum:</label>
+          <input
+            type="date"
+            v-model="basic.birthDate"
+            @change="handleDateChange"
+            ref="birthdate_input"
+            name="birthdate"
+          />
+        </div>
+
+        <div
+          v-if="basic.age < 120 && basic.age > 0"
+          style="white-space: nowrap"
+        >
+          {{ basic.age }} Jahre
+        </div>
+        <div v-else style="height: 1.5rem">
+          <!-- this div is for compensating the above div with the age -->
+        </div>
+      </div>
+
+      <div class="col" style="padding-left: 4rem">
+        <label class="def-label">Medizinische Gruppe:</label>
+        <RadioInputGroup
+          v-model="basic.medgroup"
+          name="medgroup"
+          :options="medgroupOptions"
+          vertical
         />
       </div>
     </div>
-    <div class="col">
-      <!-- age only gets displayed, when in certain range  -->
-      <div
-        class="py-4"
-        v-if="basic.age < 120 && basic.age > 0"
-        style="white-space: nowrap"
-      >
-        {{ basic.age }} Jahre
-      </div>
-    </div>
-  </div>
-</FormCard>
+  </FormCard>
 </template>
 
 <script setup>
 import { onMounted, watch, ref } from "vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
 import FormCard from "./FormCard.vue";
+import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 
 const genders = ["m", "f"];
 const basic = ref({
   gender: "",
   age: "",
   birthDate: "",
+  medgroup: 1,
 });
+
+const medgroupOptions = [
+  { label: "1 (A/B/A1/B1/FGM)", value: 1 },
+  { label: "2 (C/D/C1/D1/BPT/VE)", value: 2, id: "group2" },
+];
+
 function updateGender(event) {
   basic.value.gender = event.target.value;
 }
@@ -82,8 +98,7 @@ const handleDateChange = (event) => {
   }
 };
 /* populate fields with stored data */
-onMounted(
-  () => persistToLocalStorage (basic, "basic"))
+onMounted(() => persistToLocalStorage(basic, "basic"));
 /* watcher to save all inputted data to localStorage */
 watch(
   basic,
@@ -131,5 +146,16 @@ watch(
 /* add "scoped" to tyle tag to limit styling to this component */
 .radio_label {
   padding: 0px 1em 0px 4px;
+}
+
+/* Transitions */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
