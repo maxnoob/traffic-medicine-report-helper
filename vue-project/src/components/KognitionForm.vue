@@ -17,7 +17,9 @@
       <input type="text" v-model="kognition.description" />
       </div>
 
-      <CheckboxInput
+      <div class="grid-container">
+  <div class="grid-item">
+    <CheckboxInput
         v-model="kognition.mms.performed"
         :value="false"
         label="Mini-Mental-State-Test"
@@ -28,9 +30,22 @@
         type="text"
         placeholder="Resultat Mini-Mental-State-Test"
         v-model="kognition.mms.score"
+      /></div>
+  <div class="grid-item">
+    <CheckboxInput
+        v-model="kognition.neglect.performed"
+        :value="false"
+        label="Neglect-Test"
       />
-
-      <CheckboxInput
+      <input
+        v-if="kognition.neglect.performed"
+        type="text"
+        placeholder="Resultat Neglect-Test"
+        v-model="kognition.neglect.score"
+      />
+  </div>
+  <div class="grid-item">
+    <CheckboxInput
         v-model="kognition.ut.performed"
         :value="false"
         label="Uhrentest"
@@ -42,8 +57,9 @@
         placeholder="Resultat Uhrentest"
         v-model="kognition.ut.score"
       />
-
-      <CheckboxInput
+  </div>  
+  <div class="grid-item">
+    <CheckboxInput
         v-model="kognition.tmt.performed"
         :value="false"
         label="Trail-Making-Test"
@@ -60,17 +76,13 @@
         placeholder="Resultat Trail-Making-Test Teil B"
         v-model="kognition.tmt.tmt_b_score"
       />
-      <CheckboxInput
-        v-model="kognition.neglect.performed"
-        :value="false"
-        label="Neglect-Test"
-      />
-      <input
-        v-if="kognition.neglect.performed"
-        type="text"
-        placeholder="Resultat Neglect-Test"
-        v-model="kognition.neglect.score"
-      />
+  </div>
+
+    </div>
+
+   
+
+    
 </FormCard>
 </template>
 
@@ -114,5 +126,16 @@ watch(
 
 label {
   margin-left: 6px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 30rem;
+  padding: 1px;
+}
+
+.grid-item {
+  background-color: rgba(215, 228, 235, 0.8);
+  border: 1px solid rgba(113, 108, 108, 0.8);
+  text-align:start;
 }
 </style>
