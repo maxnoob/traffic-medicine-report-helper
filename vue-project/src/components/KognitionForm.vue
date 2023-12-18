@@ -3,7 +3,8 @@
 
     <h4 class="py-2">organische bedingte Hirnleistungsstörung</h4>
 
-    <div>
+    <div class="py-2">
+      <label>Kognition:</label>
       <RadioInputGroup
         v-model="kognition.kognitiv"
         vertical
@@ -16,7 +17,9 @@
       <input type="text" v-model="kognition.description" />
       </div>
 
-      <CheckboxInput
+      <div class="grid-container">
+  <div class="grid-item">
+    <CheckboxInput
         v-model="kognition.mms.performed"
         :value="false"
         label="Mini-Mental-State-Test"
@@ -25,10 +28,24 @@
       <input
         v-if="kognition.mms.performed"
         type="text"
+        placeholder="Resultat Mini-Mental-State-Test"
         v-model="kognition.mms.score"
+      /></div>
+  <div class="grid-item">
+    <CheckboxInput
+        v-model="kognition.neglect.performed"
+        :value="false"
+        label="Neglect-Test"
       />
-
-      <CheckboxInput
+      <input
+        v-if="kognition.neglect.performed"
+        type="text"
+        placeholder="Resultat Neglect-Test"
+        v-model="kognition.neglect.score"
+      />
+  </div>
+  <div class="grid-item">
+    <CheckboxInput
         v-model="kognition.ut.performed"
         :value="false"
         label="Uhrentest"
@@ -37,10 +54,12 @@
       <input
         v-if="kognition.ut.performed"
         type="text"
+        placeholder="Resultat Uhrentest"
         v-model="kognition.ut.score"
       />
-
-      <CheckboxInput
+  </div>  
+  <div class="grid-item">
+    <CheckboxInput
         v-model="kognition.tmt.performed"
         :value="false"
         label="Trail-Making-Test"
@@ -48,23 +67,22 @@
       <input
         v-if="kognition.tmt.performed"
         type="text"
+        placeholder="Resultat Trail-Making-Test Teil A"
         v-model="kognition.tmt.tmt_a_score"
       />
       <input
         v-if="kognition.tmt.performed"
         type="text"
+        placeholder="Resultat Trail-Making-Test Teil B"
         v-model="kognition.tmt.tmt_b_score"
       />
-      <CheckboxInput
-        v-model="kognition.neglect.performed"
-        :value="false"
-        label="Neglect-Test"
-      />
-      <input
-        v-if="kognition.neglect.performed"
-        type="text"
-        v-model="kognition.neglect.score"
-      />
+  </div>
+
+    </div>
+
+   
+
+    
 </FormCard>
 </template>
 
@@ -108,5 +126,16 @@ watch(
 
 label {
   margin-left: 6px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 30rem;
+  padding: 1px;
+}
+
+.grid-item {
+  background-color: rgba(215, 228, 235, 0.8);
+  border: 1px solid rgba(113, 108, 108, 0.8);
+  text-align:start;
 }
 </style>

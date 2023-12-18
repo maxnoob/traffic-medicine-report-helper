@@ -75,7 +75,7 @@ export default {
 
 .radio-group {
   display: flex;
-  gap: 20px;
+  gap: 50px;
 }
 .def-element{
   width: 200px;

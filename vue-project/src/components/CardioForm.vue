@@ -2,7 +2,7 @@
   <FormCard>
 
     <h4 class="py-2">Herz-Kreislauferkrankungen</h4>
-
+<div>
     <div>
       <label>Herztöne:</label>
       <RadioInputGroup
@@ -25,7 +25,7 @@
       :value="false"
       label="keine Unterschenkelödeme, kein gestauten Halsvenen"
     />
-
+  </div>
     <label>Kardiale Devices:</label>
     <RadioInputGroup
       v-model="cardio.devices"
@@ -33,15 +33,14 @@
       :options="cardio_devicesOptions"
     />
 
+
     <div v-if="cardio.devices == 'vorhanden'">
-      <CheckboxInput
-        v-model="cardio.pacemaker"
-        :value="false"
-        label="Pacemaker"
-      />
-      <CheckboxInput v-model="cardio.icd" :value="false" label="ICD" />
-      <CheckboxInput v-model="cardio.crt_d" :value="false" label="CRT-D" />
-    </div>
+      <div class="grid-container">
+  <div class="grid-item"><CheckboxInput v-model="cardio.pacemaker" :value="false" label="Pacemaker"/></div>
+  <div class="grid-item"><CheckboxInput v-model="cardio.icd" :value="false" label="ICD"/></div>
+  <div class="grid-item"><CheckboxInput v-model="cardio.crt_d" :value="false" label="CRT-D"/></div>
+  </div>
+  </div>
 
 </FormCard>
 </template>
@@ -102,5 +101,14 @@ input[type="text"] {
 
 label {
   margin-left: 6px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+  padding: 1px;
+}
+
+.grid-item {
+  text-align:start;
 }
 </style>

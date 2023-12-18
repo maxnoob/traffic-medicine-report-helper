@@ -13,8 +13,8 @@
       </div>
   
       <div v-if="hearing.aid_present">
-        <label>Hörhilfe bei Untersuchung:</label>
         <div>
+          <label>Hörhilfe bei Untersuchung:</label>
           <RadioInputGroup
         v-model="hearing.aidOption"
         vertical
@@ -50,8 +50,8 @@
   
       </div>
   
-      <div class="row py-2 px-2">
-          <label>Konversationssprache 3m beidseits</label>
+      <div class="py-2">
+          <label>Konversationssprache 3m beidseits:</label>
           <RadioInputGroup
               v-model="hearing.conversation_3m"
               name="conversation_3m"
@@ -62,8 +62,8 @@
   
        <!-- Options when Conversation 3m is not possible -->
        <div v-if="hearing.conversation_3m === 'impossible'">
-            <label>Weber Test:</label>
             <div>
+              <label>Weber Test:</label>
       <RadioInputGroup
         v-model="hearing.weberTest"
         vertical
@@ -71,8 +71,8 @@
         :options="weberTest_Options"
       />
     </div>
-    <label>Rinne Test:</label>
             <div>
+              <label>Rinne Test:</label>
       <RadioInputGroup
         v-model="hearing.rinneTest"
         vertical
@@ -91,6 +91,7 @@
   import { onMounted, ref, watch } from "vue";
   import persistToLocalStorage from "@/utils/persistToLocalStorage";
   import FormCard from "./FormCard.vue";
+import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
   
   const hearing_aidOption = [
   { label: "Hörgerät", value: "hoergeraet" },

@@ -16,16 +16,17 @@
     <div v-if="mobility.spine_movement == 'nicht_moeglich'">
       <input type="text" v-model="mobility.description" />
     </div>
-
+<div>
     <label>Extremitätenbeweglichkeit:</label>
     <RadioInputGroup
       v-model="mobility.extremities"
       name="mobility"
       :options="nichteingeschraenkt_eingeschraenktOptions"
     />
-
+  </div>
+  <div>
     <label>Hilfsmittel:</label>
-    <RadioInputGroup
+    <RadioInputGroupColumn
       v-model="mobility.devices.present"
       name="devices"
       :options="devicesOptions"
@@ -63,6 +64,7 @@
         label="andere Orthese"
       />
     </div>
+  </div>
 
 </FormCard>
 </template>
@@ -73,6 +75,7 @@ import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
 import FormCard from "./FormCard.vue";
+import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
 
 const nichteingeschraenkt_eingeschraenktOptions = [
   { label: "nicht eingeschränkt", value: "nicht_eingeschraenkt" },
