@@ -24,9 +24,10 @@ npm run serve
 ```
 npm init @eslint/config
 ```
-### Install Bootstrap
+### Install Bootstrap/DownloadJS/pdf-lib
 ```
-npm install bootstrap
+npm install bootstrap downloadjs
+npm install --save pdf-lib
 ```
 ### Code formatting with Prettier
 From VS code marketplace get "Prettier - Code formatter".<br>
