@@ -27,6 +27,7 @@
         />
       </div>
     </div>
+    <input v-maska="['###/### mmHg', '###/## mmHg', '##/## mmHg']" placeholder="syst/diast" data-maska-eager>
 
     <label>Puls:</label>
     <input type="text" placeholder="Schl./min" v-model="vitals.pulse" />
@@ -77,6 +78,7 @@ import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
 import FormCard from "./FormCard.vue";
+import { vMaska } from "maska"
 
 const azOptions = [
   { label: "erhalten", value: "erhalten" },
