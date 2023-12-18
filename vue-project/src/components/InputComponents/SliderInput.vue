@@ -2,23 +2,27 @@
   <label v-if="label">{{ label }}</label>
   <input
     type="range"
-    min=-1
-    :max=options.length
+    min="0"
+    :max="options.length - 1"
     step="1"
     v-bind="$attrs"
-    @change="$emit('update:modelValue', value)"
+    :value="modelValue"
+    @update:modelValue="$emit('update:modelValue', $event)"
+    @input="slider_change($event.target.value)"
+   
   />
+  <span>{{ conv_value }}</span>
 </template>
 
 <script>
-
-
+import { ref, watch } from "vue";
+//  @click="deselect(modelValue)"
 export default {
   props: {
     options: {
-            type: Array,
-            required: true
-        },
+      type: Array,
+      required: true,
+    },
     label: {
       type: String,
       default: "",
@@ -28,8 +32,39 @@ export default {
       default: "",
     },
     value: {
-      type: [Number]
+      type: [Number],
+    },
+  },
+  setup(props, { emit }) {
+    const conv_value = ref("nicht geprüft"); // Initialize psr_conv using ref
+    //const selectedValue = ref(null);
+
+    watch(
+      () => props.modelValue,
+      (newValue) => {
+        conv_value.value = props.options[newValue];
+       // selectedValue.value = newValue;
+      }
+    );
+
+    function slider_change(newValue) {
+      conv_value.value = props.options[newValue];
+      emit("update:modelValue", newValue); // Emit event to update modelValue
     }
+
+    // checks if the chosen value is the same as the current value so button can be deselected
+/*     function deselect(clickedValue) {
+      console.log(selectedValue.value + " | " + clickedValue);
+      if (selectedValue.value === clickedValue) {
+        emit("update:modelValue", "");
+      }
+    } */
+
+    return {
+      conv_value,
+      slider_change,
+      //deselect,
+    };
   },
 };
 </script>
