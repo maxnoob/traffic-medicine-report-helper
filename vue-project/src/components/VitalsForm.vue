@@ -38,13 +38,13 @@
 
     <div class="row"></div>
 
-    <div class="row">
-      <div class="col">
-        <label>Grösse:</label>
+    <div class="grid-container">
+  <div class="grid-item">
+    <label>Grösse:</label>
         <input type="text" placeholder="cm" v-model="vitals.height" />
         <input type="checkbox" id="height_measured" />gemessen
       </div>
-      <div class="col">
+      <div class="grid-item">
         <label>Gewicht:</label>
         <input type="text" placeholder="kg" v-model="vitals.weight" />
         <input type="checkbox" id="weight_measured" />gemessen
@@ -141,18 +141,33 @@ watch(
 input[type="text"] {
   width: 150px;
 }
-input[type="text"].bp-input{
+
+input[type="text"].bp-input {
   width: 100px;
   height: 30px;
   border-style: solid;
   border-color: black;
 }
-.bp-row{
+
+.bp-row {
   display: flex;
   gap: 10px;
   align-items: center;
 }
-.bp-row .col{
+
+.bp-row .col {
   flex-grow: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 20rem 20rem;
+  background-color: white;
+}
+
+.grid-item {
+  background-color: white;
+  text-align: start;
+  border: none; 
 }
 </style>

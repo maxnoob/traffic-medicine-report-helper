@@ -12,12 +12,27 @@
     </div>
 
     <div v-if="metabo.devices == 'vorhanden'" class="d-inline-flex">
-      <div>
-        <CheckboxInput v-model="metabo.cgm" :value="false" label="CGM" />
-        <CheckboxInput v-model="metabo.pmg" :value="false" label="PMG" />
-        <CheckboxInput v-model="metabo.pumpe" :value="false" label="Pumpe" />
-      </div>
+      <div class="grid-container">
+  <div class="grid-item">
+    <CheckboxInput 
+    v-model="metabo.cgm" 
+    :value="false" 
+    label="CGM" 
+      /></div>
+      <div class="grid-item">
+        <CheckboxInput 
+        v-model="metabo.pmg" 
+        :value="false" 
+        label="PMG" 
+        /></div>
+      <div class="grid-item">
+        <CheckboxInput 
+        v-model="metabo.pumpe" 
+        :value="false" 
+        label="Pumpe" 
+        /></div>
     </div>
+  </div>
 </FormCard>
 </template>
 
@@ -63,5 +78,16 @@ input[type="text"] {
 
 label {
   margin-left: 6px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+  padding: 1px;
+}
+
+.grid-item {
+  background-color: rgba(242, 246, 248, 0.926);
+  border: 0.5px solid rgba(113, 108, 108, 0.8);
+  text-align:start;
 }
 </style>

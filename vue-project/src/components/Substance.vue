@@ -6,7 +6,7 @@
 
   
   
-      <div class="d-flex py-2 ">
+      <div class="d-flex py-2 " style="background-color: aliceblue;">
           <label class="def-label">Foeter aethylicus:</label>
           <RadioInputGroupColumn
             v-model="substance.foeter"
@@ -22,7 +22,7 @@
             :options="nein_jaOptions"
           />
         </div>
-        <div class="d-flex py-2">
+        <div class="d-flex py-2 " style="background-color: aliceblue;">
           <label class="def-label">Spider naevi:</label>
           <RadioInputGroupColumn
             v-model="substance.spidernaevi"
@@ -38,7 +38,7 @@
             :options="nein_jaOptions"
           />
         </div>
-        <div class="d-flex py-2">
+        <div class="d-flex py-2 " style="background-color: aliceblue;">
           <label class="def-label">Ikterus:</label>
           <RadioInputGroupColumn
             v-model="substance.icterus"
@@ -54,7 +54,7 @@
             :options="nein_jaOptions"
           />
         </div>
-        <div class="d-flex py-2">
+        <div class="d-flex py-2 " style="background-color: aliceblue;">
           <label class="def-label">Nasenscheidewand:</label>
           <RadioInputGroupColumn
             v-model="substance.septum"

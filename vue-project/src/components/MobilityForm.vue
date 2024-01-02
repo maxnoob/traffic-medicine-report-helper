@@ -7,18 +7,24 @@
         >rasche Kopfdrehung 45° links/rechts und langsame Oberkörperdrehung 90°
         links/rechts:</label
       >
-      <RadioInputGroup
+    </div>
+    <div>
+      <RadioInputGroupColumn
         v-model="mobility.spine_movement"
         name="spine_movement"
         :options="moeglich_nichtmoeglichOptions"
       />
     </div>
+
     <div v-if="mobility.spine_movement == 'nicht_moeglich'">
-      <input type="text" v-model="mobility.description" />
+      <label for="additionalInfo">weitere Angaben:</label>
+      <Input
+        type="text"
+        placeholder="weitere Angaben" v-model="mobility.description" />
     </div>
 <div>
     <label>Extremitätenbeweglichkeit:</label>
-    <RadioInputGroup
+    <RadioInputGroupColumn
       v-model="mobility.extremities"
       name="mobility"
       :options="nichteingeschraenkt_eingeschraenktOptions"
@@ -31,38 +37,47 @@
       name="devices"
       :options="devicesOptions"
     />
-
+  </div>
     <div v-if="mobility.devices.present == true">
-      <CheckboxInput
+
+    <div class="grid-container">
+  <div class="grid-item" style="background-color: aliceblue;">
+    <CheckboxInput
         v-model="mobility.devices.gehstock"
         :value="false"
         label="Gehstock"
-      />
-      <CheckboxInput
+      /></div>
+      <div class="grid-item" style="background-color: white;">
+    <CheckboxInput
         v-model="mobility.devices.rollator"
         :value="false"
         label="Rollator"
-      />
-      <CheckboxInput
+        /></div>
+      <div class="grid-item" style="background-color: aliceblue;">
+    <CheckboxInput
         v-model="mobility.devices.rollstuhl"
         :value="false"
         label="Rollstuhl"
-      />
+        /></div>
+        <div class="grid-item" style="background-color: white;">
       <CheckboxInput
         v-model="mobility.devices.fussheberschiene"
         :value="false"
         label="Fussheberschiene"
-      />
+        /></div>
+        <div class="grid-item" style="background-color: aliceblue;">
       <CheckboxInput
         v-model="mobility.devices.prothese"
         :value="false"
         label="Prothese"
-      />
+        /></div>
+        <div class="grid-item" style="background-color: white;">
       <CheckboxInput
         v-model="mobility.devices.andere"
         :value="false"
         label="andere Orthese"
-      />
+        /></div>
+    
     </div>
   </div>
 
@@ -78,7 +93,7 @@ import FormCard from "./FormCard.vue";
 import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
 
 const nichteingeschraenkt_eingeschraenktOptions = [
-  { label: "nicht eingeschränkt", value: "nicht_eingeschraenkt" },
+  { label: "nicht eingeschr.", value: "nicht_eingeschraenkt" },
   { label: "eingeschränkt", value: "eingeschraenkt" },
 ];
 
@@ -122,11 +137,18 @@ watch(
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="text"] {
-  width: 80px;
-}
 
 label {
   margin-left: 6px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 11rem 11rem 11rem;
+  padding: 1px;
+}
+
+.grid-item {
+  background-color: rgba(242, 245, 246, 0.8);
+  text-align:start;
 }
 </style>
