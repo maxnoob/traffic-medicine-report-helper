@@ -278,10 +278,10 @@ const generateText = (s) => {
   // Sense of vibration
   let vibration_phrase = "";
   let vib_wrist = "";
-  let vib_wrist_re = s.neuro.vibration_wrist_re;
-  let vib_wrist_li = s.neuro.vibration_wrist_li;
-  let vib_ankle_re = s.neuro.vibration_ankle_re;
-  let vib_ankle_li = s.neuro.vibration_ankle_li;
+  let vib_wrist_re = s.neuro.vibration.wrist_re;
+  let vib_wrist_li = s.neuro.vibration.wrist_li;
+  let vib_ankle_re = s.neuro.vibration.ankle_re;
+  let vib_ankle_li = s.neuro.vibration.ankle_li;
   let bigtoe = s.neuro.bigtoe;
 
   if (vib_wrist_re || vib_wrist_li) {
@@ -305,10 +305,10 @@ const generateText = (s) => {
   }
 
   // Reflexes [0: nicht geprüft; 1: -;2: +; 3: ++; 4: +++]
-  let asr = s.neuro.asr; // achilles heel
-  let psr = s.neuro.psr; // patella
-  let bsr = s.neuro.bsr; // biceps
-  let tsr = s.neuro.tsr; // triceps
+  let asr = s.neuro.reflexes.asr; // achilles heel
+  let psr = s.neuro.reflexes.psr; // patella
+  let bsr = s.neuro.reflexes.bsr; // biceps
+  let tsr = s.neuro.reflexes.tsr; // triceps
   let max_lower = Math.max(psr, asr);
   let max_upper = Math.max(bsr, tsr);
   let reflexes = [asr, psr, bsr, tsr];
@@ -370,14 +370,14 @@ const generateText = (s) => {
   }
   reflexes_phrase += ".";
 
-  if (s.neuro.asymm_reflex === true) {
-    reflexes_phrase = "Die Muskeleigenreflexe sind asymmetrisch: [BESCHREIBEN]";
+  if (s.neuro.reflexes.asymm === true) {
+    reflexes_phrase = "Die Muskeleigenreflexe sind asymmetrisch: " + s.neuro.reflexes.asymm_beschreibung;
   }
 
   // Unterberger
-  let unterberger_test = s.neuro.unterberger_test;
+  let unterberger_test = s.neuro.unterberger.test;
   let unterberger_phrase = "";
-  if (s.neuro.unterberger_abnorm === false) {
+  if (s.neuro.unterberger.abnorm === false) {
     if (unterberger_test === "sicher") {
       unterberger_phrase =
         "Der Unterberger-Tretversuch erfolgt sicher ohne Drehung.";
@@ -390,9 +390,9 @@ const generateText = (s) => {
       unterberger_phrase =
         "Der Unterberger-Tretversuch erfolgt stark schwankend ohne Drehung.";
     }
-  } else if (s.neuro.unterberger_abnorm === true) {
-    let rotation = s.neuro.unterberger_rotation_degrees;
-    let steps = s.neuro.unterberger_rotation_steps;
+  } else if (s.neuro.unterberger.abnorm === true) {
+    let rotation = s.neuro.unterberger.rotation_degrees;
+    let steps = s.neuro.unterberger.rotation_steps;
     if (unterberger_test === "sicher") {
       unterberger_phrase = `Der Unterberger-Tretversuch erfolgt sicher mit ${rotation} Grad Drehung nach ${steps} Schritten.`;
     } else if (unterberger_test === "l_schwankend") {
@@ -508,7 +508,7 @@ const generateText = (s) => {
         ${unterberger_phrase} \
         ${romberg_phrase} \
         ${diadochokinese_phrase} ${fnp_phrase} ${tremor_phrase}\
-        ${linewalk_phrase} ${gait_phrase}`;
+        ${linewalk_phrase} ${gait_phrase} `;
 
   //----------------------------- MOBILITY --------------------------------------------------//
   let mobility_phrase = "";
@@ -527,7 +527,7 @@ const generateText = (s) => {
     }
   }
 
-  const status_mobility = `${mobility_phrase}`;
+  const status_mobility = `${mobility_phrase} `;
 
   //----------------------------- SUBSTANCE --------------------------------------------------//
 

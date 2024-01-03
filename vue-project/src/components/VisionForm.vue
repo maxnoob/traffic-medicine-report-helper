@@ -1,19 +1,15 @@
 <template>
   <FormCard>
-    
-
     <h4 class="py-2">Sehvermögen</h4>
 
-    <div class="form-check">
+    <div>
       <input
         type="checkbox"
         class="form-check-input"
         id="visionaid_checkbox"
         v-model="vision.aid_present"
       />
-      <label class="form-check-label" for="visionaid_checkbox"
-        >Sehhilfe vorhanden</label
-      >
+      <label for="visionaid_checkbox">Sehhilfe vorhanden</label>
     </div>
 
     <div v-if="vision.aid_present">
@@ -133,21 +129,19 @@
           name="vis_field"
           :value="option.value"
           v-model="vision.vis_field_degrees"
-          class="d-inline-flex"
+          class="d-inline-flex form-check-input"
         />
         <label for="option">{{ option.text }}</label>
       </div>
     </div>
 
-    
-    <div class="d-flex py-2 " style="background-color: aliceblue;">
-     <div class="def-label">
-      <label>Pupillenöffnung:</label>
-    </div>
+    <div class="d-flex py-2" style="background-color: aliceblue">
+      <div class="def-label">
+        <label>Pupillenöffnung:</label>
+      </div>
       <select
         v-model="vision.pupils"
         class="form-select form-select-sm vision_input"
-        
       >
         <option value="" selected disabled>mm</option>
         <option
@@ -160,36 +154,39 @@
       </select>
     </div>
 
-
     <div class="d-flex py-2">
-        <label class="def-label">Nystagmus:</label>
-        <RadioInputGroupColumn
-          v-model="vision.nystag"
-          name="nystag"
-          :options="nein_jaOptions"
-        />
-      </div>
-
+      <label class="def-label">Nystagmus:</label>
+      <RadioInputGroupColumn
+        v-model="vision.nystag"
+        name="nystag"
+        :options="nein_jaOptions"
+      />
+    </div>
 
     <div class="d-flex py-2" style="background-color: aliceblue">
-        <label class="def-label">Doppelbilder:</label>
-        <RadioInputGroupColumn
-          v-model="vision.double"
-          name="doppelbilder"
-          :options="nein_jaOptions"
-        />
-      </div>
+      <label class="def-label">Doppelbilder:</label>
+      <RadioInputGroupColumn
+        v-model="vision.double"
+        name="doppelbilder"
+        :options="nein_jaOptions"
+      />
+    </div>
 
     <div class="d-flex py-2">
-    <label class="def-label">Lang-Stereo-Test:</label>
-    <RadioInputGroupColumn
-      v-model="vision.stereo"
-      name="stereo"
-      :options="pos_negOptions"
-    />
-    <div v-if="vision.stereo=='neg'"><input type="text" placeholder="Beschreibung des Befundes" v-model="vision.bemerkung" />
+      <label class="def-label">Lang-Stereo-Test:</label>
+      <RadioInputGroupColumn
+        v-model="vision.stereo"
+        name="stereo"
+        :options="pos_negOptions"
+      />
+      <div v-if="vision.stereo == 'neg'">
+        <input
+          type="text"
+          placeholder="Beschreibung des Befundes"
+          v-model="vision.bemerkung"
+        />
+      </div>
     </div>
-  </div>
 
     <div class="d-flex py-2" style="background-color: aliceblue">
       <label class="def-label">Augenmotilität:</label>
@@ -201,13 +198,13 @@
     </div>
 
     <div class="d-flex py-2">
-    <label class="def-label">Dämmerungssehen:</label>
-    <RadioInputGroupColumn
-      v-model="vision.daemmerung"
-      name="daemmerung"
-      :options="erhalten_gestoertOptions"
-    />
-  </div>
+      <label class="def-label">Dämmerungssehen:</label>
+      <RadioInputGroupColumn
+        v-model="vision.daemmerung"
+        name="daemmerung"
+        :options="erhalten_gestoertOptions"
+      />
+    </div>
 
     <div class="d-flex py-2" style="background-color: aliceblue">
       <label class="def-label">Blendempfindlichkeit:</label>
@@ -298,12 +295,10 @@ const vision = ref({
   stereo: "",
   daemmerung: "",
   blend: "",
-  bemerkung: ""
+  bemerkung: "",
 });
 /* populate fields with stored data */
-onMounted(
-  () => persistToLocalStorage (vision, "vision")
-);
+onMounted(() => persistToLocalStorage(vision, "vision"));
 /* use watch to retain inputted data via localStorage */
 watch(
   vision,
@@ -329,7 +324,8 @@ input[type="text"] {
 .def-label {
   width: 200px;
 }
-label, select {
+label,
+select {
   margin-left: 6px;
 }
 </style>

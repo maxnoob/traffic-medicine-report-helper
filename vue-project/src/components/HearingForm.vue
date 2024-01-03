@@ -24,8 +24,7 @@
             </div>
       </div>
         <!-- Conditionally show three radio buttons when "Cochlea Implantat" is selected -->
-        <div v-if="hearing.aidOption === 'cochlea_implantat'">
-          <!-- Your additional radio buttons go here -->
+        <div v-if="(hearing.aidOption === 'cochlea_implantat' || hearing.aidOption === 'hoergeraet') && hearing.aid_present">
           <div class="d-flex py-2">
             <label>Seite:</label>
             <RadioInputGroup
@@ -36,20 +35,6 @@
           </div>
         </div>
   
-  
-        <div v-if="hearing.aidOption === 'hoergeraet'">
-          <!-- Your additional radio buttons go here -->
-          <div class="d-flex py-2">
-            <label>Seite:</label>
-            <RadioInputGroup
-              v-model="hearing.placement"
-              name="placement"
-              :options="placement"
-            />
-          </div>
-  
-      </div>
-  
       <div class="py-2">
           <label>Konversationssprache 3m beidseits:</label>
           <RadioInputGroup
@@ -58,7 +43,6 @@
               :options="conversation_3m"
             />
           </div>
-  
   
        <!-- Options when Conversation 3m is not possible -->
        <div v-if="hearing.conversation_3m === 'impossible'">
@@ -91,7 +75,6 @@
   import { onMounted, ref, watch } from "vue";
   import persistToLocalStorage from "@/utils/persistToLocalStorage";
   import FormCard from "./FormCard.vue";
-import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
   
   const hearing_aidOption = [
   { label: "Hörgerät", value: "hoergeraet" },

@@ -28,6 +28,7 @@
             @change="handleDateChange"
             ref="birthdate_input"
             name="birthdate"
+            class="value_input"
           />
         </div>
 
@@ -148,6 +149,15 @@ watch(
   padding: 0px 1em 0px 4px;
 }
 
+.value_input {
+  width: 120px;
+  height: 40px;
+  border-style: solid;
+  border-width: 0.1cap;
+  border-radius: 5px;
+  border-color: lightgray;
+}
+
 /* Transitions */
 .v-enter-active,
 .v-leave-active {
@@ -158,4 +168,5 @@ watch(
 .v-leave-to {
   opacity: 0;
 }
+
 </style>

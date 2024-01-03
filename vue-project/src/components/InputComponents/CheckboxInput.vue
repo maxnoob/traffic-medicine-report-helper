@@ -8,9 +8,9 @@
       type="checkbox"
       :checked="modelValue"
       @change="$emit('update:modelValue', $event.target.checked)"
-      class="field"
+      class="form-check-input v-al-buttons"
     />
-    <label v-if="label">{{ label }}</label>
+    <label class="v-al-label" v-if="label">{{ label }}</label>
   </template>
   
   <script>
@@ -27,6 +27,17 @@
     }
   }
   </script>
+
+<style scoped>
+/* for buttons and labels to be on same height, use vertical-align middle & sub */
+.v-al-buttons {
+  vertical-align: middle;
+}
+
+.v-al-label {
+  vertical-align: sub;
+}
+</style>
 
 <!-- Apply this component in parent like:
 <div>

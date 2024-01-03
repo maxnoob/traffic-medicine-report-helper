@@ -12,7 +12,8 @@
     <label>Blutdruck:</label>
     <div class="bp-row">
       <div class="col">
-        <input class="bp-input"
+        <input
+          class="value_input"
           type="text"
           placeholder="sys mmHg"
           v-model="vitals.bloodpressure_sys"
@@ -20,7 +21,8 @@
       </div>
       /
       <div class="col">
-        <input class="bp-input"
+        <input
+          class="value_input"
           type="text"
           placeholder="dia mmHg"
           v-model="vitals.bloodpressure_dia"
@@ -29,8 +31,9 @@
     </div>
 
     <label>Puls:</label>
-    <input type="text" placeholder="Schl./min" v-model="vitals.pulse" />
-
+    <!-- <div class="input-group input-group-sm mb-3"> -->
+      <input type="text" class="value_input" placeholder="Schl./min" v-model="vitals.pulse" />
+        <!-- <span class="input-group-text">Schl./min</span></div> -->
     <div>
       <input type="checkbox" value="regelm" v-model="vitals.puls_reg" />
       <label>regelmässig</label>
@@ -39,14 +42,14 @@
     <div class="row"></div>
 
     <div class="grid-container">
-  <div class="grid-item">
-    <label>Grösse:</label>
-        <input type="text" placeholder="cm" v-model="vitals.height" />
+      <div class="grid-item">
+        <label>Grösse:</label>
+        <input type="text" class="value_input" v-model="vitals.height" />
         <input type="checkbox" id="height_measured" />gemessen
       </div>
       <div class="grid-item">
         <label>Gewicht:</label>
-        <input type="text" placeholder="kg" v-model="vitals.weight" />
+        <input type="text" class="value_input" placeholder="kg" v-model="vitals.weight" />
         <input type="checkbox" id="weight_measured" />gemessen
       </div>
     </div>
@@ -59,11 +62,11 @@
           @click="bmi_clicked()"
           style="white-space: nowrap"
         >
-          BMI berechnen
+          BMI
         </button>
       </div>
       <div class="col">
-        <div v-if="vitals.bmi" style="white-space: nowrap; position: relative">
+        <div v-if="bmi_show" style="white-space: nowrap; position: relative">
           {{ vitals.bmi }} kg/m<sup>2</sup> (Norm: 18.5 - 25)
         </div>
       </div>
@@ -77,6 +80,7 @@ import { onMounted, ref, watch } from "vue";
 import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
 import FormCard from "./FormCard.vue";
+// import ValueInput from "./InputComponents/ValueInput.vue"; // TODO: make great value input component
 
 const azOptions = [
   { label: "erhalten", value: "erhalten" },
@@ -101,7 +105,9 @@ const vitals = ref({
 
 defineExpose({
   calcBMI,
-})
+});
+
+const bmi_show = ref(false);
 
 // Calculate BMI
 function calcBMI(weight, height) {
@@ -109,7 +115,6 @@ function calcBMI(weight, height) {
   return bmi;
 }
 function bmi_clicked() {
-  console.log(typeof vitals.value.weight);
   let regex = new RegExp("^[0-9]{2,3}$");
   try {
     if (vitals.value.weight.match(regex) && vitals.value.height.match(regex)) {
@@ -120,6 +125,7 @@ function bmi_clicked() {
   } catch (error) {
     alert("Zur BMI-Berechnung Grösse und Gewicht angeben (Zahlen 10-999)");
   }
+  bmi_show.value = !bmi_show.value
 }
 /* populate fields with stored data */
 onMounted(() => persistToLocalStorage(vitals, "vitals"));
@@ -138,8 +144,17 @@ watch(
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="text"] {
-  width: 150px;
+/* input[type="text"] {
+  width: 100px;
+} */
+
+.value_input {
+  width: 100px;
+  height: 40px;
+  border-style: solid;
+  border-width: 0.1cap;
+  border-radius: 5px;
+  border-color: lightgray;
 }
 
 input[type="text"].bp-input {
@@ -168,6 +183,6 @@ input[type="text"].bp-input {
 .grid-item {
   background-color: white;
   text-align: start;
-  border: none; 
+  border: none;
 }
 </style>
