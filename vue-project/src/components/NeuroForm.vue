@@ -1,5 +1,5 @@
 <template>
- <FormCard>
+  <FormCard>
     <h4 class="py-2">Neurologie</h4>
 
     <div class="d-flex py-2">   
@@ -79,55 +79,23 @@
       <div class="slider-container">
         <div class="slider-pair">
           <label>PSR:</label>
-          <input
-            type="range"
-            v-model="neuro.psr"
-            min="0"
-            max="4"
-            step="1"
-            @input="psr_change()"
-          />
-          <span>{{ psr_conv }}</span>
+          <SliderInput v-model="neuro.psr" :options="reflOptions" />
         </div>
 
         <div class="slider-pair">
           <label>BSR:</label>
-          <input
-            type="range"
-            v-model="neuro.bsr"
-            min="0"
-            max="4"
-            step="1"
-            @input="bsr_change()"
-          />
-          <span>{{ bsr_conv }}</span>
+          <SliderInput v-model="neuro.bsr" :options="reflOptions" />
         </div>
       </div>
 
       <div class="slider-container">
         <div class="slider-pair">
           <label>ASR:</label>
-          <input
-            type="range"
-            v-model="neuro.asr"
-            min="0"
-            max="4"
-            step="1"
-            @input="asr_change()"
-          />
-          <span>{{ asr_conv }}</span>
+          <SliderInput v-model="neuro.asr" :options="reflOptions" />
         </div>
         <div class="slider-pair">
           <label>TSR:</label>
-          <input
-            type="range"
-            v-model="neuro.tsr"
-            min="0"
-            max="4"
-            step="1"
-            @input="tsr_change()"
-          />
-          <span>{{ tsr_conv }}</span>
+          <SliderInput v-model="neuro.tsr" :options="reflOptions" />
         </div>
       </div>
     </div>
@@ -161,16 +129,11 @@
     />
 
     <div>
-      <label class="def-label">Romberg</label>
-      <input
-        type="range"
-        v-model="neuro.romberg_test"
-        min="0"
-        max="4"
-        step="1"
-        @input="romberg_change()"
+      <label>Romberg</label>
+      <SliderInput
+      v-model="neuro.romberg_test"
+      :options="gaitOptions"
       />
-      <span>{{ romberg_conv }}</span>
     </div>
 
     <div>
@@ -233,34 +196,34 @@
     <div>
       <label class="def-label">Tremor</label>
       <RadioInputGroup
-      name="tremor"
+        name="tremor"
         v-model="neuro.tremor"
         :options="nichtVorhanden_vorhandenOptions"
       />
-      <div v-if="tremor==='present'">
-      <CheckboxInput
-        v-model="neuro.restingtremor"
-        :value="false"
-        label="Ruhetremor"
-        name="tremor"
-      />
-      <CheckboxInput
-        v-model="neuro.intentiontremor"
-        :value="false"
-        label="Intentionstremor"
-        name="tremor"
-      />
-    </div>
-    <div>
-      <div v-if="neuro.restingtremor || neuro.intentiontremor">
-        <RadioInputGroup
+      <div v-if="tremor === 'present'">
+        <CheckboxInput
+          v-model="neuro.restingtremor"
+          :value="false"
+          label="Ruhetremor"
           name="tremor"
-          v-model="neuro.tremor"
-          :options="tremorOptions"
+        />
+        <CheckboxInput
+          v-model="neuro.intentiontremor"
+          :value="false"
+          label="Intentionstremor"
+          name="tremor"
         />
       </div>
+      <div>
+        <div v-if="neuro.restingtremor || neuro.intentiontremor">
+          <RadioInputGroup
+            name="tremor"
+            v-model="neuro.tremor"
+            :options="tremorOptions"
+          />
+        </div>
+      </div>
     </div>
-  </div>
     <div>
       <label class="def-label">Diadochokinese</label>
       <RadioInputGroup
@@ -336,7 +299,7 @@ import FormCard from "./FormCard.vue";
 import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
 // import { formToJSON } from "axios";
 //import TextInput from "./InputComponents/TextInput.vue";
-// import SliderInput from "./InputComponents/SliderInput.vue";
+import SliderInput from "./InputComponents/SliderInput.vue";
 
 const auffaellig_unauffaelligOptions = [
   { label: "unauffällig", value: "unauffaellig" },
@@ -383,18 +346,13 @@ const fnpOptions = [
 ];
 
 // für Gang-Sliders
-const gangOptions = [
+const gaitOptions = [
   "nicht geprüft",
   "sicher",
   "leicht schwankend",
   "stark schwankend",
   "unmöglich",
 ];
-
-const romberg_conv = ref("nicht geprüft");
-function romberg_change() {
-  romberg_conv.value = gangOptions[neuro.value.romberg_test];
-}
 
 const sicherSchwankendOptions = [
   { label: "sicher", value: "sicher" },
@@ -405,23 +363,6 @@ const sicherSchwankendOptions = [
 
 // für Reflex-Sliders
 const reflOptions = ["nicht geprüft", "-", "+", "++", "+++"];
-
-const bsr_conv = ref("nicht geprüft");
-function bsr_change() {
-  bsr_conv.value = reflOptions[neuro.value.bsr];
-}
-const psr_conv = ref("nicht geprüft");
-function psr_change() {
-  psr_conv.value = reflOptions[neuro.value.psr];
-}
-const tsr_conv = ref("nicht geprüft");
-function tsr_change() {
-  tsr_conv.value = reflOptions[neuro.value.tsr];
-}
-const asr_conv = ref("nicht geprüft");
-function asr_change() {
-  asr_conv.value = reflOptions[neuro.value.asr];
-}
 
 let bigtoeAppear = ref(false); // use ref to make stuff reactive!!
 // if the sense of vibration is less than 6 on either foot, display further exam options
@@ -477,7 +418,7 @@ const neuro = ref({
     steppergang: false,
     ataktisch: false,
     spastisch: false,
-    wernicke_mann: false
+    wernicke_mann: false,
   },
 });
 
