@@ -2,17 +2,19 @@
 <!-- Created according to course on vuemastery.com -->
 <!-- $emit is needed, so that parent component recieves the change-event and the value of the radio button -->
 <!-- $attrs allows for attribute injection into the element in the parent -->
+<!-- class="form-check-input" is bootstrap styling -->
 
 <template>
-  <div class="def-component">
+  <div class="def-component ">
   <input
     type="radio"
     :checked="modelValue === value"
     :value="value"
     v-bind="$attrs"
     @change="$emit('update:modelValue', value)"
+    class="form-check-input v-al-buttons"
   />
-  <label v-if="label">{{ label }}</label>
+  <label class="v-al-label" v-if="label">{{ label }}</label>
 </div>
 </template>
 
@@ -41,6 +43,15 @@ label{
 }
 .def-component {
   width: 150px;
+}
+
+/* for buttons and labels to be on same height, use vertical-align middle & sub */
+.v-al-buttons {
+  vertical-align: middle;
+}
+
+.v-al-label {
+  vertical-align: sub;
 }
 
 </style>

@@ -2,6 +2,7 @@
 <!-- Created according to course on vuemastery.com -->
 <!-- $emit is needed, so that parent component recieves the change-event and the value of the radio button -->
 <!-- $attrs allows for attribute injection into the element in the parent -->
+<!-- class="form-check-input" is bootstrap styling -->
 
 <template>
   <input
@@ -10,6 +11,7 @@
     :value="value"
     v-bind="$attrs"
     @change="$emit('update:modelValue', value)"
+    class="form-check-input"
   />
   <label v-if="label">{{ label }}</label>
 </template>

@@ -133,7 +133,10 @@ watch(
 
 .grid-item {
   background-color: white;
-  border: 0.5px solid rgba(113, 108, 108, 0.8);
+  border: 0.5px solid rgba(186, 176, 176, 0.8);
+  border-radius: 5px;
   text-align:start;
+  padding-left: 0.5rem;
+  margin-top: 0.5rem;
 }
 </style>

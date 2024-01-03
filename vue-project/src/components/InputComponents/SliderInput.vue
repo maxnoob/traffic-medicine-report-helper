@@ -1,5 +1,5 @@
 <template>
-  <label v-if="label">{{ label }}</label>
+  <label  v-if="label">{{ label }}</label>
   <input
     type="range"
     min="0"
@@ -9,9 +9,10 @@
     :value="modelValue"
     @update:modelValue="$emit('update:modelValue', $event)"
     @input="slider_change($event.target.value)"
-   
+    :style="style"
+    
   />
-  <span>{{ conv_value }}</span>
+  <span class="spacing" style="font-weight: 300;">{{ conv_value }}</span>
 </template>
 
 <script>
@@ -68,3 +69,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.spacing {
+  padding-left: 0.5rem;
+}
+
+label{
+  padding-right: 0.5rem;
+}
+
+</style>
