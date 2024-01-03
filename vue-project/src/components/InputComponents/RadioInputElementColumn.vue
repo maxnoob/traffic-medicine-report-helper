@@ -40,7 +40,7 @@ label{
     margin-left: 6px;
 }
 .def-component {
-  width: 120px;
+  width: 150px;
 }
 
 </style>

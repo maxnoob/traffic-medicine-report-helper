@@ -1,12 +1,16 @@
 <template>
   <FormCard>
     <h4 class="py-2">Neurologie</h4>
-    <RadioInputGroup
+
+    <div class="d-flex py-2">   
+    <label class="def-label">Sprache:</label>
+    <RadioInputGroupColumn
       v-model="neuro.speech"
       name="speech"
       :options="auffaellig_unauffaelligOptions"
-      label="Sprache"
     />
+  </div>
+  
     <div v-if="neuro.speech == 'auffaellig'">
       <RadioInputGroup
         v-model="neuro.speech_extended"
@@ -14,31 +18,36 @@
         :options="speech_extendedOptions"
       />
     </div>
-    <div class="col">
-      <div>Vibrationssinn</div>
-    </div>
-    <div class="row">
-      <label>Fingerknöchel:</label>
+    <h6 class="py-2">Vibrationssinn</h6>
+      <div class="grid-container">
+        <label>Fingerknöchel:</label>
+  <div class="grid-item">
       <input
         type="text"
         placeholder="rechts"
         v-model="neuro.vibration_wrist_re"
       />
+    </div>
+    <div class="grid-item">
       <input
         type="text"
         placeholder="links"
         v-model="neuro.vibration_wrist_li"
       />
     </div>
+    </div>
 
-    <div class="row" style="white-space: nowrap">
-      <label>Aussenknöchel:</label>
+    <div class="grid-container">
+        <label>Aussenknöchel:</label>
+  <div class="grid-item">
       <input
-        type="text"
+      type="text"
         placeholder="rechts"
         v-model="neuro.vibration_ankle_re"
         @keyup="check_bigtoeNeeded()"
       />
+    </div>
+    <div class="grid-item">
       <input
         type="text"
         placeholder="links"
@@ -46,9 +55,9 @@
         @keyup="check_bigtoeNeeded()"
       />
     </div>
-
+    </div>
     <div v-if="bigtoeAppear">
-      <label>Lagensinn Grosszehe:</label>
+      <label class="def-label">Lagensinn Grosszehe:</label>
       <RadioInputGroup
         name="bigtoe"
         v-model="neuro.bigtoe"
@@ -57,7 +66,7 @@
     </div>
 
     <div>
-      <label>Oberflächensensibilität:</label>
+      <label class="def-label">Oberflächensensibilität:</label>
       <RadioInputGroup
         name="sensibility"
         v-model="neuro.sensibility"
@@ -103,14 +112,16 @@
       >
     </div>
     <div v-if="neuro.asymm_reflex">
-      <input
+      <label for="additionalInfo">Beschreibung der Assymetrie:</label>
+      <Input
         type="text"
-        class="form-check-input"
+        placeholder="Beschreibung"
         v-model="neuro.asymm_beschreibung"
-      />
-    </div>
+        />
+      </div>
 
-    <label>Kraft Extremitäten:</label>
+
+    <label class="def-label">Kraft Extremitäten:</label>
     <RadioInputGroup
       name="force"
       v-model="neuro.force"
@@ -126,6 +137,7 @@
     </div>
 
     <div>
+      
       <label>Unterberger</label>
       <RadioInputGroup name="unterberger" v-model="neuro.unterberger_test" />
     </div>
@@ -169,7 +181,7 @@
     </div>
 
     <div>
-      <label>Strichgang</label>
+      <label class="def-label">Strichgang</label>
       <RadioInputGroup
         name="line_walk"
         v-model="neuro.line_walk"
@@ -177,12 +189,12 @@
       />
     </div>
     <div>
-      <label>Finger-Nase-Probe</label>
+      <label class="def-label">Finger-Nase-Probe</label>
       <RadioInputGroup name="fnp" v-model="neuro.fnp" :options="fnpOptions" />
     </div>
 
     <div>
-      <label>Tremor</label>
+      <label class="def-label">Tremor</label>
       <RadioInputGroup
         name="tremor"
         v-model="neuro.tremor"
@@ -213,7 +225,7 @@
       </div>
     </div>
     <div>
-      <label>Diadochokinese</label>
+      <label class="def-label">Diadochokinese</label>
       <RadioInputGroup
         name="diadocho"
         v-model="neuro.diadochokinesis"
@@ -221,7 +233,7 @@
       />
     </div>
     <div>
-      <label>Gang</label>
+      <label class="def-label">Gang</label>
       <RadioInputGroup
         name="gait"
         v-model="neuro.gait.abnorm"
@@ -284,6 +296,7 @@ import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage";
 import FormCard from "./FormCard.vue";
+import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
 // import { formToJSON } from "axios";
 //import TextInput from "./InputComponents/TextInput.vue";
 import SliderInput from "./InputComponents/SliderInput.vue";
@@ -425,7 +438,16 @@ watch(
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type="text"] {
-  width: 80px;
+.grid-container {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+  padding: 1px;
+}
+
+.grid-item {
+  text-align:start;
+}
+.def-label {
+  width: 200px;
 }
 </style>

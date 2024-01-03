@@ -3,15 +3,15 @@
 
     <h4 class="py-2">organische bedingte Hirnleistungsstörung</h4>
 
-    <div class="py-2">
-      <label>Kognition:</label>
-      <RadioInputGroup
-        v-model="kognition.kognitiv"
-        vertical
-        name="kognitiv"
-        :options="nichtauffaellig_auffaelligOptions"
-      />
-    </div>
+    <div class="d-flex py-2">      
+  <label class="def-label">Kognition:</label>
+  <RadioInputGroupColumn
+    v-model="kognition.kognitiv"
+    name="kognitiv"
+    :options="nichtauffaellig_auffaelligOptions"
+  />
+</div>
+
 
     <div v-if="kognition.kognitiv == 'auffaellig'">
       <input type="text" v-model="kognition.description" />
@@ -88,10 +88,10 @@
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
-import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
 import persistToLocalStorage from "@/utils/persistToLocalStorage.js";
 import CheckboxInput from "./InputComponents/CheckboxInput.vue";
 import FormCard from "./FormCard.vue";
+import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
 
 const nichtauffaellig_auffaelligOptions = [
   { label: "nicht auffällig", value: "nicht_auffaellig" },
@@ -120,12 +120,10 @@ watch(
 );
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 
-
-label {
-  margin-left: 6px;
+.def-label {
+  width: 400px;
 }
 .grid-container {
   display: grid;
@@ -134,8 +132,8 @@ label {
 }
 
 .grid-item {
-  background-color: rgba(215, 228, 235, 0.8);
-  border: 1px solid rgba(113, 108, 108, 0.8);
+  background-color: white;
+  border: 0.5px solid rgba(113, 108, 108, 0.8);
   text-align:start;
 }
 </style>
