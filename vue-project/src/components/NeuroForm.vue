@@ -2,15 +2,15 @@
   <FormCard>
     <h4 class="py-2">Neurologie</h4>
 
-    <div class="d-flex py-2">   
-    <label class="def-label">Sprache:</label>
-    <RadioInputGroupColumn
-      v-model="neuro.speech"
-      name="speech"
-      :options="auffaellig_unauffaelligOptions"
-    />
-  </div>
-  
+    <div class="d-flex py-2">
+      <label class="def-label">Sprache:</label>
+      <RadioInputGroupColumn
+        v-model="neuro.speech"
+        name="speech"
+        :options="auffaellig_unauffaelligOptions"
+      />
+    </div>
+
     <div v-if="neuro.speech == 'auffaellig'">
       <RadioInputGroup
         v-model="neuro.speech_extended"
@@ -19,42 +19,42 @@
       />
     </div>
     <h6 class="py-2">Vibrationssinn</h6>
-      <div class="grid-container">
-        <label>Fingerknöchel:</label>
-  <div class="grid-item">
-      <input
-        type="text"
-        placeholder="rechts"
-        v-model="neuro.vibration_wrist_re"
-      />
-    </div>
-    <div class="grid-item">
-      <input
-        type="text"
-        placeholder="links"
-        v-model="neuro.vibration_wrist_li"
-      />
-    </div>
+    <div class="grid-container">
+      <label>Fingerknöchel:</label>
+      <div class="grid-item">
+        <input
+          type="text"
+          placeholder="rechts"
+          v-model="neuro.vibration.wrist_re"
+        />
+      </div>
+      <div class="grid-item">
+        <input
+          type="text"
+          placeholder="links"
+          v-model="neuro.vibration.wrist_li"
+        />
+      </div>
     </div>
 
     <div class="grid-container">
-        <label>Aussenknöchel:</label>
-  <div class="grid-item">
-      <input
-      type="text"
-        placeholder="rechts"
-        v-model="neuro.vibration_ankle_re"
-        @keyup="check_bigtoeNeeded()"
-      />
-    </div>
-    <div class="grid-item">
-      <input
-        type="text"
-        placeholder="links"
-        v-model="neuro.vibration_ankle_li"
-        @keyup="check_bigtoeNeeded()"
-      />
-    </div>
+      <label>Aussenknöchel:</label>
+      <div class="grid-item">
+        <input
+          type="text"
+          placeholder="rechts"
+          v-model="neuro.vibration.ankle_re"
+          @keyup="check_bigtoeNeeded()"
+        />
+      </div>
+      <div class="grid-item">
+        <input
+          type="text"
+          placeholder="links"
+          v-model="neuro.vibration.ankle_li"
+          @keyup="check_bigtoeNeeded()"
+        />
+      </div>
     </div>
     <div v-if="bigtoeAppear">
       <label class="def-label">Lagensinn Grosszehe:</label>
@@ -79,23 +79,23 @@
       <div class="slider-container">
         <div class="slider-pair">
           <label>PSR:</label>
-          <SliderInput v-model="neuro.psr" :options="reflOptions" />
+          <SliderInput v-model="neuro.reflexes.psr" :options="reflOptions" />
         </div>
 
         <div class="slider-pair">
           <label>BSR:</label>
-          <SliderInput v-model="neuro.bsr" :options="reflOptions" />
+          <SliderInput v-model="neuro.reflexes.bsr" :options="reflOptions" />
         </div>
       </div>
 
       <div class="slider-container">
         <div class="slider-pair">
           <label>ASR:</label>
-          <SliderInput v-model="neuro.asr" :options="reflOptions" />
+          <SliderInput v-model="neuro.reflexes.asr" :options="reflOptions" />
         </div>
         <div class="slider-pair">
           <label>TSR:</label>
-          <SliderInput v-model="neuro.tsr" :options="reflOptions" />
+          <SliderInput v-model="neuro.reflexes.tsr" :options="reflOptions" />
         </div>
       </div>
     </div>
@@ -105,21 +105,20 @@
         type="checkbox"
         class="form-check-input"
         id="asymm_checkbox"
-        v-model="neuro.asymm_reflex"
+        v-model="neuro.reflexes.asymm"
       />
       <label class="form-check-label" for="asymm_checkbox"
         >asymmetrische Reflexe</label
       >
     </div>
-    <div v-if="neuro.asymm_reflex">
-      <label for="additionalInfo">Beschreibung der Assymetrie:</label>
-      <Input
+    <div v-if="neuro.reflexes.asymm">
+      <label for="additionalInfo">Beschreibung der Asymmetrie:</label>
+      <input
         type="text"
         placeholder="Beschreibung"
-        v-model="neuro.asymm_beschreibung"
-        />
-      </div>
-
+        v-model="neuro.reflexes.asymm_beschreibung"
+      />
+    </div>
 
     <label class="def-label">Kraft Extremitäten:</label>
     <RadioInputGroup
@@ -130,51 +129,47 @@
 
     <div>
       <label>Romberg</label>
-      <SliderInput
-      v-model="neuro.romberg_test"
-      :options="gaitOptions"
-      />
+      <SliderInput v-model="neuro.romberg_test" :options="gaitOptions" />
     </div>
 
     <div>
-      
       <label>Unterberger</label>
-      <RadioInputGroup name="unterberger" v-model="neuro.unterberger_test" />
+      <RadioInputGroup name="unterberger" v-model="neuro.unterberger.test" />
     </div>
     <CheckboxInput
       name="unterberger_abnorm"
-      v-model="neuro.unterberger_abnorm"
+      v-model="neuro.unterberger.abnorm"
       label="weitere Auffälligkeiten"
     />
-    <div v-if="neuro.unterberger_abnorm">
+    <div v-if="neuro.unterberger.abnorm">
       <CheckboxInput
         name="unterberger_arm_re"
-        v-model="neuro.unterberger_arm_re"
+        v-model="neuro.unterberger.arm_re"
         label="Absinken/Pronation rechts"
       />
       <CheckboxInput
         name="unterberger_arm_li"
-        v-model="neuro.unterberger_arm_li"
+        v-model="neuro.unterberger.arm_li"
         label="Absinken/Pronation links"
       />
       <!-- TODO Arrange stuff not ugly! -->
       <CheckboxInput
         name="unterberger_rotation"
-        v-model="neuro.unterberger_rotation"
+        v-model="neuro.unterberger.rotation"
         label="Drehung"
       />
-      <div v-if="neuro.unterberger_rotation">
+      <div v-if="neuro.unterberger.rotation">
         um
         <input
           type="text"
           placeholder="°"
-          v-model="neuro.unterberger_rotation_degrees"
+          v-model="neuro.unterberger.rotation_degrees"
         />
         Grad nach
         <input
           type="text"
           placeholder="#"
-          v-model="neuro.unterberger_rotation_steps"
+          v-model="neuro.unterberger.rotation_steps"
         />
         Schritten
       </div>
@@ -368,8 +363,8 @@ let bigtoeAppear = ref(false); // use ref to make stuff reactive!!
 // if the sense of vibration is less than 6 on either foot, display further exam options
 function check_bigtoeNeeded() {
   let regex = new RegExp("^[0-5]{1}$");
-  let vib_re = neuro.value.vibration_ankle_re;
-  let vib_li = neuro.value.vibration_ankle_li;
+  let vib_re = neuro.value.vibration.ankle_re;
+  let vib_li = neuro.value.vibration.ankle_li;
   console.log("re: " + vib_re + "; li: " + vib_li);
   if (vib_re > 5 && vib_li > 5) {
     bigtoeAppear.value = false;
@@ -383,29 +378,35 @@ function check_bigtoeNeeded() {
   return;
 }
 
-// TODO: daten zu unterberger verschachteln
 const neuro = ref({
   speech: "",
-  vibration_wrist_re: "",
-  vibration_wrist_li: "",
-  vibration_ankle_re: "",
-  vibration_ankle_li: "",
+  vibration: {
+    wrist_re: "",
+    wrist_li: "",
+    ankle_re: "",
+    ankle_li: "",
+  },
   bigtoe: "",
   sensibility: "",
-  bsr: 0,
-  psr: 0,
-  asr: 0,
-  tsr: 0,
-  reflexes_symm: true,
+  reflexes: {
+    bsr: 0,
+    psr: 0,
+    asr: 0,
+    tsr: 0,
+    asymm: false,
+    asymm_beschreibung: "",
+  },
   strength_extremities: null,
   romberg_test: "",
-  unterberger_test: "",
-  unterberger_abnorm: false,
-  unterberger_rotation: false,
-  unterberger_rotation_degrees: "",
-  unterberger_rotation_steps: "",
-  unterberger_arm_re: false,
-  unterberger_arm_rli: false,
+  unterberger: {
+    test: "",
+    abnorm: false,
+    rotation: false,
+    rotation_degrees: "",
+    rotation_steps: "",
+    arm_re: false,
+    arm_rli: false,
+  },
   line_walk: "",
   finger_nose: "",
   tremor: "",
@@ -445,7 +446,7 @@ watch(
 }
 
 .grid-item {
-  text-align:start;
+  text-align: start;
 }
 .def-label {
   width: 200px;
