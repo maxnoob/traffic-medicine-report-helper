@@ -70,6 +70,43 @@
             :options="nein_jaOptions"
           />
         </div>
+<br>
+<div>
+        <div>
+          <h6 class="py-2" style="background-color: aliceblue">Lebergrösse</h6>
+          <label class="liver-label">tastbar unter Rippenbogen</label>
+        <RadioInputGroupColumn
+        v-model="substance.liver_touch"
+        name="liver"
+        :options="nein_jaOptions"
+        />
+      </div>
+  </div>
+  <div class="grid-container">
+      <div class="grid-item">
+        <label>in MCL:</label>
+
+        <input
+          class="value_input"
+          type="text"
+          placeholder="cm"
+          v-model="substance.liver_size"
+        />
+      </div>    
+ 
+
+      <div class="grid-item">
+        <br>
+        <RadioInputGroupColumn
+        v-model="substance.liver_sound"
+        name="liver_sound"
+        :options="perk_auskOptions"
+        />
+      </div>
+  
+</div>
+
+
 
     </FormCard>
   </template>
@@ -96,7 +133,10 @@ const nein_jaOptions = [
   { label: "nein", value: "nein" },
   { label: "ja", value: "ja" },
 ];
-
+const perk_auskOptions = [
+  { label: "perkutorisch", value: "perkutorisch" },
+  { label : "kratzauskulatorisch", value: "kratzauskulatorisch" },
+];
 onMounted(
     () => persistToLocalStorage(substance, "substance")
     );
@@ -111,11 +151,43 @@ watch(
   { immediate: true }
 );
 </script>
-<style>
+<style scoped>
  .def-label {
   width: 200px;
 }
+.liver-label {
+  width: 250px;
+}
+.value_input {
+  width: 60px;
+  height: 40px;
+  border-style: solid;
+  border-width: 0.1cap;
+  border-radius: 5px;
+  border-color: lightgray;
+}
+.mcl-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
+.mcl-row .col {
+  flex-grow: 0;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 10rem 35rem;
+}
+
+.grid-item {
+  background-color: none;
+  text-align: start;
+  border: black;
+}
+.v-al-label{
+width: 200px;
+}
 </style>
 
   
