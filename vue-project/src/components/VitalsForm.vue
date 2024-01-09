@@ -42,12 +42,12 @@
     <div class="row"></div>
 
     <div class="grid-container">
-      <div class="grid-item">
+      <div>
         <label>Grösse:</label>
-        <input type="text" class="value_input" v-model="vitals.height" />
+        <input type="text" class="value_input" placeholder="cm" v-model="vitals.height" />
         <input type="checkbox" id="height_measured" />gemessen
       </div>
-      <div class="grid-item">
+      <div>
         <label>Gewicht:</label>
         <input type="text" class="value_input" placeholder="kg" v-model="vitals.weight" />
         <input type="checkbox" id="weight_measured" />gemessen
@@ -119,13 +119,13 @@ function bmi_clicked() {
   try {
     if (vitals.value.weight.match(regex) && vitals.value.height.match(regex)) {
       vitals.value.bmi = calcBMI(vitals.value.weight, vitals.value.height);
+      bmi_show.value = !bmi_show.value // toggles BMI on button click
     } else {
-      alert("Grösse und Gewicht: Zahlen 10-999)");
+      alert("Grösse und Gewicht angeben (Zahlen 10-999)");
     }
   } catch (error) {
     alert("Zur BMI-Berechnung Grösse und Gewicht angeben (Zahlen 10-999)");
   }
-  bmi_show.value = !bmi_show.value
 }
 /* populate fields with stored data */
 onMounted(() => persistToLocalStorage(vitals, "vitals"));
@@ -176,13 +176,7 @@ input[type="text"].bp-input {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 20rem 20rem;
-  background-color: white;
+  grid-template-columns: 12rem 12rem;
 }
 
-.grid-item {
-  background-color: white;
-  text-align: start;
-  border: none;
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-        <nav ref="navbar" id="navbar" class="rounded sticky-top navbar-collapse navbar-expand-md">
+        <nav ref="navbar" id="navbar" class="rounded sticky-top navbar-collapse navbar-expand-md center_horizontal">
           <a class="nav-link" href="#basic_data">Stammdaten</a>
           <a class="nav-link" href="#vitals">Vitalparameter</a>
           <a class="nav-link" href="#vision">Sehvermögen</a>
@@ -49,4 +49,11 @@
 #navbar a:active {
     background-color: #606466;
 }
+
+.center_horizontal {
+   margin: auto !important;
+   width: 90% !important;
+   min-width: 55rem !important;
+}
+
 </style>

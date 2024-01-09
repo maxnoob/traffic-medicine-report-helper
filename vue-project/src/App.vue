@@ -2,9 +2,9 @@
   <body>
     <div class="container" id="top_container">
       <div class="second_container">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" style="margin-right: 2.5rem;">
           <h1>Status erfassen</h1>
-          <button class="btn btn-dark m-3" @click="darkmode()">
+          <button class="btn btn-dark my-3" @click="darkmode()">
             <!--Moon stars fill icon-->
             <svg
               width="16"
@@ -25,7 +25,7 @@
 
         <NavBar />
         <!-- Basic Data / Stammdaten -->
-        <div id="basic_data" class="offset" />
+        <div id="basic_data" class="offset" /> <!-- offset is so that the navbar won't cover the content that was scrolled to -->
         <BasicDataForm />
         <!---- Vitals  / Vitalparameter---->
         <div id="vitals" class="offset" />
@@ -36,7 +36,7 @@
         <div id="hearing" class="offset" />
         <HearingForm />
         <div id="substances" class="offset" />
-        <Substance />
+        <SubstanceForm />
         <div id="psych" class="offset" />
         <Psych />
         <!-- Organisch bedingte Hirnleistungsstörungen -->
@@ -58,6 +58,7 @@
         <div id="mobility" class="offset" />
         <MobilityForm />
         <!----- Buttons ----->
+        <div class="center_horizontal">
         <div
           class="d-flex justify-content-evenly offset width-adj"
           id="processing"
@@ -187,6 +188,7 @@
         <!-- snackbar for showing confirmation message after copying -->
         <Snackbar />
       </div>
+      </div>
     </div>
     <img
       src="./assets/BFH_Logo_deutsch.png"
@@ -214,7 +216,7 @@ import MobilityForm from "./components/MobilityForm.vue";
 import KognitionForm from "./components/KognitionForm.vue";
 import GeneratedText from "./components/GeneratedText.vue";
 import HearingForm from "./components/HearingForm.vue";
-import Substance from "./components/Substance.vue";
+import SubstanceForm from "./components/SubstanceForm.vue";
 import Psych from "./components/Psych.vue";
 import NavBar from "./components/NavBar.vue";
 
@@ -232,7 +234,7 @@ export default {
     MobilityForm,
     KognitionForm,
     GeneratedText,
-    Substance,
+    SubstanceForm,
     HearingForm,
     Psych,
     NavBar,
@@ -604,6 +606,14 @@ input[type="checkbox"] {
 
 .width-adj {
   margin-right: 2.5rem;
-  max-width: 80rem;
+  /*max-width: 80rem;*/
 }
+
+.center_horizontal {
+   margin: auto !important;
+   width: 50%;
+   min-width: 55rem;
+   max-width: 70rem;
+}
+
 </style>

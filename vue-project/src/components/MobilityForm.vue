@@ -148,7 +148,6 @@ label {
 }
 
 .grid-item {
-  background-color: rgba(242, 245, 246, 0.8);
   text-align:start;
 }
 </style>

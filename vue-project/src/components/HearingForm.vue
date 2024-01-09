@@ -35,14 +35,16 @@
           </div>
         </div>
   
-      <div class="py-2">
+      <div class="py-2 threeCols">
           <label>Konversationssprache 3m beidseits:</label>
+        
           <RadioInputGroup
               v-model="hearing.conversation_3m"
               name="conversation_3m"
               :options="conversation_3m"
             />
-          </div>
+  
+        </div>
   
        <!-- Options when Conversation 3m is not possible -->
        <div v-if="hearing.conversation_3m === 'impossible'">
@@ -107,14 +109,13 @@
   
   ];
   
-  
-  
+
   const hearing = ref({
     aid_present: false,
     aidOption: "",
     placement: "",
     weberTest: "",
-    conversation_3m: "",
+    conversation_3m: 'possible',
   });
   
   onMounted(() => persistToLocalStorage(hearing, "hearing"));
@@ -130,5 +131,10 @@
   </script>
   
   <style scoped>
-  /* Your styles go here */
+.threeCols {
+  display: grid;
+  grid-template-columns: 14rem 10rem 12rem;
+  gap: 0.5rem;
+  padding: 1px;
+}
   </style>

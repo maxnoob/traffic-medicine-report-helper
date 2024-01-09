@@ -59,7 +59,7 @@
           <RadioInputGroupColumn
             v-model="substance.septum"
             name="septum"
-            :options="nein_jaOptions"
+            :options="septumOptions"
           />
         </div>
         <div class="d-flex py-2">
@@ -74,36 +74,31 @@
 <div>
         <div>
           <h6 class="py-2" style="background-color: aliceblue">Lebergrösse</h6>
+          <div class="threeCols">
           <label class="liver-label">tastbar unter Rippenbogen</label>
-        <RadioInputGroupColumn
+        <RadioInputGroup
         v-model="substance.liver_touch"
         name="liver"
         :options="nein_jaOptions"
         />
       </div>
+      </div>
   </div>
-  <div class="grid-container">
-      <div class="grid-item">
+  <div class="threeCols">
+    <div class="twoCols">
         <label>in MCL:</label>
-
         <input
           class="value_input"
           type="text"
           placeholder="cm"
           v-model="substance.liver_size"
         />
-      </div>    
- 
-
-      <div class="grid-item">
-        <br>
-        <RadioInputGroupColumn
+      </div>
+        <RadioInputGroup
         v-model="substance.liver_sound"
         name="liver_sound"
         :options="perk_auskOptions"
         />
-      </div>
-  
 </div>
 
 
@@ -116,9 +111,8 @@
   import RadioInputGroupColumn from "./InputComponents/RadioInputGroupColumn.vue";
   import persistToLocalStorage from "@/utils/persistToLocalStorage";
   import FormCard from "./FormCard.vue";
+  import RadioInputGroup from "./InputComponents/RadioInputGroup.vue";
   
-
-
 const substance = ref({
   foeter: null,
   faceerythem: null,
@@ -128,6 +122,7 @@ const substance = ref({
   palmarerythem: null,
   septum: null,
   scar: null,
+  mcl: ""
 });
 const nein_jaOptions = [
   { label: "nein", value: "nein" },
@@ -137,6 +132,10 @@ const perk_auskOptions = [
   { label: "perkutorisch", value: "perkutorisch" },
   { label : "kratzauskulatorisch", value: "kratzauskulatorisch" },
 ];
+const septumOptions = [
+{ label: "intakt", value: "intact" },
+{ label: "defekt", value: "defect" }
+]
 onMounted(
     () => persistToLocalStorage(substance, "substance")
     );
@@ -166,28 +165,27 @@ watch(
   border-radius: 5px;
   border-color: lightgray;
 }
-.mcl-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
 
-.mcl-row .col {
-  flex-grow: 0;
-}
-.grid-container {
+.threeCols {
   display: grid;
-  grid-template-columns: 10rem 35rem;
+  grid-template-columns: 14rem 10rem 12rem;
+  gap: 0.5rem;
+  padding: 1px;
+  vertical-align:sub;
+}
+.twoCols {
+  display: grid;
+  grid-template-columns: 6rem 6rem;
+  gap: 0.5rem;
+  padding: 1px;
+  vertical-align: middle;
 }
 
-.grid-item {
-  background-color: none;
-  text-align: start;
-  border: black;
+label,
+select, h6 {
+  margin-left: 6px;
 }
-.v-al-label{
-width: 200px;
-}
+
 </style>
 
   

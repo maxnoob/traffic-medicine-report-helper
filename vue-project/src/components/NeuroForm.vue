@@ -523,4 +523,10 @@ watch(
 .def-label {
   width: 200px;
 }
+
+label,
+select, h6 {
+  margin-left: 6px;
+}
+
 </style>
