@@ -96,7 +96,7 @@ const vitals = ref({
   bloodpressure_sys: "",
   bloodpressure_dia: "",
   pulse: "",
-  puls_reg: false,
+  pulse_reg: false,
   height: "",
   weight: "",
   az: "erhalten",
