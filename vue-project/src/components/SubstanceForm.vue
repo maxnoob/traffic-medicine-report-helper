@@ -63,7 +63,7 @@
           />
         </div>
         <div class="d-flex py-2">
-          <label class="def-label">Narbenstrasse:</label>
+          <label class="def-label">Narbenstrassen:</label>
           <RadioInputGroupColumn
             v-model="substance.scar"
             name="scar"
@@ -91,7 +91,7 @@
           class="value_input"
           type="text"
           placeholder="cm"
-          v-model="substance.liver_size"
+          v-model="substance.mcl"
         />
       </div>
         <RadioInputGroup
@@ -100,8 +100,6 @@
         :options="perk_auskOptions"
         />
 </div>
-
-
 
     </FormCard>
   </template>

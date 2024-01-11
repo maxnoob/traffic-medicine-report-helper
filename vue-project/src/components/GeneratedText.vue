@@ -193,13 +193,16 @@ const generateText = (s) => {
     card_devices_phrase = `Folgende kardiale Geräte sind bei ${phrases[4]} vorhanden: `;
   }
 
+  //
+
+  let mcl = s.substance.mcl;
   const status_vitals = `\nDer Blutdruck ist ${bp_phrase} (${bp_sys}/${bp_dia} mmHg, Normbereich 100–140/60–90 mmHg${bp_no_rest}), \
         der Puls ${pulse_phrase} (Pulsfrequenz ${pulse} Schläge/min, Normbereich 60–100 Schläge/min). \
         ${heart_auscultation_phrase} ${heartinsuff_phrase} \
         ${carotis_phrase} \
         ${card_devices_phrase}
         Über allen Lungenfeldern können vesikuläre Atemgeräusche ohne Nebengeräusche auskultiert werden. Palpatorisch ist die Leber nicht vergrössert und nicht druckschmerzhaft. \
-        In der Kratzauskultation ragt die Leber in der Medioklavikularlinie bis etwa _ cm unter den Rippenbogen. `;
+        In der Kratzauskultation ragt die Leber in der Medioklavikularlinie bis etwa ${mcl} cm unter den Rippenbogen. `;
 
   //------------------------------------- VISION -----------------------------------------------//
   let pupils = s.vision.pupils;
@@ -531,6 +534,7 @@ const generateText = (s) => {
 
   //----------------------------- SUBSTANCE --------------------------------------------------//
 
+  
   let stigmata_phrase =
     "Es finden sich keine Alkohol- und/oder Drogenstigmata.";
   let stigmata_found = false;
