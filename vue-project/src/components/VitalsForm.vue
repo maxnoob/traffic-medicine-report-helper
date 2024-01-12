@@ -35,7 +35,7 @@
       <input type="text" class="value_input" placeholder="Schl./min" v-model="vitals.pulse" />
         <!-- <span class="input-group-text">Schl./min</span></div> -->
     <div>
-      <input type="checkbox" value="regelm" v-model="vitals.puls_reg" />
+      <input type="checkbox" value="regelm" v-model="vitals.pulse_reg" />
       <label>regelmässig</label>
     </div>
 
