@@ -31,7 +31,7 @@ npm install --save pdf-lib
 ```
 ### Code formatting with Prettier
 From VS code marketplace get "Prettier - Code formatter".<br>
-[pPrettier on vs code marketplace](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).<br>
+[Prettier on vs code marketplace](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).<br>
 While programming use keyboard shortcut: <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>F</kbd> to format the current file with prettier (doesn't change any logic or syntax, just the alignment of the text).
 
 
