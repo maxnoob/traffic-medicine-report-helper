@@ -26,7 +26,8 @@ npm init @eslint/config
 ```
 ### Install Bootstrap/DownloadJS/pdf-lib
 ```
-npm install bootstrap downloadjs
+npm install bootstrap 
+npm install downloadjs
 npm install --save pdf-lib
 ```
 ### Code formatting with Prettier
@@ -39,6 +40,12 @@ While programming use keyboard shortcut: <kbd>alt</kbd> + <kbd>shift</kbd> + <kb
 ```
 npm run build
 ```
+To run the application locally go into the vue.config.js file and write:
+```
+module.exports = {
+  publicPath: '',
+}
+```
+Then run the application via /dist/index.html.
+For unknown reasons, the spacing between the sections (cards) disappears, when running like that.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
