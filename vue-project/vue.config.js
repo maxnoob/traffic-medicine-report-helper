@@ -4,5 +4,5 @@ module.exports = defineConfig({
 })
 
 module.exports = {
-  publicPath: '/lc1-traffic-docu/public/'
+  publicPath: 'https://maxnoob.github.io/lc1-traffic-docu/public/'
 }
