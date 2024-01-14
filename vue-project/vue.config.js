@@ -4,5 +4,5 @@ module.exports = defineConfig({
 })
 
 module.exports = {
-  publicPath: '/lc1-traffic-docu/vue-project/dist/'
+  publicPath: '/lc1-traffic-docu/public/'
 }
