@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 
-module.exports = {
+module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === 'production'
     ? '/lc1-traffic-docu/'
     : '/'
-}
+})
