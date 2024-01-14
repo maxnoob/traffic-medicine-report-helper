@@ -9,12 +9,7 @@ npm install
 
 # Concerning the Vue.js application
 
-Change into the directory of the vue project itself
-```
-cd vue-project
-```
-
-To compiles and hot-reload the application for development use:
+To compile and hot-reload the application for development use:
 ```
 npm run serve
 ```
